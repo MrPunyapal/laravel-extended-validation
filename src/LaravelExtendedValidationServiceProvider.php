@@ -128,14 +128,76 @@ class LaravelExtendedValidationServiceProvider extends PackageServiceProvider
         });
 
         Validator::replacer($name, function (string $message, string $attribute, string $rule, array $parameters) use ($name): string {
-            /** @var string */
-            $translation = trans("extended-validation::validation.{$name}", ['attribute' => $attribute]);
-            if ($translation === "extended-validation::validation.{$name}") {
-                $translation = trans("laravel-extended-validation::validation.{$name}", ['attribute' => $attribute]);
+            $replacements = $this->getRuleReplacements($name, $parameters, $attribute);
+
+            $isDefaultMessage = $message === "validation.{$name}"
+                || str_ends_with($message, ".{$name}")
+                || $message === trans("validation.{$name}")
+                || $message === trans("validation.{$name}", ['attribute' => $attribute]);
+
+            if ($isDefaultMessage) {
+                /** @var string */
+                $translation = trans("extended-validation::validation.{$name}", $replacements);
+                if ($translation === "extended-validation::validation.{$name}") {
+                    $translation = trans("laravel-extended-validation::validation.{$name}", $replacements);
+                }
+
+                return $translation;
             }
 
-            return $translation;
+            foreach ($replacements as $key => $value) {
+                $message = str_replace(
+                    [':'.$key, ':'.Str::upper($key), ':'.Str::ucfirst($key)],
+                    [$value, Str::upper((string) $value), Str::ucfirst((string) $value)],
+                    $message
+                );
+            }
+
+            return $message;
         });
+    }
+
+    /**
+     * @param  array<int, string>  $parameters
+     * @return array<string, string>
+     */
+    protected function getRuleReplacements(string $name, array $parameters, string $attribute): array
+    {
+        $replacements = ['attribute' => $attribute];
+
+        switch ($name) {
+            case 'min_words':
+                $replacements['min'] = $parameters[0] ?? '';
+                break;
+            case 'max_words':
+                $replacements['max'] = $parameters[0] ?? '';
+                break;
+            case 'multiple_of':
+                $replacements['step'] = $parameters[0] ?? '';
+                $replacements['value'] = $parameters[0] ?? '';
+                break;
+            case 'unless_between':
+                $val1 = $parameters[0] ?? '';
+                $val2 = $parameters[1] ?? '';
+                if (is_numeric($val1) && is_numeric($val2)) {
+                    $min = min((float) $val1, (float) $val2);
+                    $max = max((float) $val1, (float) $val2);
+                    $replacements['min'] = (string) (str_contains((string) $val1, '.') || str_contains((string) $val2, '.') ? $min : (int) $min);
+                    $replacements['max'] = (string) (str_contains((string) $val1, '.') || str_contains((string) $val2, '.') ? $max : (int) $max);
+                } else {
+                    $replacements['min'] = (string) $val1;
+                    $replacements['max'] = (string) $val2;
+                }
+                break;
+            case 'url_protocol':
+                $replacements['protocols'] = implode(', ', array_map(
+                    fn (string $p): string => rtrim(strtolower(trim($p)), ':/'),
+                    $parameters
+                ));
+                break;
+        }
+
+        return $replacements;
     }
 
     /**
