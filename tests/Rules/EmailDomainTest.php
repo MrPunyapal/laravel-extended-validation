@@ -21,4 +21,21 @@ describe('EmailDomain', function (): void {
         expect(Validator::make(['email' => 'user@mailinator.com'], ['email' => $rule])->fails())->toBeTrue();
         expect(Validator::make(['email' => 'user@tempmail.com'], ['email' => $rule])->fails())->toBeTrue();
     });
+
+    it('supports wildcard domain patterns', function (): void {
+        $rule = EmailDomain::allowed('*.company.com');
+
+        expect(Validator::make(['email' => 'user@company.com'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'user@mail.company.com'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'user@dev.mail.company.com'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'user@notcompany.com'], ['email' => $rule])->fails())->toBeTrue();
+    });
+
+    it('supports allowSubdomains option', function (): void {
+        $rule = EmailDomain::allowed('company.com')->allowSubdomains();
+
+        expect(Validator::make(['email' => 'user@company.com'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'user@mail.company.com'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'user@other.com'], ['email' => $rule])->fails())->toBeTrue();
+    });
 });

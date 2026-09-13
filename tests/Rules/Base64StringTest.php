@@ -28,4 +28,13 @@ describe('Base64String', function (): void {
 
         expect(Validator::make(['img' => $valid], ['img' => $rule])->passes())->toBeTrue();
     });
+
+    it('supports url-safe base64 strings', function (): void {
+        // "Hello?World" base64 is "SGVsbG8/V29ybGQ=" -> urlsafe is "SGVsbG8_V29ybGQ"
+        $urlSafeString = 'SGVsbG8_V29ybGQ';
+
+        expect(Validator::make(['token' => $urlSafeString], ['token' => Base64String::urlSafe()])->passes())->toBeTrue();
+        expect(Validator::make(['token' => $urlSafeString], ['token' => 'base64_string:url_safe'])->passes())->toBeTrue();
+        expect(Validator::make(['token' => 'not-valid-base64!!!'], ['token' => Base64String::urlSafe()])->fails())->toBeTrue();
+    });
 });

@@ -13,6 +13,8 @@ describe('Luhn', function (): void {
         '5500000000000004',   // Mastercard test
         '378282246310005',    // Amex test
         '79927398713',        // Known valid
+        '7992-7398-713',      // Hyphenated
+        '7992 7398 713',      // Spaced
     ]);
 
     it('fails for invalid Luhn numbers', function (string $value): void {
@@ -21,5 +23,7 @@ describe('Luhn', function (): void {
         '1234567890123456',
         '0000000000000000',
         'abcdefg',
+        'abc79927398713xyz',
+        '79927398713!',
     ]);
 });

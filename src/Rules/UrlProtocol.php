@@ -31,7 +31,10 @@ final class UrlProtocol implements ValidationRule
             }
         }
 
-        $this->protocols = array_map(strtolower(...), $flattened);
+        $this->protocols = array_values(array_unique(array_map(
+            fn (string $protocol): string => rtrim(strtolower(trim($protocol)), ':/'),
+            $flattened
+        )));
     }
 
     /**

@@ -30,4 +30,10 @@ describe('UrlProtocol', function (): void {
         123,
         null,
     ]);
+
+    it('normalizes protocols configured with trailing slashes or colons', function (): void {
+        $rule = UrlProtocol::make('https://', 'http:');
+        expect(Validator::make(['url' => 'https://laravel.com'], ['url' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['url' => 'http://example.com'], ['url' => $rule])->passes())->toBeTrue();
+    });
 });

@@ -38,4 +38,9 @@ describe('MultipleOf', function (): void {
         expect(Validator::make(['price' => 2.00], ['price' => $rule])->passes())->toBeTrue();
         expect(Validator::make(['price' => 0.30], ['price' => $rule])->fails())->toBeTrue();
     });
+
+    it('supports string-rule syntax without type error', function (): void {
+        expect(Validator::make(['num' => 25], ['num' => 'multiple_of:5'])->passes())->toBeTrue();
+        expect(Validator::make(['num' => 23], ['num' => 'multiple_of:5'])->fails())->toBeTrue();
+    });
 });

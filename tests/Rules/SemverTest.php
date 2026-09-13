@@ -32,4 +32,19 @@ describe('Semver', function (): void {
         '1.02.0',
         '1.0.03',
     ]);
+
+    it('supports required v prefix mode', function (): void {
+        expect(Validator::make(['v' => 'v1.2.3'], ['v' => Semver::withPrefix()])->passes())->toBeTrue();
+        expect(Validator::make(['v' => '1.2.3'], ['v' => Semver::withPrefix()])->fails())->toBeTrue();
+        expect(Validator::make(['v' => 'v1.2.3'], ['v' => 'semver:v'])->passes())->toBeTrue();
+        expect(Validator::make(['v' => '1.2.3'], ['v' => 'semver:v'])->fails())->toBeTrue();
+    });
+
+    it('supports optional v prefix mode', function (): void {
+        expect(Validator::make(['v' => 'v1.2.3'], ['v' => Semver::optionalPrefix()])->passes())->toBeTrue();
+        expect(Validator::make(['v' => '1.2.3'], ['v' => Semver::optionalPrefix()])->passes())->toBeTrue();
+        expect(Validator::make(['v' => 'v1.2.3'], ['v' => 'semver:optional'])->passes())->toBeTrue();
+        expect(Validator::make(['v' => '1.2.3'], ['v' => 'semver:optional'])->passes())->toBeTrue();
+        expect(Validator::make(['v' => 'invalid'], ['v' => Semver::optionalPrefix()])->fails())->toBeTrue();
+    });
 });

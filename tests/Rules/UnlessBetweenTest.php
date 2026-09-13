@@ -24,4 +24,18 @@ describe('UnlessBetween', function (): void {
         20,
         10.5,
     ]);
+
+    it('supports string-rule syntax and string parameters without type error', function (): void {
+        expect(Validator::make(['val' => 5], ['val' => 'unless_between:10,20'])->passes())->toBeTrue();
+        expect(Validator::make(['val' => 15], ['val' => 'unless_between:10,20'])->fails())->toBeTrue();
+    });
+
+    it('normalizes inverted bounds', function (): void {
+        expect(Validator::make(['val' => 15], ['val' => new UnlessBetween(20, 10)])->fails())->toBeTrue();
+        expect(Validator::make(['val' => 5], ['val' => new UnlessBetween(20, 10)])->passes())->toBeTrue();
+    });
+
+    it('fails for non-numeric values', function (): void {
+        expect(Validator::make(['val' => 'abc'], ['val' => new UnlessBetween(10, 20)])->fails())->toBeTrue();
+    });
 });

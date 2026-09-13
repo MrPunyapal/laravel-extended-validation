@@ -16,6 +16,8 @@ final class Base64String implements ValidationRule
 
     public bool $implicit = true;
 
+    public bool $urlSafe = false;
+
     /**
      * @var array<int, string>
      */
@@ -24,24 +26,47 @@ final class Base64String implements ValidationRule
     /**
      * Create a new rule instance.
      *
-     * @param  array<int, string>|string  $allowedMimeTypes
+     * @param  array<int, string>|string|bool  $allowedMimeTypes
      */
     public function __construct(
-        array|string $allowedMimeTypes = [],
-        string ...$additionalMimeTypes,
+        array|string|bool $allowedMimeTypes = [],
+        string|bool ...$additionalArgs,
     ) {
+        if ($allowedMimeTypes === true || $allowedMimeTypes === 'url_safe') {
+            $this->allowedMimeTypes = [];
+            $this->urlSafe = true;
+
+            return;
+        }
+
         $types = is_array($allowedMimeTypes) ? $allowedMimeTypes : [$allowedMimeTypes];
-        $this->allowedMimeTypes = array_values(array_filter(array_merge($types, $additionalMimeTypes)));
+        $flattened = array_merge($types, $additionalArgs);
+        $mimeTypes = [];
+
+        foreach ($flattened as $arg) {
+            if ($arg === true || $arg === 'url_safe') {
+                $this->urlSafe = true;
+            } elseif (is_string($arg) && $arg !== '') {
+                $mimeTypes[] = $arg;
+            }
+        }
+
+        $this->allowedMimeTypes = array_values(array_filter($mimeTypes));
     }
 
     /**
      * Create a new rule instance.
      *
-     * @param  array<int, string>|string  $allowedMimeTypes
+     * @param  array<int, string>|string|bool  $allowedMimeTypes
      */
-    public static function make(array|string $allowedMimeTypes = [], string ...$additionalMimeTypes): static
+    public static function make(array|string|bool $allowedMimeTypes = [], string|bool ...$additionalArgs): static
     {
-        return new self($allowedMimeTypes, ...$additionalMimeTypes);
+        return new self($allowedMimeTypes, ...$additionalArgs);
+    }
+
+    public static function urlSafe(): static
+    {
+        return new self('url_safe');
     }
 
     /**
@@ -75,6 +100,22 @@ final class Base64String implements ValidationRule
             $base64 = $matches[2];
         } elseif (! empty($this->allowedMimeTypes)) {
             $fail('laravel-extended-validation::validation.base64_string')->translate();
+
+            return;
+        }
+
+        if ($this->urlSafe) {
+            $standard = strtr($base64, '-_', '+/');
+            $remainder = strlen($standard) % 4;
+            if ($remainder > 0) {
+                $standard .= str_repeat('=', 4 - $remainder);
+            }
+
+            $decoded = base64_decode($standard, true);
+
+            if ($decoded === false || strtr(rtrim(base64_encode($decoded), '='), '+/', '-_') !== rtrim($base64, '=')) {
+                $fail('laravel-extended-validation::validation.base64_string')->translate();
+            }
 
             return;
         }

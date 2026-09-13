@@ -40,7 +40,15 @@ final class Luhn implements ValidationRule
             return;
         }
 
-        $digits = (string) preg_replace('/\D/', '', (string) $value);
+        $raw = (string) $value;
+
+        if (! preg_match('/^[0-9\s\-]+$/', $raw)) {
+            $fail('laravel-extended-validation::validation.luhn')->translate();
+
+            return;
+        }
+
+        $digits = str_replace([' ', '-'], '', $raw);
 
         if ($digits === '' || ltrim($digits, '0') === '') {
             $fail('laravel-extended-validation::validation.luhn')->translate();

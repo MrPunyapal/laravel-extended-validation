@@ -32,6 +32,16 @@ final class Isbn implements ValidationRule
         return new self($type);
     }
 
+    public static function isbn10(): static
+    {
+        return new self('10');
+    }
+
+    public static function isbn13(): static
+    {
+        return new self('13');
+    }
+
     /**
      * Run the validation rule.
      *

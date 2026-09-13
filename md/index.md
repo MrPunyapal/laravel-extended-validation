@@ -1,11 +1,11 @@
 ---
 title: Laravel Extended Validation
-description: A collection of 28 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
+description: A collection of useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
 ---
 
 # Laravel Extended Validation
 
-A collection of 28 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
+A collection of useful validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
 
 ```bash
 composer require mrpunyapal/laravel-extended-validation

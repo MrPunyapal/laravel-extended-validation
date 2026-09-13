@@ -13,12 +13,20 @@ final class UnlessBetween implements ValidationRule
 {
     use Conditionable, Macroable;
 
-    public function __construct(
-        private readonly int|float $min,
-        private readonly int|float $max,
-    ) {}
+    public readonly int|float $min;
 
-    public static function make(int|float $min, int|float $max): static
+    public readonly int|float $max;
+
+    public function __construct(int|float|string $min, int|float|string $max)
+    {
+        $val1 = is_numeric($min) ? (str_contains((string) $min, '.') ? (float) $min : (int) $min) : 0;
+        $val2 = is_numeric($max) ? (str_contains((string) $max, '.') ? (float) $max : (int) $max) : 0;
+
+        $this->min = min($val1, $val2);
+        $this->max = max($val1, $val2);
+    }
+
+    public static function make(int|float|string $min, int|float|string $max): static
     {
         return new self($min, $max);
     }

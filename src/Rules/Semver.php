@@ -14,17 +14,36 @@ final class Semver implements ValidationRule
 {
     use Conditionable, Macroable;
 
-    /**
-     * Create a new rule instance.
-     */
-    public function __construct() {}
+    public readonly string $mode;
 
     /**
      * Create a new rule instance.
      */
-    public static function make(): static
+    public function __construct(string|bool|null $prefix = null)
     {
-        return new self;
+        $this->mode = match (is_bool($prefix) ? ($prefix ? 'required' : 'none') : strtolower(trim((string) $prefix))) {
+            'v', 'prefix', 'required', '1', 'true' => 'required',
+            'optional', 'any', 'maybe' => 'optional',
+            default => 'none',
+        };
+    }
+
+    /**
+     * Create a new rule instance.
+     */
+    public static function make(string|bool|null $prefix = null): static
+    {
+        return new self($prefix);
+    }
+
+    public static function withPrefix(): static
+    {
+        return new self('required');
+    }
+
+    public static function optionalPrefix(): static
+    {
+        return new self('optional');
     }
 
     /**
@@ -40,7 +59,13 @@ final class Semver implements ValidationRule
             return;
         }
 
-        $pattern = '/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
+        $corePattern = '(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?';
+
+        $pattern = match ($this->mode) {
+            'required' => '/^v'.$corePattern.'$/',
+            'optional' => '/^v?'.$corePattern.'$/',
+            default => '/^'.$corePattern.'$/',
+        };
 
         if (! preg_match($pattern, $value)) {
             $fail('laravel-extended-validation::validation.semver')->translate();

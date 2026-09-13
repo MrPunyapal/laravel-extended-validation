@@ -13,11 +13,16 @@ final class MultipleOf implements ValidationRule
 {
     use Conditionable, Macroable;
 
-    public function __construct(
-        private readonly int|float $step,
-    ) {}
+    public readonly int|float $step;
 
-    public static function make(int|float $step): static
+    public function __construct(int|float|string $step)
+    {
+        $this->step = is_numeric($step)
+            ? (str_contains((string) $step, '.') ? (float) $step : (int) $step)
+            : 0;
+    }
+
+    public static function make(int|float|string $step): static
     {
         return new self($step);
     }

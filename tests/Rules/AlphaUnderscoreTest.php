@@ -26,4 +26,10 @@ describe('AlphaUnderscore', function (): void {
         'user#name',
         null,
     ]);
+
+    it('supports string-rule syntax and ascii option', function (): void {
+        expect(Validator::make(['u' => 'user_123'], ['u' => 'alpha_underscore:ascii'])->passes())->toBeTrue();
+        expect(Validator::make(['u' => 'café_123'], ['u' => 'alpha_underscore:ascii'])->fails())->toBeTrue();
+        expect(Validator::make(['u' => 'café_123'], ['u' => 'alpha_underscore'])->passes())->toBeTrue();
+    });
 });

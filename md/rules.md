@@ -1,11 +1,11 @@
 ---
 title: Rules Reference
-description: Complete reference and usage examples for all 28 validation rules in mrpunyapal/laravel-extended-validation.
+description: Complete reference and usage examples for validation rules in mrpunyapal/laravel-extended-validation.
 ---
 
 # Rules Reference
 
-Complete reference for all 28 validation rules included in the package.
+Complete reference for validation rules included in the package.
 
 ---
 
@@ -171,11 +171,11 @@ use Illuminate\Validation\Rule;
 
 ## semver
 
-Validates strings against the official [Semantic Versioning 2.0.0](https://semver.org) specification, including optional pre-release tags and build metadata.
+Validates strings against the official [Semantic Versioning 2.0.0](https://semver.org) specification, including optional pre-release tags and build metadata. Supports strict SemVer without prefix, required `v` prefix, or optional `v` prefix.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Semver`
-- **Macro**: `Rule::semver()`
-- **String**: `semver`
+- **Macro**: `Rule::semver(?string $prefix = null)`
+- **String**: `semver`, `semver:v`, `semver:optional`
 
 ### Usage
 
@@ -183,30 +183,44 @@ Validates strings against the official [Semantic Versioning 2.0.0](https://semve
 use MrPunyapal\LaravelExtendedValidation\Rules\Semver;
 use Illuminate\Validation\Rule;
 
+// Strict SemVer 2.0.0 (no prefix)
 'version' => ['required', new Semver]
 'version' => ['required', Rule::semver()]
 'version' => 'required|semver'
+
+// Required 'v' prefix (e.g. v1.2.3)
+'version' => ['required', Semver::withPrefix()]
+'version' => ['required', Rule::semver('v')]
+'version' => 'required|semver:v'
+
+// Optional 'v' prefix (accepts both 1.2.3 and v1.2.3)
+'version' => ['required', Semver::optionalPrefix()]
+'version' => ['required', Rule::semver('optional')]
+'version' => 'required|semver:optional'
 ```
 
 ### Examples
 
-| Input | Result |
-| --- | --- |
-| `1.0.0`, `0.1.0` | Passes |
-| `1.2.3-alpha.1` | Passes |
-| `2.0.0-beta+build.123` | Passes |
-| `v1.0.0` | Fails (prefix not allowed in SemVer 2.0) |
-| `1.0` | Fails (missing patch component) |
+| Input | Mode | Result |
+| --- | --- | --- |
+| `1.0.0`, `0.1.0` | Default | Passes |
+| `1.2.3-alpha.1` | Default | Passes |
+| `2.0.0-beta+build.123` | Default | Passes |
+| `v1.0.0` | Default | Fails (prefix not allowed in SemVer 2.0) |
+| `v1.0.0` | `withPrefix()` / `:v` | Passes |
+| `1.0.0` | `withPrefix()` / `:v` | Fails (missing prefix) |
+| `1.0.0` / `v1.0.0` | `optionalPrefix()` / `:optional` | Passes |
+| `1.0` | All | Fails (missing patch component) |
 
 ---
 
 ## base64_string
 
-Validates that an attribute is valid base64-encoded data, with optional MIME type filtering for Data URIs.
+Validates that an attribute is valid base64-encoded data, with optional MIME type filtering for Data URIs and URL-safe base64 support.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Base64String`
-- **Macro**: `Rule::base64String(array|string $allowedMimeTypes = [])`
-- **String**: `base64_string` or `base64_string:{mimes}`
+- **Macro**: `Rule::base64String(array|string $allowedMimeTypes = [], bool $urlSafe = false)`
+- **String**: `base64_string`, `base64_string:url_safe`, or `base64_string:{mimes}`
 
 ### Usage
 
@@ -216,6 +230,11 @@ use Illuminate\Validation\Rule;
 
 // Standard base64 payload
 'payload' => ['required', new Base64String]
+
+// URL-safe base64 payload (Base64Url using - and _)
+'token' => ['required', Base64String::urlSafe()]
+'token' => ['required', Rule::base64String(urlSafe: true)]
+'token' => 'required|base64_string:url_safe'
 
 // Data URI restricted to specific image types
 'avatar' => ['required', new Base64String(['image/png', 'image/jpeg'])]
@@ -227,7 +246,7 @@ use Illuminate\Validation\Rule;
 
 ## luhn
 
-Validates numeric strings against the Luhn/MOD-10 algorithm. Common for credit cards, debit cards, IMEI numbers, and national identifiers.
+Validates numeric strings against the Luhn/MOD-10 algorithm. Common for credit cards, debit cards, IMEI numbers, and national identifiers. Formatted strings containing spaces or dashes are accepted, but non-numeric characters are rejected.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Luhn`
 - **Macro**: `Rule::luhn()`
@@ -370,11 +389,13 @@ use Illuminate\Validation\Rule;
 'book' => 'required|isbn'
 
 // ISBN-10 only
+'book' => ['required', Isbn::isbn10()]
 'book' => ['required', new Isbn('10')]
 'book' => ['required', Rule::isbn('10')]
 'book' => 'required|isbn:10'
 
 // ISBN-13 only
+'book' => ['required', Isbn::isbn13()]
 'book' => ['required', new Isbn('13')]
 'book' => ['required', Rule::isbn('13')]
 'book' => 'required|isbn:13'
@@ -384,11 +405,11 @@ use Illuminate\Validation\Rule;
 
 ## country_code
 
-Validates ISO 3166-1 country codes (alpha-2 or alpha-3 format).
+Validates ISO 3166-1 country codes (alpha-2 format, alpha-3 format, or either).
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\CountryCode`
 - **Macro**: `Rule::countryCode(string $format = 'alpha2')`
-- **String**: `country_code` or `country_code:{format}`
+- **String**: `country_code`, `country_code:alpha2`, `country_code:alpha3`, `country_code:any`
 
 ### Usage
 
@@ -397,25 +418,36 @@ use MrPunyapal\LaravelExtendedValidation\Rules\CountryCode;
 use Illuminate\Validation\Rule;
 
 // ISO 3166-1 alpha-2 (US, GB, IN, DE, JP, etc.)
+'country' => ['required', CountryCode::alpha2()]
 'country' => ['required', new CountryCode]
 'country' => ['required', Rule::countryCode()]
 'country' => 'required|country_code'
 
 // ISO 3166-1 alpha-3 (USA, GBR, IND, DEU, JPN, etc.)
+'country' => ['required', CountryCode::alpha3()]
 'country' => ['required', new CountryCode('alpha3')]
 'country' => ['required', Rule::countryCode('alpha3')]
 'country' => 'required|country_code:alpha3'
+
+// Accepts either alpha-2 or alpha-3
+'country' => ['required', CountryCode::any()]
+'country' => ['required', new CountryCode('any')]
+'country' => ['required', Rule::countryCode('any')]
+'country' => 'required|country_code:any'
 ```
 
 ---
 
 ## hex_color
 
-Validates CSS hex color codes (supporting 3, 4, 6, or 8 hexadecimal characters preceded by `#`).
+Validates CSS hex color codes (supporting 3, 4, 6, or 8 hexadecimal characters). Supports colors with `#` (default), without `#`, or optional `#`.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\HexColor`
-- **Macro**: `Rule::hexColor()`
+- **Macro**: `Rule::hexColor(?string $prefix = null)`
 - **String**: `hex_color`
+
+> [!NOTE]
+> Laravel 10+ includes a built-in `hex_color` string rule that strictly requires `#`. To validate colors without `#` or with optional `#`, use class syntax or the `Rule::hexColor()` macro.
 
 ### Usage
 
@@ -423,21 +455,33 @@ Validates CSS hex color codes (supporting 3, 4, 6, or 8 hexadecimal characters p
 use MrPunyapal\LaravelExtendedValidation\Rules\HexColor;
 use Illuminate\Validation\Rule;
 
+// Requires '#' prefix (default)
 'accent' => ['required', new HexColor]
 'accent' => ['required', Rule::hexColor()]
 'accent' => 'required|hex_color'
+
+// Without '#' prefix (e.g. 'fff', '4f46e5')
+'accent' => ['required', HexColor::withoutHash()]
+'accent' => ['required', Rule::hexColor('no_hash')]
+
+// Optional '#' prefix (accepts both 'fff' and '#fff')
+'accent' => ['required', HexColor::optionalHash()]
+'accent' => ['required', Rule::hexColor('optional_hash')]
 ```
 
 ### Examples
 
-| Input | Result |
-| --- | --- |
-| `#fff`, `#FFF` | Passes (3-digit) |
-| `#ffff` | Passes (4-digit with alpha) |
-| `#ffffff` | Passes (6-digit) |
-| `#ffffffff` | Passes (8-digit with alpha) |
-| `fff` | Fails (missing `#`) |
-| `#gggggg` | Fails (invalid hex characters) |
+| Input | Mode | Result |
+| --- | --- | --- |
+| `#fff`, `#FFF` | Default | Passes (3-digit) |
+| `#ffff` | Default | Passes (4-digit with alpha) |
+| `#ffffff` | Default | Passes (6-digit) |
+| `#ffffffff` | Default | Passes (8-digit with alpha) |
+| `fff` | Default | Fails (missing `#`) |
+| `4f46e5`, `fff` | `withoutHash()` / `no_hash` | Passes |
+| `#4f46e5` | `withoutHash()` / `no_hash` | Fails (hash not allowed) |
+| `4f46e5` / `#4f46e5` | `optionalHash()` / `optional_hash` | Passes |
+| `#gggggg` | All | Fails (invalid hex characters) |
 
 ---
 
@@ -550,7 +594,7 @@ use Illuminate\Validation\Rule;
 
 ## email_domain
 
-Validates that an email address belongs to an allowed domain list or does not belong to a blocked domain list.
+Validates that an email address belongs to an allowed domain list or does not belong to a blocked domain list. Supports exact domains, wildcards (`*.example.com`), and automatic subdomain allowance.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\EmailDomain`
 - **Macro**: `Rule::emailDomain($allowed = [], $blocked = [])`
@@ -566,6 +610,10 @@ use Illuminate\Validation\Rule;
 'email' => ['required', 'email', EmailDomain::allowed('company.com', 'partner.org')]
 'email' => ['required', 'email', Rule::emailDomain(allowed: ['company.com', 'partner.org'])]
 
+// Allow company domain and all of its subdomains (*.company.com)
+'email' => ['required', 'email', EmailDomain::allowed('*.company.com')]
+'email' => ['required', 'email', EmailDomain::allowed('company.com')->allowSubdomains()]
+
 // Block disposable email providers
 'email' => ['required', 'email', EmailDomain::blocked('mailinator.com', 'tempmail.com')]
 'email' => ['required', 'email', Rule::emailDomain(blocked: ['mailinator.com', 'tempmail.com'])]
@@ -576,6 +624,10 @@ use Illuminate\Validation\Rule;
 | Input | Configuration | Result |
 | --- | --- | --- |
 | `alice@company.com` | `allowed: ['company.com']` | Passes |
+| `alice@mail.company.com` | `allowed: ['company.com']` | Fails |
+| `alice@mail.company.com` | `allowed: ['*.company.com']` | Passes |
+| `alice@company.com` | `allowed: ['company.com']` (with `allowSubdomains`) | Passes |
+| `alice@mail.company.com` | `allowed: ['company.com']` (with `allowSubdomains`) | Passes |
 | `alice@gmail.com` | `allowed: ['company.com']` | Fails |
 | `bob@legit.com` | `blocked: ['tempmail.com']` | Passes |
 | `bob@tempmail.com` | `blocked: ['tempmail.com']` | Fails |
@@ -614,11 +666,11 @@ use Illuminate\Validation\Rule;
 
 ## alpha_underscore
 
-Validates that a string contains only letters, numbers, and underscores (`_`). Unlike Laravel's native `alpha_dash` which also permits hyphens (`-`), `alpha_underscore` enforces strict identifier naming (like Python or SQL identifiers and usernames).
+Validates that a string contains only letters, numbers, and underscores (`_`). Unlike Laravel's native `alpha_dash` which also permits hyphens (`-`), `alpha_underscore` enforces strict identifier naming (like Python or SQL identifiers and usernames). An optional ASCII mode restricts matching to ASCII-only characters.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore`
-- **Macro**: `Rule::alphaUnderscore()`
-- **String**: `alpha_underscore`
+- **Macro**: `Rule::alphaUnderscore(bool $ascii = false)`
+- **String**: `alpha_underscore`, `alpha_underscore:ascii`
 
 ### Usage
 
@@ -626,27 +678,35 @@ Validates that a string contains only letters, numbers, and underscores (`_`). U
 use MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore;
 use Illuminate\Validation\Rule;
 
+// Default mode (Unicode letters, numbers, and underscores)
 'username' => ['required', 'string', new AlphaUnderscore]
 'username' => ['required', 'string', Rule::alphaUnderscore()]
 'username' => 'required|string|alpha_underscore'
+
+// ASCII-only mode
+'identifier' => ['required', 'string', AlphaUnderscore::ascii()]
+'identifier' => ['required', 'string', Rule::alphaUnderscore(ascii: true)]
+'identifier' => 'required|string|alpha_underscore:ascii'
 ```
 
 ### Examples
 
-| Input | Result |
-| --- | --- |
-| `user_123` | Passes |
-| `USER_NAME` | Passes |
-| `_system_` | Passes |
-| `user-name` | Fails (hyphen not allowed) |
-| `user name` | Fails (space not allowed) |
-| `user@name` | Fails (symbol not allowed) |
+| Input | Mode | Result |
+| --- | --- | --- |
+| `user_123` | Default | Passes |
+| `USER_NAME` | Default | Passes |
+| `_system_` | Default | Passes |
+| `café_bar` | Default | Passes |
+| `café_bar` | ASCII | Fails (contains non-ASCII characters) |
+| `user-name` | All | Fails (hyphen not allowed) |
+| `user name` | All | Fails (space not allowed) |
+| `user@name` | All | Fails (symbol not allowed) |
 
 ---
 
 ## unless_between
 
-Validates that a numeric value falls outside a specified range (i.e. value < min OR value > max).
+Validates that a numeric value falls outside a specified range (i.e. value < min OR value > max). Bounds may be specified in any order; the lower and upper bounds are normalized automatically.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween`
 - **Macro**: `Rule::unlessBetween(float|int $min, float|int $max)`
@@ -740,7 +800,7 @@ use Illuminate\Validation\Rule;
 
 ## url_protocol
 
-Validates that a URL string uses one of the specified protocol schemes.
+Validates that a URL string uses one of the specified protocol schemes. Protocol names can be passed with or without trailing `://` (e.g. `'https'` or `'https://'`).
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\UrlProtocol`
 - **Macro**: `Rule::urlProtocol(array|string ...$protocols)`
@@ -755,6 +815,9 @@ use Illuminate\Validation\Rule;
 'website' => ['required', new UrlProtocol('https')]
 'website' => ['required', Rule::urlProtocol('https', 'http')]
 'website' => 'required|url_protocol:https,http'
+
+// Protocols with trailing '://' are normalized automatically
+'website' => ['required', Rule::urlProtocol('https://', 'http://')]
 ```
 
 ### Examples

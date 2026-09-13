@@ -13,11 +13,16 @@ final class AlphaUnderscore implements ValidationRule
 {
     use Conditionable, Macroable;
 
-    public function __construct(
-        private readonly bool $ascii = false,
-    ) {}
+    public readonly bool $ascii;
 
-    public static function make(bool $ascii = false): static
+    public function __construct(bool|string $ascii = false)
+    {
+        $this->ascii = is_bool($ascii)
+            ? $ascii
+            : in_array(strtolower(trim($ascii)), ['1', 'true', 'ascii'], true);
+    }
+
+    public static function make(bool|string $ascii = false): static
     {
         return new self($ascii);
     }

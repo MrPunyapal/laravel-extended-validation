@@ -34,4 +34,11 @@ describe('Isbn', function (): void {
         expect(Validator::make(['isbn' => '9780306406157'], ['isbn' => $rule])->passes())->toBeTrue();
         expect(Validator::make(['isbn' => '0306406152'], ['isbn' => $rule])->fails())->toBeTrue();
     });
+
+    it('supports static factory methods', function (): void {
+        expect(Validator::make(['isbn' => '0306406152'], ['isbn' => Isbn::isbn10()])->passes())->toBeTrue();
+        expect(Validator::make(['isbn' => '9780306406157'], ['isbn' => Isbn::isbn10()])->fails())->toBeTrue();
+        expect(Validator::make(['isbn' => '9780306406157'], ['isbn' => Isbn::isbn13()])->passes())->toBeTrue();
+        expect(Validator::make(['isbn' => '0306406152'], ['isbn' => Isbn::isbn13()])->fails())->toBeTrue();
+    });
 });

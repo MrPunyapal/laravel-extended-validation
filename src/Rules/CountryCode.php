@@ -79,6 +79,21 @@ final class CountryCode implements ValidationRule
         return new self($format);
     }
 
+    public static function alpha2(): static
+    {
+        return new self('alpha2');
+    }
+
+    public static function alpha3(): static
+    {
+        return new self('alpha3');
+    }
+
+    public static function any(): static
+    {
+        return new self('any');
+    }
+
     /**
      * Run the validation rule.
      *
@@ -97,6 +112,7 @@ final class CountryCode implements ValidationRule
         $isValid = match (strtolower($this->format)) {
             'alpha3', 'alpha-3' => in_array($upperValue, self::ALPHA_3_CODES, true),
             'alpha2', 'alpha-2' => in_array($upperValue, self::ALPHA_2_CODES, true),
+            'any', 'all', 'either' => in_array($upperValue, self::ALPHA_2_CODES, true) || in_array($upperValue, self::ALPHA_3_CODES, true),
             default => false,
         };
 

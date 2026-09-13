@@ -14,17 +14,36 @@ final class HexColor implements ValidationRule
 {
     use Conditionable, Macroable;
 
-    /**
-     * Create a new rule instance.
-     */
-    public function __construct() {}
+    public readonly string $mode;
 
     /**
      * Create a new rule instance.
      */
-    public static function make(): static
+    public function __construct(string|bool|null $prefix = null)
     {
-        return new self;
+        $this->mode = match (is_bool($prefix) ? ($prefix ? 'required' : 'none') : strtolower(trim((string) $prefix))) {
+            'no_hash', 'none', 'false', '0' => 'none',
+            'optional', 'optional_hash', 'maybe', 'any' => 'optional',
+            default => 'required',
+        };
+    }
+
+    /**
+     * Create a new rule instance.
+     */
+    public static function make(string|bool|null $prefix = null): static
+    {
+        return new self($prefix);
+    }
+
+    public static function withoutHash(): static
+    {
+        return new self('none');
+    }
+
+    public static function optionalHash(): static
+    {
+        return new self('optional');
     }
 
     /**
@@ -40,7 +59,15 @@ final class HexColor implements ValidationRule
             return;
         }
 
-        if (! preg_match('/^#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/', $value)) {
+        $corePattern = '([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})';
+
+        $pattern = match ($this->mode) {
+            'none' => '/^'.$corePattern.'$/',
+            'optional' => '/^#?'.$corePattern.'$/',
+            default => '/^#'.$corePattern.'$/',
+        };
+
+        if (! preg_match($pattern, $value)) {
             $fail('laravel-extended-validation::validation.hex_color')->translate();
         }
     }
