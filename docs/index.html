@@ -155,13 +155,15 @@
 </tbody>
 </table></div>
 <h2 id="why-this-package">Why this package?</h2>
+<p>I submitted a pull request (<a href="https://github.com/laravel/framework/pull/61522">laravel/framework#61522</a>) to the Laravel framework to add an option rejecting plus-addressed email aliases (<code>username+alias@gmail.com</code>) to prevent users from creating multiple accounts or abusing free trials. The PR was closed because plus-addressing is RFC 5322 compliant, and Laravel core maintains strict RFC compliance for email validation rather than adding anti-abuse rules.</p>
+<p>That got me thinking: <em>what other useful validation rules have been proposed to the framework over the years and rejected?</em></p>
 <p>In <code>laravel/framework</code>, pull requests for new validation rules are frequently closed by core maintainers not because the rules lack utility, but because:</p>
 <ol>
 <li><strong>Core Leanness</strong>: The framework avoids single-regex wrapper rules to avoid bloat.</li>
-<li><strong>RFC Strictness</strong>: Some rules (such as sub-addressing in email) restrict inputs that are RFC-valid even though real-world apps need to block them to prevent abuse.</li>
+<li><strong>RFC Strictness</strong>: Some rules (such as sub-addressing in email) restrict inputs that are RFC-valid even though real-world apps need to block them.</li>
 <li><strong>Dataset Maintenance</strong>: Rules requiring ISO codes, country lists, or postal formats require constant maintenance that core avoids taking on.</li>
 </ol>
-<p>This package bridges that gap by packaging these requested validation rules into a single, clean, thoroughly tested package.</p>
+<p>I looked through closed and rejected validation PRs on the <code>laravel/framework</code> repository, picked the most useful ones, and implemented them all in this package following Laravel's modern validation standards.</p>
 <h2 id="next-steps">Next steps</h2>
 <ul>
 <li><a href="installation/">Installation</a> — requirements and setup.</li>

@@ -6,6 +6,14 @@
 
 A collection of **15 useful validation rules** that were proposed to Laravel core but rejected — now available as a clean, well-tested package. Every rule works three ways: as a class, as a `Rule::` macro, and as a string rule.
 
+## Why this package?
+
+I submitted a pull request ([laravel/framework#61522](https://github.com/laravel/framework/pull/61522)) to the Laravel framework to add an option rejecting plus-addressed email aliases (e.g. `username+alias@gmail.com`) to prevent users from creating multiple accounts or abusing trials. The PR was rejected because plus-addressing is RFC 5322 compliant, and Laravel core maintains strict RFC compliance for email validation rather than adding anti-abuse rules.
+
+That got me thinking: *what other useful validation rules have been proposed to the framework over the years and rejected?*
+
+I looked through closed and rejected validation PRs on the `laravel/framework` repository, picked the most useful ones that real-world applications actually need, and implemented them all in this package the Laravel way!
+
 ## Installation
 
 ```bash

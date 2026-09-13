@@ -139,13 +139,17 @@ Every rule can be used in three ways: as a standalone validation class (`new Slu
 
 ## Why this package?
 
+I submitted a pull request ([laravel/framework#61522](https://github.com/laravel/framework/pull/61522)) to the Laravel framework to add an option rejecting plus-addressed email aliases (`username+alias@gmail.com`) to prevent users from creating multiple accounts or abusing free trials. The PR was closed because plus-addressing is RFC 5322 compliant, and Laravel core maintains strict RFC compliance for email validation rather than adding anti-abuse rules.
+
+That got me thinking: *what other useful validation rules have been proposed to the framework over the years and rejected?*
+
 In `laravel/framework`, pull requests for new validation rules are frequently closed by core maintainers not because the rules lack utility, but because:
 
 1. **Core Leanness**: The framework avoids single-regex wrapper rules to avoid bloat.
-2. **RFC Strictness**: Some rules (such as sub-addressing in email) restrict inputs that are RFC-valid even though real-world apps need to block them to prevent abuse.
+2. **RFC Strictness**: Some rules (such as sub-addressing in email) restrict inputs that are RFC-valid even though real-world apps need to block them.
 3. **Dataset Maintenance**: Rules requiring ISO codes, country lists, or postal formats require constant maintenance that core avoids taking on.
 
-This package bridges that gap by packaging these requested validation rules into a single, clean, thoroughly tested package.
+I looked through closed and rejected validation PRs on the `laravel/framework` repository, picked the most useful ones, and implemented them all in this package following Laravel's modern validation standards.
 
 ## Next steps
 
