@@ -1,0 +1,10 @@
+# Laravel Extended Validation
+> A collection of useful validation rules rejected from Laravel core, implemented the Laravel way.
+
+## Docs
+
+- https://mrpunyapal.github.io/laravel-extended-validation/configuration: Configuration
+- https://mrpunyapal.github.io/laravel-extended-validation/installation: Installation
+- https://mrpunyapal.github.io/laravel-extended-validation/: Laravel Extended Validation
+- https://mrpunyapal.github.io/laravel-extended-validation/rules: Rules Reference
+- https://mrpunyapal.github.io/laravel-extended-validation/usage: Usage

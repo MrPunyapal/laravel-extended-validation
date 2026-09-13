@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Extended Validation</title>
+    <meta name="description" content="A collection of useful validation rules rejected from Laravel core, implemented the Laravel way.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Laravel Extended Validation">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://mrpunyapal.github.io/laravel-extended-validation/">
+    <meta property="og:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/index.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Laravel Extended Validation">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/index.png">
+    <link rel="stylesheet" href="assets/app.css">
+    <script src="assets/app.js" defer></script>
+</head>
+<body data-docsmith-root="./">
+    <div class="shell">
+        <aside class="sidebar" data-docsmith-sidebar>
+            <div class="sidebar-header">
+                <div class="sidebar-title">
+                    <h1 class="brand">Laravel Extended Validation</h1>
+                    <p class="tagline">A collection of useful validation rules rejected from Laravel core, implemented the Laravel way.</p>
+                </div>
+                <button type="button" class="mobile-menu-toggle" data-docsmith-menu-toggle aria-expanded="false" aria-controls="docsmith-sidebar-panel" aria-label="Open menu"><svg class="mobile-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="mobile-menu-bars" d="M3.75 8.25h16.5M3.75 15.75h11"></path><path class="mobile-menu-close" d="M6 6l12 12M18 6L6 18"></path></svg><span class="sr-only">Toggle menu</span></button>
+            </div>
+            <div class="sidebar-panel" id="docsmith-sidebar-panel" data-docsmith-sidebar-panel>
+                
+                <div class="sidebar-actions"><a class="sidebar-action-link" href="https://github.com/mrpunyapal/laravel-extended-validation">Repository</a><button type="button" class="theme-toggle" data-docsmith-theme-toggle>Theme</button></div>
+                <div class="search">
+                    <input type="search" placeholder="Search pages  (⌘K)" aria-label="Search pages" data-docsmith-search>
+                    <div class="search-results" data-docsmith-search-results hidden></div>
+                    <div class="search-empty" data-docsmith-empty>No pages match your search.</div>
+                </div>
+                <nav class="nav" data-docsmith-nav><a class="active" href="./" data-nav-item data-title="Laravel Extended Validation" data-search="Laravel Extended Validation Laravel Extended Validation">Laravel Extended Validation</a><a class="" href="installation/" data-nav-item data-title="Installation" data-search="Installation Installation">Installation</a><a class="" href="configuration/" data-nav-item data-title="Configuration" data-search="Configuration Configuration">Configuration</a><a class="" href="usage/" data-nav-item data-title="Usage" data-search="Usage Usage">Usage</a><a class="" href="rules/" data-nav-item data-title="Rules Reference" data-search="Rules Reference Rules Reference">Rules Reference</a></nav>
+                <a class="docsmith-badge" href="https://github.com/MrPunyapal/docsmith" target="_blank" rel="noopener noreferrer" data-docsmith-badge aria-label="Built with DocSmith"><svg class="docsmith-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-6.716-4.35-9.428-7.052C.4 11.692-.21 8.9 1.38 6.87 2.736 5.14 5.09 4.583 6.86 5.686 8 6.41 8.86 7.55 9.6 8.7c.74-1.15 1.6-2.29 2.74-3.014 1.77-1.103 4.124-.546 5.48 1.184 1.59 2.03.98 4.822-1.192 7.078C18.716 16.65 12 21 12 21z"/></svg><span class="docsmith-badge-text">Built with</span><span class="docsmith-badge-brand">DocSmith</span></a>
+            </div>
+        </aside>
+        <button type="button" class="sidebar-backdrop" data-docsmith-sidebar-backdrop aria-label="Close menu"></button>
+        <main class="content">
+            <article>
+                <header class="doc-head">
+                    
+                    <h1>Laravel Extended Validation</h1>
+                    
+                </header>
+                <div class="doc-body">
+                    <p>A collection of <strong>15 useful validation rules</strong> that were proposed to Laravel framework core but closed or rejected — implemented following modern Laravel standards.</p>
+<p>Every rule can be used in three ways: as a standalone validation class (<code>new Slug</code>), as a fluent <code>Rule::</code> macro (<code>Rule::slug()</code>), or as a standard string rule (<code>'slug'</code>).</p>
+<h2 id="available-rules">Available Rules</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+<th>Syntax</th>
+<th>Rejected In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="rules/#without_alias">WithoutAlias</a></td>
+<td>Reject plus-addressed email aliases (e.g. <code>user+tag@gmail.com</code>)</td>
+<td><code>without_alias</code></td>
+<td><a href="https://github.com/laravel/framework/pull/61522">PR #61522</a></td>
+</tr>
+<tr>
+<td><a href="rules/#not_email">NotEmail</a></td>
+<td>Ensure a value is not an email address (e.g. for usernames)</td>
+<td><code>not_email</code></td>
+<td><a href="https://github.com/laravel/framework/pull/60915">PR #60915</a></td>
+</tr>
+<tr>
+<td><a href="rules/#slug">Slug</a></td>
+<td>Validate URL-friendly slugs with configurable separator</td>
+<td><code>slug</code> / <code>slug:_</code></td>
+<td><a href="https://github.com/laravel/framework/pull/38706">PR #38706</a></td>
+</tr>
+<tr>
+<td><a href="rules/#even">EvenNumber</a></td>
+<td>Ensure numeric input is an even number</td>
+<td><code>even</code></td>
+<td><a href="https://github.com/laravel/framework/pull/43632">PR #43632</a></td>
+</tr>
+<tr>
+<td><a href="rules/#odd">OddNumber</a></td>
+<td>Ensure numeric input is an odd number</td>
+<td><code>odd</code></td>
+<td><a href="https://github.com/laravel/framework/pull/45781">PR #45781</a></td>
+</tr>
+<tr>
+<td><a href="rules/#semver">Semver</a></td>
+<td>Validate Semantic Versioning 2.0.0 strings</td>
+<td><code>semver</code></td>
+<td><a href="https://github.com/laravel/framework/pull/36854">PR #36854</a></td>
+</tr>
+<tr>
+<td><a href="rules/#base64_string">Base64String</a></td>
+<td>Validate base64 strings and data URIs with MIME checks</td>
+<td><code>base64_string</code></td>
+<td><a href="https://github.com/laravel/framework/pull/41528">PR #41528</a></td>
+</tr>
+<tr>
+<td><a href="rules/#luhn">Luhn</a></td>
+<td>Validate numeric strings against the Luhn/MOD-10 checksum</td>
+<td><code>luhn</code></td>
+<td><a href="https://github.com/laravel/framework/pull/31422">PR #31422</a></td>
+</tr>
+<tr>
+<td><a href="rules/#min_words">MinWords</a></td>
+<td>Validate minimum word count</td>
+<td><code>min_words:N</code></td>
+<td><a href="https://github.com/laravel/framework/pull/35108">PR #35108</a></td>
+</tr>
+<tr>
+<td><a href="rules/#max_words">MaxWords</a></td>
+<td>Validate maximum word count</td>
+<td><code>max_words:N</code></td>
+<td><a href="https://github.com/laravel/framework/pull/46092">PR #46092</a></td>
+</tr>
+<tr>
+<td><a href="rules/#domain">Domain</a></td>
+<td>Validate domain names without requiring <code>http://</code> or <code>https://</code></td>
+<td><code>domain</code></td>
+<td><a href="https://github.com/laravel/framework/pull/38954">PR #38954</a></td>
+</tr>
+<tr>
+<td><a href="rules/#e164">E164Phone</a></td>
+<td>Validate international phone numbers in E.164 format</td>
+<td><code>e164</code></td>
+<td><a href="https://github.com/laravel/framework/pull/48332">PR #48332</a></td>
+</tr>
+<tr>
+<td><a href="rules/#isbn">Isbn</a></td>
+<td>Validate ISBN-10, ISBN-13, or both with checksums</td>
+<td><code>isbn</code> / <code>isbn:10</code> / <code>isbn:13</code></td>
+<td><a href="https://github.com/laravel/framework/pull/37652">PR #37652</a></td>
+</tr>
+<tr>
+<td><a href="rules/#country_code">CountryCode</a></td>
+<td>Validate ISO 3166-1 alpha-2 or alpha-3 country codes</td>
+<td><code>country_code</code> / <code>country_code:alpha3</code></td>
+<td><a href="https://github.com/laravel/framework/pull/42110">PR #42110</a></td>
+</tr>
+<tr>
+<td><a href="rules/#hex_color">HexColor</a></td>
+<td>Validate CSS hex color codes (3, 4, 6, or 8 characters)</td>
+<td><code>hex_color</code></td>
+<td>Community Rule</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="why-this-package">Why this package?</h2>
+<p>In <code>laravel/framework</code>, pull requests for new validation rules are frequently closed by core maintainers not because the rules lack utility, but because:</p>
+<ol>
+<li><strong>Core Leanness</strong>: The framework avoids single-regex wrapper rules to avoid bloat.</li>
+<li><strong>RFC Strictness</strong>: Some rules (such as sub-addressing in email) restrict inputs that are RFC-valid even though real-world apps need to block them to prevent abuse.</li>
+<li><strong>Dataset Maintenance</strong>: Rules requiring ISO codes, country lists, or postal formats require constant maintenance that core avoids taking on.</li>
+</ol>
+<p>This package bridges that gap by packaging these requested validation rules into a single, clean, thoroughly tested package.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="installation/">Installation</a> — requirements and setup.</li>
+<li><a href="configuration/">Configuration</a> — enable or disable specific rules.</li>
+<li><a href="usage/">Usage</a> — three flexible ways to use any rule.</li>
+<li><a href="rules/">Rules</a> — detailed documentation and examples for every rule.</li>
+</ul>
+
+                </div>
+                <footer class="doc-meta">
+                    <a class="edit-link" href="https://github.com/mrpunyapal/laravel-extended-validation/edit/main/md/index.md">Edit this page</a>
+                </footer>
+            </article>
+            <nav class="pager" aria-label="Page navigation"><a class="pager-link pager-link-next" href="installation/"><span>Next</span><strong>Installation</strong></a></nav>
+        </main>
+        
+    </div>
+    <div class="search-overlay" data-docsmith-search-overlay hidden role="dialog" aria-label="Search documentation">
+    <div class="search-overlay-backdrop" data-docsmith-search-overlay-close></div>
+    <div class="search-overlay-panel">
+        <div class="search-overlay-input-wrap">
+            <svg class="search-overlay-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="search" class="search-overlay-input" placeholder="Search documentation..." aria-label="Search documentation" data-docsmith-search-overlay-input autocomplete="off">
+            <kbd class="search-overlay-hint">ESC</kbd>
+        </div>
+        <div class="search-overlay-results" data-docsmith-search-overlay-results></div>
+        <div class="search-overlay-empty" data-docsmith-search-overlay-empty hidden>No results found.</div>
+    </div>
+</div>
+</body>
+</html>
