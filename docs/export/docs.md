@@ -100,6 +100,23 @@ php artisan vendor:publish --tag="laravel-extended-validation-translations"
 
 This places the translation files in `lang/vendor/laravel-extended-validation` where you can translate them into any language or tweak the error messages.
 
+## Laravel Boost
+
+The package ships a Laravel Boost skill named `laravel-extended-validation-development` for on-demand AI guidance when using these extended validation rules.
+
+If your Laravel application uses Boost, install Boost and publish its resources:
+
+```bash
+composer require laravel/boost --dev
+php artisan boost:install
+```
+
+If Boost is already installed and you add this package later, discover the new package skills:
+
+```bash
+php artisan boost:update --discover
+```
+
 ## Next steps
 
 - Explore [Configuration](configuration/) to enable or disable specific rules.

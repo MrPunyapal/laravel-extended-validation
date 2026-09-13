@@ -217,6 +217,16 @@ Publish the translation files to customize error messages:
 php artisan vendor:publish --tag="laravel-extended-validation-translations"
 ```
 
+## Laravel Boost
+
+The package ships a Laravel Boost skill named `laravel-extended-validation-development` for on-demand AI guidance when using these extended validation rules.
+
+If your Laravel application uses Boost, discover the new package skills:
+
+```bash
+php artisan boost:update --discover
+```
+
 ## Testing
 
 ```bash
