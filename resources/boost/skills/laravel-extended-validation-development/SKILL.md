@@ -97,7 +97,7 @@ $request->validate([
 
 ## Configuration
 
-Rules can be enabled/disabled in `config/laravel-extended-validation.php`. Publish with:
+Rules can be enabled/disabled in `config/extended-validation.php`. Publish with:
 
 ```bash
 php artisan vendor:publish --tag="laravel-extended-validation-config"

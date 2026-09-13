@@ -34,12 +34,21 @@ class LaravelExtendedValidationServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-extended-validation')
-            ->hasConfigFile()
+            ->hasConfigFile('extended-validation')
             ->hasTranslations();
     }
 
     public function packageBooted(): void
     {
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-extended-validation');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'extended-validation');
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/extended-validation.php' => config_path('extended-validation.php'),
+            ], 'laravel-extended-validation-config');
+        }
+
         $this->registerRules();
     }
 
@@ -94,7 +103,12 @@ class LaravelExtendedValidationServiceProvider extends PackageServiceProvider
 
         Validator::replacer($name, function (string $message, string $attribute, string $rule, array $parameters) use ($name): string {
             /** @var string */
-            return trans("laravel-extended-validation::validation.{$name}", ['attribute' => $attribute]);
+            $translation = trans("extended-validation::validation.{$name}", ['attribute' => $attribute]);
+            if ($translation === "extended-validation::validation.{$name}") {
+                $translation = trans("laravel-extended-validation::validation.{$name}", ['attribute' => $attribute]);
+            }
+
+            return $translation;
         });
     }
 

@@ -17,7 +17,7 @@ php artisan vendor:publish --tag="laravel-extended-validation-config"
 
 ## Configuration options
 
-The published file lives at `config/laravel-extended-validation.php`:
+The published file lives at `config/extended-validation.php`:
 
 ```php
 return [

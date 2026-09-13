@@ -16,7 +16,7 @@ php artisan vendor:publish --tag="laravel-extended-validation-config"
 
 ## Configuration options
 
-The published file lives at `config/laravel-extended-validation.php`:
+The published file lives at `config/extended-validation.php`:
 
 ```php
 return [
@@ -93,7 +93,7 @@ Publish the configuration file to enable or disable specific rules:
 php artisan vendor:publish --tag="laravel-extended-validation-config"
 ```
 
-This creates `config/laravel-extended-validation.php`. See [Configuration](configuration.md) for available settings.
+This creates `config/extended-validation.php`. See [Configuration](configuration.md) for available settings.
 
 ## Publishing translations
 
