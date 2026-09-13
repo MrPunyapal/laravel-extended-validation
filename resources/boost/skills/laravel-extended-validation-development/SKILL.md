@@ -32,6 +32,12 @@ Typical triggers:
 - Ensuring submitted passwords are not already hashed (`not_hashed` / `NotHashed`)
 - Validating alphanumeric identifiers with underscores (`alpha_underscore` / `AlphaUnderscore`)
 - Validating numeric values that must fall outside a range (`unless_between` / `UnlessBetween`)
+- Ensuring input strings contain no whitespace characters (`without_whitespace` / `WithoutWhitespace`)
+- Ensuring input strings contain no HTML or XML tags (`no_html` / `NoHtml`)
+- Validating URL protocol schemes (`url_protocol` / `UrlProtocol`)
+- Validating strict snake_case string formatting (`snake_case` / `SnakeCase`)
+- Validating numeric values that are exact multiples of a step (`multiple_of` / `MultipleOf`)
+- Validating strict ASCII-only alphanumeric characters (`alpha_num_ascii` / `AlphaNumAscii`)
 
 ## Three Syntax Styles
 
@@ -106,6 +112,12 @@ $request->validate([
 | Not Hashed | `NotHashed` | `Rule::notHashed()` | `not_hashed` | Rejects bcrypt/argon hashes |
 | Alpha Underscore | `AlphaUnderscore` | `Rule::alphaUnderscore()` | `alpha_underscore` | `user_123` (letters, numbers, _) |
 | Unless Between | `UnlessBetween` | `Rule::unlessBetween($min, $max)` | `unless_between:min,max` | Outside numeric range |
+| Without Whitespace | `WithoutWhitespace` | `Rule::withoutWhitespace()` | `without_whitespace` | Rejects spaces/tabs/newlines |
+| No HTML | `NoHtml` | `Rule::noHtml()` | `no_html` | Rejects HTML tags |
+| URL Protocol | `UrlProtocol` | `Rule::urlProtocol(...$p)` | `url_protocol:https,sftp` | Allowed protocol schemes |
+| Snake Case | `SnakeCase` | `Rule::snakeCase()` | `snake_case` | `user_name_123` |
+| Multiple Of | `MultipleOf` | `Rule::multipleOf($step)` | `multiple_of:5` | Exact multiple of step |
+| Alpha Num ASCII | `AlphaNumAscii` | `Rule::alphaNumAscii()` | `alpha_num_ascii` | Strict ASCII `[a-zA-Z0-9]` |
 
 ## Configuration
 

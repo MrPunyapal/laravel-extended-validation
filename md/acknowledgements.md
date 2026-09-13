@@ -38,6 +38,12 @@ The table below lists each rule, the pull request that proposed it, and the orig
 | [`not_hashed`](rules.md#not_hashed) | [#39891](https://github.com/laravel/framework/pull/39891) | Verify that a password input is plain text and has not already been hashed with bcrypt or Argon2. |
 | [`alpha_underscore`](rules.md#alpha_underscore) | [#28643](https://github.com/laravel/framework/pull/28643) | Validate alphanumeric strings with underscores for strict code and database identifiers. |
 | [`unless_between`](rules.md#unless_between) | [#34512](https://github.com/laravel/framework/pull/34512) | Validate that numeric values fall outside a given range. |
+| [`without_whitespace`](rules.md#without_whitespace) | [#15190](https://github.com/laravel/framework/pull/15190) | Ensure input contains no whitespace characters for tokens and identifiers. |
+| [`no_html`](rules.md#no_html) | [#42626](https://github.com/laravel/framework/pull/42626) | Ensure input contains no HTML or XML tags in plain text fields. |
+| [`url_protocol`](rules.md#url_protocol) | [#44909](https://github.com/laravel/framework/pull/44909), [#44911](https://github.com/laravel/framework/pull/44911) | Validate that a URL uses an approved protocol scheme. |
+| [`snake_case`](rules.md#snake_case) | [#45348](https://github.com/laravel/framework/pull/45348) | Validate strict snake_case formatting for slugs, column names, and keys. |
+| [`multiple_of`](rules.md#multiple_of) | [#28135](https://github.com/laravel/framework/pull/28135), [#34959](https://github.com/laravel/framework/pull/34959) | Validate that numeric values are an exact multiple of a given step. |
+| [`alpha_num_ascii`](rules.md#alpha_num_ascii) | [#45609](https://github.com/laravel/framework/pull/45609) | Enforce strict ASCII-only alphanumeric characters, rejecting Unicode homoglyphs. |
 
 ## Submitting a rule
 

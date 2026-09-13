@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Rule;
+use MrPunyapal\LaravelExtendedValidation\Rules\AlphaNumAscii;
 use MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore;
 use MrPunyapal\LaravelExtendedValidation\Rules\Base64String;
 use MrPunyapal\LaravelExtendedValidation\Rules\Cidr;
@@ -25,13 +26,18 @@ use MrPunyapal\LaravelExtendedValidation\Rules\Longitude;
 use MrPunyapal\LaravelExtendedValidation\Rules\Luhn;
 use MrPunyapal\LaravelExtendedValidation\Rules\MaxWords;
 use MrPunyapal\LaravelExtendedValidation\Rules\MinWords;
+use MrPunyapal\LaravelExtendedValidation\Rules\MultipleOf;
+use MrPunyapal\LaravelExtendedValidation\Rules\NoHtml;
 use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
 use MrPunyapal\LaravelExtendedValidation\Rules\NotHashed;
 use MrPunyapal\LaravelExtendedValidation\Rules\OddNumber;
 use MrPunyapal\LaravelExtendedValidation\Rules\Semver;
 use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
+use MrPunyapal\LaravelExtendedValidation\Rules\SnakeCase;
 use MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween;
+use MrPunyapal\LaravelExtendedValidation\Rules\UrlProtocol;
 use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
+use MrPunyapal\LaravelExtendedValidation\Rules\WithoutWhitespace;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -85,6 +91,12 @@ class LaravelExtendedValidationServiceProvider extends PackageServiceProvider
             'not_hashed' => NotHashed::class,
             'alpha_underscore' => AlphaUnderscore::class,
             'unless_between' => UnlessBetween::class,
+            'without_whitespace' => WithoutWhitespace::class,
+            'no_html' => NoHtml::class,
+            'url_protocol' => UrlProtocol::class,
+            'snake_case' => SnakeCase::class,
+            'multiple_of' => MultipleOf::class,
+            'alpha_num_ascii' => AlphaNumAscii::class,
         ];
 
         foreach ($rules as $name => $ruleClass) {

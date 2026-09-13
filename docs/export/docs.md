@@ -37,6 +37,12 @@ The table below lists each rule, the pull request that proposed it, and the orig
 | [`not_hashed`](rules.md#not_hashed) | [#39891](https://github.com/laravel/framework/pull/39891) | Verify that a password input is plain text and has not already been hashed with bcrypt or Argon2. |
 | [`alpha_underscore`](rules.md#alpha_underscore) | [#28643](https://github.com/laravel/framework/pull/28643) | Validate alphanumeric strings with underscores for strict code and database identifiers. |
 | [`unless_between`](rules.md#unless_between) | [#34512](https://github.com/laravel/framework/pull/34512) | Validate that numeric values fall outside a given range. |
+| [`without_whitespace`](rules.md#without_whitespace) | [#15190](https://github.com/laravel/framework/pull/15190) | Ensure input contains no whitespace characters for tokens and identifiers. |
+| [`no_html`](rules.md#no_html) | [#42626](https://github.com/laravel/framework/pull/42626) | Ensure input contains no HTML or XML tags in plain text fields. |
+| [`url_protocol`](rules.md#url_protocol) | [#44909](https://github.com/laravel/framework/pull/44909), [#44911](https://github.com/laravel/framework/pull/44911) | Validate that a URL uses an approved protocol scheme. |
+| [`snake_case`](rules.md#snake_case) | [#45348](https://github.com/laravel/framework/pull/45348) | Validate strict snake_case formatting for slugs, column names, and keys. |
+| [`multiple_of`](rules.md#multiple_of) | [#28135](https://github.com/laravel/framework/pull/28135), [#34959](https://github.com/laravel/framework/pull/34959) | Validate that numeric values are an exact multiple of a given step. |
+| [`alpha_num_ascii`](rules.md#alpha_num_ascii) | [#45609](https://github.com/laravel/framework/pull/45609) | Enforce strict ASCII-only alphanumeric characters, rejecting Unicode homoglyphs. |
 
 ## Submitting a rule
 
@@ -178,11 +184,11 @@ php artisan boost:update --discover
 
 # Laravel Extended Validation
 
-> A collection of 22 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
+> A collection of 28 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
 
 # Laravel Extended Validation
 
-A collection of 22 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
+A collection of 28 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
 
 ```bash
 composer require mrpunyapal/laravel-extended-validation
@@ -231,6 +237,12 @@ $request->validate([
 | [not_hashed](rules.md#not_hashed) | `NotHashed` | Ensure string is not already a bcrypt/argon hashed password | `not_hashed` |
 | [alpha_underscore](rules.md#alpha_underscore) | `AlphaUnderscore` | Ensure string contains only letters, numbers, and underscores | `alpha_underscore` |
 | [unless_between](rules.md#unless_between) | `UnlessBetween` | Ensure numeric value falls outside a specified range | `unless_between:min,max` |
+| [without_whitespace](rules.md#without_whitespace) | `WithoutWhitespace` | Ensure input does not contain any whitespace characters | `without_whitespace` |
+| [no_html](rules.md#no_html) | `NoHtml` | Ensure input does not contain HTML tags | `no_html` |
+| [url_protocol](rules.md#url_protocol) | `UrlProtocol` | Validate URL scheme against allowed protocols | `url_protocol:https,sftp` |
+| [snake_case](rules.md#snake_case) | `SnakeCase` | Validate strict snake_case string formatting | `snake_case` |
+| [multiple_of](rules.md#multiple_of) | `MultipleOf` | Ensure numeric value is an exact multiple of a step | `multiple_of:step` |
+| [alpha_num_ascii](rules.md#alpha_num_ascii) | `AlphaNumAscii` | Validate strict ASCII-only alphanumeric characters | `alpha_num_ascii` |
 
 ## Why this package exists
 
@@ -253,11 +265,11 @@ That prompted a closer look at other validation pull requests closed across the 
 
 # Rules Reference
 
-> Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.
+> Complete reference and usage examples for all 28 validation rules in mrpunyapal/laravel-extended-validation.
 
 # Rules Reference
 
-Complete reference for all 22 validation rules included in the package.
+Complete reference for all 28 validation rules included in the package.
 
 ---
 
@@ -924,6 +936,198 @@ use Illuminate\Validation\Rule;
 | `10` | `10, 20` | Fails (inside boundary) |
 | `15` | `10, 20` | Fails (inside range) |
 | `20` | `10, 20` | Fails (inside boundary) |
+
+---
+
+## without_whitespace
+
+Validates that an input string does not contain any whitespace characters (spaces, tabs, or newlines).
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\WithoutWhitespace`
+- **Macro**: `Rule::withoutWhitespace()`
+- **String**: `without_whitespace`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\WithoutWhitespace;
+use Illuminate\Validation\Rule;
+
+'token' => ['required', new WithoutWhitespace]
+'token' => ['required', Rule::withoutWhitespace()]
+'token' => 'required|without_whitespace'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `username` | Passes |
+| `token_12345` | Passes |
+| `hello world` | Fails (contains space) |
+| `"hello\tworld"` | Fails (contains tab) |
+| `"hello\nworld"` | Fails (contains newline) |
+
+---
+
+## no_html
+
+Validates that an input string contains no HTML or XML tags.
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\NoHtml`
+- **Macro**: `Rule::noHtml()`
+- **String**: `no_html`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\NoHtml;
+use Illuminate\Validation\Rule;
+
+'comment' => ['required', 'string', new NoHtml]
+'comment' => ['required', 'string', Rule::noHtml()]
+'comment' => 'required|string|no_html'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `Plain text comment` | Passes |
+| `Ben & Jerry's` | Passes |
+| `formula: 3 < 5 and 6 > 2` | Passes |
+| `<p>Hello world</p>` | Fails |
+| `<script>alert(1)</script>` | Fails |
+| `<img src="x" onerror="alert(1)">` | Fails |
+
+---
+
+## url_protocol
+
+Validates that a URL string uses one of the specified protocol schemes.
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\UrlProtocol`
+- **Macro**: `Rule::urlProtocol(array|string ...$protocols)`
+- **String**: `url_protocol:{protocol1},{protocol2}`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\UrlProtocol;
+use Illuminate\Validation\Rule;
+
+'website' => ['required', new UrlProtocol('https')]
+'website' => ['required', Rule::urlProtocol('https', 'http')]
+'website' => 'required|url_protocol:https,http'
+```
+
+### Examples
+
+| Input | Allowed | Result |
+| --- | --- | --- |
+| `https://laravel.com` | `['https', 'http']` | Passes |
+| `http://example.com` | `['https', 'http']` | Passes |
+| `ftp://files.example.com` | `['https']` | Fails |
+| `javascript:alert(1)` | `['https']` | Fails |
+
+---
+
+## snake_case
+
+Validates that a string is strictly formatted in snake_case (lowercase alphanumeric characters separated by single underscores).
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\SnakeCase`
+- **Macro**: `Rule::snakeCase()`
+- **String**: `snake_case`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\SnakeCase;
+use Illuminate\Validation\Rule;
+
+'column_name' => ['required', new SnakeCase]
+'column_name' => ['required', Rule::snakeCase()]
+'column_name' => 'required|snake_case'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `user_name` | Passes |
+| `first_name_id` | Passes |
+| `slug` | Passes |
+| `UserName` | Fails (uppercase letters) |
+| `user-name` | Fails (hyphens not allowed) |
+| `user__name` | Fails (consecutive underscores) |
+| `_user_name` | Fails (leading underscore) |
+
+---
+
+## multiple_of
+
+Validates that a numeric value is an exact multiple of a given step.
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\MultipleOf`
+- **Macro**: `Rule::multipleOf(int|float $step)`
+- **String**: `multiple_of:{step}`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\MultipleOf;
+use Illuminate\Validation\Rule;
+
+'quantity' => ['required', new MultipleOf(5)]
+'quantity' => ['required', Rule::multipleOf(5)]
+'quantity' => 'required|multiple_of:5'
+
+// Floating point increments
+'price' => ['required', new MultipleOf(0.25)]
+```
+
+### Examples
+
+| Input | Step | Result |
+| --- | --- | --- |
+| `5`, `10`, `15`, `0`, `-5` | `5` | Passes |
+| `0.50`, `1.25`, `2.00` | `0.25` | Passes |
+| `7` | `5` | Fails |
+| `0.30` | `0.25` | Fails |
+
+---
+
+## alpha_num_ascii
+
+Validates that an input contains only standard ASCII alphanumeric characters (`a-z`, `A-Z`, `0-9`), rejecting multi-byte characters and Unicode homoglyphs.
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\AlphaNumAscii`
+- **Macro**: `Rule::alphaNumAscii()`
+- **String**: `alpha_num_ascii`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\AlphaNumAscii;
+use Illuminate\Validation\Rule;
+
+'code' => ['required', new AlphaNumAscii]
+'code' => ['required', Rule::alphaNumAscii()]
+'code' => 'required|alpha_num_ascii'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `abcXYZ123` | Passes |
+| `User42` | Passes |
+| `user_name` | Fails (symbols not allowed) |
+| `café` | Fails (non-ASCII character `é`) |
+| `über` | Fails (non-ASCII character `ü`) |
+| `こんにちは` | Fails (non-ASCII characters) |
+
 
 
 

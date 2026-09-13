@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use MrPunyapal\LaravelExtendedValidation\Rules\AlphaNumAscii;
 use MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore;
 use MrPunyapal\LaravelExtendedValidation\Rules\Base64String;
 use MrPunyapal\LaravelExtendedValidation\Rules\Cidr;
@@ -19,13 +20,18 @@ use MrPunyapal\LaravelExtendedValidation\Rules\Longitude;
 use MrPunyapal\LaravelExtendedValidation\Rules\Luhn;
 use MrPunyapal\LaravelExtendedValidation\Rules\MaxWords;
 use MrPunyapal\LaravelExtendedValidation\Rules\MinWords;
+use MrPunyapal\LaravelExtendedValidation\Rules\MultipleOf;
+use MrPunyapal\LaravelExtendedValidation\Rules\NoHtml;
 use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
 use MrPunyapal\LaravelExtendedValidation\Rules\NotHashed;
 use MrPunyapal\LaravelExtendedValidation\Rules\OddNumber;
 use MrPunyapal\LaravelExtendedValidation\Rules\Semver;
 use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
+use MrPunyapal\LaravelExtendedValidation\Rules\SnakeCase;
 use MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween;
+use MrPunyapal\LaravelExtendedValidation\Rules\UrlProtocol;
 use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
+use MrPunyapal\LaravelExtendedValidation\Rules\WithoutWhitespace;
 
 // ──────────────────────────────────────────────────────
 // Slug
@@ -478,6 +484,30 @@ describe('Rule macros', function (): void {
     it('registers Rule::unlessBetween()', function (): void {
         expect(Rule::unlessBetween(1, 10))->toBeInstanceOf(UnlessBetween::class);
     });
+
+    it('registers Rule::withoutWhitespace()', function (): void {
+        expect(Rule::withoutWhitespace())->toBeInstanceOf(WithoutWhitespace::class);
+    });
+
+    it('registers Rule::noHtml()', function (): void {
+        expect(Rule::noHtml())->toBeInstanceOf(NoHtml::class);
+    });
+
+    it('registers Rule::urlProtocol()', function (): void {
+        expect(Rule::urlProtocol('https'))->toBeInstanceOf(UrlProtocol::class);
+    });
+
+    it('registers Rule::snakeCase()', function (): void {
+        expect(Rule::snakeCase())->toBeInstanceOf(SnakeCase::class);
+    });
+
+    it('registers Rule::multipleOf()', function (): void {
+        expect(Rule::multipleOf(5))->toBeInstanceOf(MultipleOf::class);
+    });
+
+    it('registers Rule::alphaNumAscii()', function (): void {
+        expect(Rule::alphaNumAscii())->toBeInstanceOf(AlphaNumAscii::class);
+    });
 });
 
 // ──────────────────────────────────────────────────────
@@ -657,5 +687,179 @@ describe('UnlessBetween', function (): void {
         15,
         20,
         10.5,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// WithoutWhitespace
+// ──────────────────────────────────────────────────────
+describe('WithoutWhitespace', function (): void {
+    it('passes for strings without whitespace', function (mixed $value): void {
+        expect(Validator::make(['token' => $value], ['token' => new WithoutWhitespace])->passes())->toBeTrue();
+    })->with([
+        'username',
+        'user_name-123',
+        'token_without_space',
+        '42',
+        12345,
+    ]);
+
+    it('fails for strings containing whitespace', function (mixed $value): void {
+        expect(Validator::make(['token' => $value], ['token' => new WithoutWhitespace])->fails())->toBeTrue();
+    })->with([
+        'hello world',
+        "hello\tworld",
+        "hello\nworld",
+        ' leading_space',
+        'trailing_space ',
+        null,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// NoHtml
+// ──────────────────────────────────────────────────────
+describe('NoHtml', function (): void {
+    it('passes for plain text without HTML tags', function (string $value): void {
+        expect(Validator::make(['text' => $value], ['text' => new NoHtml])->passes())->toBeTrue();
+    })->with([
+        'plain text input',
+        'Ben & Jerry\'s',
+        'formula: 3 < 5 and 6 > 2',
+        'hello world',
+    ]);
+
+    it('fails for strings containing HTML tags', function (mixed $value): void {
+        expect(Validator::make(['text' => $value], ['text' => new NoHtml])->fails())->toBeTrue();
+    })->with([
+        '<p>hello</p>',
+        '<b>bold</b>',
+        '<script>alert("xss")</script>',
+        '<img src="x" onerror="alert(1)">',
+        null,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// UrlProtocol
+// ──────────────────────────────────────────────────────
+describe('UrlProtocol', function (): void {
+    it('passes when url scheme matches allowed protocols', function (): void {
+        $rule = UrlProtocol::make('https', 'http');
+
+        expect(Validator::make(['url' => 'https://laravel.com'], ['url' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['url' => 'http://example.com'], ['url' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['url' => 'ftp://files.example.com'], ['url' => $rule])->fails())->toBeTrue();
+    });
+
+    it('supports array of protocols', function (): void {
+        $rule = new UrlProtocol(['sftp', 'ssh']);
+
+        expect(Validator::make(['url' => 'sftp://server.io'], ['url' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['url' => 'ssh://server.io'], ['url' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['url' => 'https://server.io'], ['url' => $rule])->fails())->toBeTrue();
+    });
+
+    it('fails for non-strings and invalid URLs', function (mixed $value): void {
+        $rule = UrlProtocol::make('https');
+        expect(Validator::make(['url' => $value], ['url' => $rule])->fails())->toBeTrue();
+    })->with([
+        'not-a-url',
+        123,
+        null,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// SnakeCase
+// ──────────────────────────────────────────────────────
+describe('SnakeCase', function (): void {
+    it('passes for valid snake_case strings', function (string $value): void {
+        expect(Validator::make(['key' => $value], ['key' => new SnakeCase])->passes())->toBeTrue();
+    })->with([
+        'user_name',
+        'first_name_id',
+        'slug',
+        'v1_api_endpoint',
+        'item1_value2',
+    ]);
+
+    it('fails for non snake_case strings', function (mixed $value): void {
+        expect(Validator::make(['key' => $value], ['key' => new SnakeCase])->fails())->toBeTrue();
+    })->with([
+        'UserName',
+        'userName',
+        'user-name',
+        'user name',
+        '_leading_underscore',
+        'trailing_underscore_',
+        'double__underscore',
+        null,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// MultipleOf
+// ──────────────────────────────────────────────────────
+describe('MultipleOf', function (): void {
+    it('passes for integer multiples', function (mixed $value): void {
+        expect(Validator::make(['num' => $value], ['num' => new MultipleOf(5)])->passes())->toBeTrue();
+    })->with([
+        5,
+        10,
+        15,
+        0,
+        -5,
+        -100,
+        '25',
+    ]);
+
+    it('fails for non-multiples', function (mixed $value): void {
+        expect(Validator::make(['num' => $value], ['num' => new MultipleOf(5)])->fails())->toBeTrue();
+    })->with([
+        1,
+        2,
+        3,
+        4,
+        6,
+        7.5,
+        'not-a-number',
+    ]);
+
+    it('supports floating point steps', function (): void {
+        $rule = new MultipleOf(0.25);
+
+        expect(Validator::make(['price' => 0.50], ['price' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['price' => 1.25], ['price' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['price' => 2.00], ['price' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['price' => 0.30], ['price' => $rule])->fails())->toBeTrue();
+    });
+});
+
+// ──────────────────────────────────────────────────────
+// AlphaNumAscii
+// ──────────────────────────────────────────────────────
+describe('AlphaNumAscii', function (): void {
+    it('passes for ascii alphanumeric strings', function (mixed $value): void {
+        expect(Validator::make(['code' => $value], ['code' => new AlphaNumAscii])->passes())->toBeTrue();
+    })->with([
+        'abcXYZ123',
+        'Username42',
+        'ABC',
+        '12345',
+        999,
+    ]);
+
+    it('fails for strings with spaces, symbols, or non-ascii characters', function (mixed $value): void {
+        expect(Validator::make(['code' => $value], ['code' => new AlphaNumAscii])->fails())->toBeTrue();
+    })->with([
+        'user_name',
+        'user-name',
+        'user name',
+        'user@domain',
+        'café',
+        'über',
+        'こんにちは',
+        null,
     ]);
 });

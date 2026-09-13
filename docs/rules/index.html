@@ -8,12 +8,12 @@
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Rules Reference | Laravel Extended Validation">
-    <meta property="og:description" content="Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.">
+    <meta property="og:description" content="Complete reference and usage examples for all 28 validation rules in mrpunyapal/laravel-extended-validation.">
     <meta property="og:url" content="https://mrpunyapal.github.io/laravel-extended-validation/rules">
     <meta property="og:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/rules.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rules Reference | Laravel Extended Validation">
-    <meta name="twitter:description" content="Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.">
+    <meta name="twitter:description" content="Complete reference and usage examples for all 28 validation rules in mrpunyapal/laravel-extended-validation.">
     <meta name="twitter:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/rules.png">
     <link rel="stylesheet" href="../assets/app.css">
     <script src="../assets/app.js" defer></script>
@@ -36,7 +36,7 @@
                     <div class="search-results" data-docsmith-search-results hidden></div>
                     <div class="search-empty" data-docsmith-empty>No pages match your search.</div>
                 </div>
-                <nav class="nav" data-docsmith-nav><a class="" href="../" data-nav-item data-title="Laravel Extended Validation" data-search="Laravel Extended Validation Laravel Extended Validation A collection of 22 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.">Laravel Extended Validation</a><a class="" href="../installation/" data-nav-item data-title="Installation" data-search="Installation Installation Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.">Installation</a><a class="" href="../configuration/" data-nav-item data-title="Configuration" data-search="Configuration Configuration Configure and selectively enable or disable validation rules in mrpunyapal/laravel-extended-validation.">Configuration</a><a class="" href="../usage/" data-nav-item data-title="Usage" data-search="Usage Usage Learn the three syntax options for applying extended validation rules in Laravel applications.">Usage</a><a class="active" href="./" data-nav-item data-title="Rules Reference" data-search="Rules Reference Rules Reference Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.">Rules Reference</a><a class="" href="../acknowledgements/" data-nav-item data-title="Acknowledgements" data-search="Acknowledgements Acknowledgements Community contributors and rejected Laravel pull requests that inspired rules in this package.">Acknowledgements</a></nav>
+                <nav class="nav" data-docsmith-nav><a class="" href="../" data-nav-item data-title="Laravel Extended Validation" data-search="Laravel Extended Validation Laravel Extended Validation A collection of 28 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.">Laravel Extended Validation</a><a class="" href="../installation/" data-nav-item data-title="Installation" data-search="Installation Installation Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.">Installation</a><a class="" href="../configuration/" data-nav-item data-title="Configuration" data-search="Configuration Configuration Configure and selectively enable or disable validation rules in mrpunyapal/laravel-extended-validation.">Configuration</a><a class="" href="../usage/" data-nav-item data-title="Usage" data-search="Usage Usage Learn the three syntax options for applying extended validation rules in Laravel applications.">Usage</a><a class="active" href="./" data-nav-item data-title="Rules Reference" data-search="Rules Reference Rules Reference Complete reference and usage examples for all 28 validation rules in mrpunyapal/laravel-extended-validation.">Rules Reference</a><a class="" href="../acknowledgements/" data-nav-item data-title="Acknowledgements" data-search="Acknowledgements Acknowledgements Community contributors and rejected Laravel pull requests that inspired rules in this package.">Acknowledgements</a></nav>
                 <a class="docsmith-badge" href="https://github.com/MrPunyapal/docsmith" target="_blank" rel="noopener noreferrer" data-docsmith-badge aria-label="Built with DocSmith"><svg class="docsmith-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-6.716-4.35-9.428-7.052C.4 11.692-.21 8.9 1.38 6.87 2.736 5.14 5.09 4.583 6.86 5.686 8 6.41 8.86 7.55 9.6 8.7c.74-1.15 1.6-2.29 2.74-3.014 1.77-1.103 4.124-.546 5.48 1.184 1.59 2.03.98 4.822-1.192 7.078C18.716 16.65 12 21 12 21z"/></svg><span class="docsmith-badge-text">Built with</span><span class="docsmith-badge-brand">DocSmith</span></a>
             </div>
         </aside>
@@ -46,10 +46,10 @@
                 <header class="doc-head">
                     
                     <h1>Rules Reference</h1>
-                    <p class="doc-description">Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.</p>
+                    <p class="doc-description">Complete reference and usage examples for all 28 validation rules in mrpunyapal/laravel-extended-validation.</p>
                 </header>
                 <div class="doc-body">
-                    <p>Complete reference for all 22 validation rules included in the package.</p>
+                    <p>Complete reference for all 28 validation rules included in the package.</p>
 <hr>
 <h2 id="without-alias">without_alias</h2>
 <p>Validates that an email address does not contain a plus-addressed sub-alias (e.g. <code>user+tag@gmail.com</code>). Useful for preventing trial abuse and duplicate account creation.</p>
@@ -944,6 +944,309 @@
 </tr>
 </tbody>
 </table></div>
+<hr>
+<h2 id="without-whitespace">without_whitespace</h2>
+<p>Validates that an input string does not contain any whitespace characters (spaces, tabs, or newlines).</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\WithoutWhitespace</code></li>
+<li><strong>Macro</strong>: <code>Rule::withoutWhitespace()</code></li>
+<li><strong>String</strong>: <code>without_whitespace</code></li>
+</ul>
+<h3 id="usage-23">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">WithoutWhitespace</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">token</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">WithoutWhitespace</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">token</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">withoutWhitespace</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">token</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|without_whitespace</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-16">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>username</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>token_12345</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>hello world</code></td>
+<td>Fails (contains space)</td>
+</tr>
+<tr>
+<td><code>"hello\tworld"</code></td>
+<td>Fails (contains tab)</td>
+</tr>
+<tr>
+<td><code>"hello\nworld"</code></td>
+<td>Fails (contains newline)</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="no-html">no_html</h2>
+<p>Validates that an input string contains no HTML or XML tags.</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\NoHtml</code></li>
+<li><strong>Macro</strong>: <code>Rule::noHtml()</code></li>
+<li><strong>String</strong>: <code>no_html</code></li>
+</ul>
+<h3 id="usage-24">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">NoHtml</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">comment</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">string</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">NoHtml</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">comment</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">string</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">noHtml</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">comment</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|string|no_html</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-17">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Plain text comment</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>Ben &amp; Jerry's</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>formula: 3 &lt; 5 and 6 &gt; 2</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>&lt;p&gt;Hello world&lt;/p&gt;</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>&lt;script&gt;alert(1)&lt;/script&gt;</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>&lt;img src="x" onerror="alert(1)"&gt;</code></td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="url-protocol">url_protocol</h2>
+<p>Validates that a URL string uses one of the specified protocol schemes.</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\UrlProtocol</code></li>
+<li><strong>Macro</strong>: <code>Rule::urlProtocol(array|string ...$protocols)</code></li>
+<li><strong>String</strong>: <code>url_protocol:{protocol1},{protocol2}</code></li>
+</ul>
+<h3 id="usage-25">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">UrlProtocol</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">website</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">UrlProtocol</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">https</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">website</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">urlProtocol</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">https</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">http</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">website</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|url_protocol:https,http</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-18">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Allowed</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://laravel.com</code></td>
+<td><code>['https', 'http']</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>http://example.com</code></td>
+<td><code>['https', 'http']</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>ftp://files.example.com</code></td>
+<td><code>['https']</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>javascript:alert(1)</code></td>
+<td><code>['https']</code></td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="snake-case">snake_case</h2>
+<p>Validates that a string is strictly formatted in snake_case (lowercase alphanumeric characters separated by single underscores).</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\SnakeCase</code></li>
+<li><strong>Macro</strong>: <code>Rule::snakeCase()</code></li>
+<li><strong>String</strong>: <code>snake_case</code></li>
+</ul>
+<h3 id="usage-26">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">SnakeCase</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">column_name</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">SnakeCase</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">column_name</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">snakeCase</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">column_name</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|snake_case</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-19">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user_name</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>first_name_id</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>slug</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>UserName</code></td>
+<td>Fails (uppercase letters)</td>
+</tr>
+<tr>
+<td><code>user-name</code></td>
+<td>Fails (hyphens not allowed)</td>
+</tr>
+<tr>
+<td><code>user__name</code></td>
+<td>Fails (consecutive underscores)</td>
+</tr>
+<tr>
+<td><code>_user_name</code></td>
+<td>Fails (leading underscore)</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="multiple-of">multiple_of</h2>
+<p>Validates that a numeric value is an exact multiple of a given step.</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\MultipleOf</code></li>
+<li><strong>Macro</strong>: <code>Rule::multipleOf(int|float $step)</code></li>
+<li><strong>String</strong>: <code>multiple_of:{step}</code></li>
+</ul>
+<h3 id="usage-27">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MultipleOf</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">quantity</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MultipleOf</span><span class="token">(</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">5</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">quantity</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">multipleOf</span><span class="token">(</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">5</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">quantity</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|multiple_of:5</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">//</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;"> Floating point increments</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">price</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MultipleOf</span><span class="token">(</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">0</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">.</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">25</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-20">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Step</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>5</code>, <code>10</code>, <code>15</code>, <code>0</code>, <code>-5</code></td>
+<td><code>5</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>0.50</code>, <code>1.25</code>, <code>2.00</code></td>
+<td><code>0.25</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>7</code></td>
+<td><code>5</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>0.30</code></td>
+<td><code>0.25</code></td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="alpha-num-ascii">alpha_num_ascii</h2>
+<p>Validates that an input contains only standard ASCII alphanumeric characters (<code>a-z</code>, <code>A-Z</code>, <code>0-9</code>), rejecting multi-byte characters and Unicode homoglyphs.</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\AlphaNumAscii</code></li>
+<li><strong>Macro</strong>: <code>Rule::alphaNumAscii()</code></li>
+<li><strong>String</strong>: <code>alpha_num_ascii</code></li>
+</ul>
+<h3 id="usage-28">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">AlphaNumAscii</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">code</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">AlphaNumAscii</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">code</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">alphaNumAscii</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">code</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|alpha_num_ascii</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-21">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abcXYZ123</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>User42</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>user_name</code></td>
+<td>Fails (symbols not allowed)</td>
+</tr>
+<tr>
+<td><code>café</code></td>
+<td>Fails (non-ASCII character <code>é</code>)</td>
+</tr>
+<tr>
+<td><code>über</code></td>
+<td>Fails (non-ASCII character <code>ü</code>)</td>
+</tr>
+<tr>
+<td><code>こんにちは</code></td>
+<td>Fails (non-ASCII characters)</td>
+</tr>
+</tbody>
+</table></div>
 
                 </div>
                 <footer class="doc-meta">
@@ -952,7 +1255,7 @@
             </article>
             <nav class="pager" aria-label="Page navigation"><a class="pager-link" href="../usage/"><span>Previous</span><strong>Usage</strong></a><a class="pager-link pager-link-next" href="../acknowledgements/"><span>Next</span><strong>Acknowledgements</strong></a></nav>
         </main>
-        <aside class="toc-sidebar" data-docsmith-toc><p class="toc-title">On this page</p><nav class="toc-links"><a class="toc-link toc-link-level-2" href="#without-alias" data-docsmith-toc-link="without-alias">without_alias</a><a class="toc-link toc-link-level-3" href="#usage" data-docsmith-toc-link="usage">Usage</a><a class="toc-link toc-link-level-3" href="#examples" data-docsmith-toc-link="examples">Examples</a><a class="toc-link toc-link-level-2" href="#not-email" data-docsmith-toc-link="not-email">not_email</a><a class="toc-link toc-link-level-3" href="#usage-2" data-docsmith-toc-link="usage-2">Usage</a><a class="toc-link toc-link-level-3" href="#examples-2" data-docsmith-toc-link="examples-2">Examples</a><a class="toc-link toc-link-level-2" href="#slug" data-docsmith-toc-link="slug">slug</a><a class="toc-link toc-link-level-3" href="#usage-3" data-docsmith-toc-link="usage-3">Usage</a><a class="toc-link toc-link-level-3" href="#examples-with-default" data-docsmith-toc-link="examples-with-default">Examples (with default -)</a><a class="toc-link toc-link-level-2" href="#even" data-docsmith-toc-link="even">even</a><a class="toc-link toc-link-level-3" href="#usage-4" data-docsmith-toc-link="usage-4">Usage</a><a class="toc-link toc-link-level-3" href="#examples-3" data-docsmith-toc-link="examples-3">Examples</a><a class="toc-link toc-link-level-2" href="#odd" data-docsmith-toc-link="odd">odd</a><a class="toc-link toc-link-level-3" href="#usage-5" data-docsmith-toc-link="usage-5">Usage</a><a class="toc-link toc-link-level-3" href="#examples-4" data-docsmith-toc-link="examples-4">Examples</a><a class="toc-link toc-link-level-2" href="#semver" data-docsmith-toc-link="semver">semver</a><a class="toc-link toc-link-level-3" href="#usage-6" data-docsmith-toc-link="usage-6">Usage</a><a class="toc-link toc-link-level-3" href="#examples-5" data-docsmith-toc-link="examples-5">Examples</a><a class="toc-link toc-link-level-2" href="#base64-string" data-docsmith-toc-link="base64-string">base64_string</a><a class="toc-link toc-link-level-3" href="#usage-7" data-docsmith-toc-link="usage-7">Usage</a><a class="toc-link toc-link-level-2" href="#luhn" data-docsmith-toc-link="luhn">luhn</a><a class="toc-link toc-link-level-3" href="#usage-8" data-docsmith-toc-link="usage-8">Usage</a><a class="toc-link toc-link-level-2" href="#min-words" data-docsmith-toc-link="min-words">min_words</a><a class="toc-link toc-link-level-3" href="#usage-9" data-docsmith-toc-link="usage-9">Usage</a><a class="toc-link toc-link-level-2" href="#max-words" data-docsmith-toc-link="max-words">max_words</a><a class="toc-link toc-link-level-3" href="#usage-10" data-docsmith-toc-link="usage-10">Usage</a><a class="toc-link toc-link-level-2" href="#domain" data-docsmith-toc-link="domain">domain</a><a class="toc-link toc-link-level-3" href="#usage-11" data-docsmith-toc-link="usage-11">Usage</a><a class="toc-link toc-link-level-3" href="#examples-6" data-docsmith-toc-link="examples-6">Examples</a><a class="toc-link toc-link-level-2" href="#e164" data-docsmith-toc-link="e164">e164</a><a class="toc-link toc-link-level-3" href="#usage-12" data-docsmith-toc-link="usage-12">Usage</a><a class="toc-link toc-link-level-3" href="#examples-7" data-docsmith-toc-link="examples-7">Examples</a><a class="toc-link toc-link-level-2" href="#isbn" data-docsmith-toc-link="isbn">isbn</a><a class="toc-link toc-link-level-3" href="#usage-13" data-docsmith-toc-link="usage-13">Usage</a><a class="toc-link toc-link-level-2" href="#country-code" data-docsmith-toc-link="country-code">country_code</a><a class="toc-link toc-link-level-3" href="#usage-14" data-docsmith-toc-link="usage-14">Usage</a><a class="toc-link toc-link-level-2" href="#hex-color" data-docsmith-toc-link="hex-color">hex_color</a><a class="toc-link toc-link-level-3" href="#usage-15" data-docsmith-toc-link="usage-15">Usage</a><a class="toc-link toc-link-level-3" href="#examples-8" data-docsmith-toc-link="examples-8">Examples</a><a class="toc-link toc-link-level-2" href="#latitude" data-docsmith-toc-link="latitude">latitude</a><a class="toc-link toc-link-level-3" href="#usage-16" data-docsmith-toc-link="usage-16">Usage</a><a class="toc-link toc-link-level-3" href="#examples-9" data-docsmith-toc-link="examples-9">Examples</a><a class="toc-link toc-link-level-2" href="#longitude" data-docsmith-toc-link="longitude">longitude</a><a class="toc-link toc-link-level-3" href="#usage-17" data-docsmith-toc-link="usage-17">Usage</a><a class="toc-link toc-link-level-3" href="#examples-10" data-docsmith-toc-link="examples-10">Examples</a><a class="toc-link toc-link-level-2" href="#cidr" data-docsmith-toc-link="cidr">cidr</a><a class="toc-link toc-link-level-3" href="#usage-18" data-docsmith-toc-link="usage-18">Usage</a><a class="toc-link toc-link-level-3" href="#examples-11" data-docsmith-toc-link="examples-11">Examples</a><a class="toc-link toc-link-level-2" href="#email-domain" data-docsmith-toc-link="email-domain">email_domain</a><a class="toc-link toc-link-level-3" href="#usage-19" data-docsmith-toc-link="usage-19">Usage</a><a class="toc-link toc-link-level-3" href="#examples-12" data-docsmith-toc-link="examples-12">Examples</a><a class="toc-link toc-link-level-2" href="#not-hashed" data-docsmith-toc-link="not-hashed">not_hashed</a><a class="toc-link toc-link-level-3" href="#usage-20" data-docsmith-toc-link="usage-20">Usage</a><a class="toc-link toc-link-level-3" href="#examples-13" data-docsmith-toc-link="examples-13">Examples</a><a class="toc-link toc-link-level-2" href="#alpha-underscore" data-docsmith-toc-link="alpha-underscore">alpha_underscore</a><a class="toc-link toc-link-level-3" href="#usage-21" data-docsmith-toc-link="usage-21">Usage</a><a class="toc-link toc-link-level-3" href="#examples-14" data-docsmith-toc-link="examples-14">Examples</a><a class="toc-link toc-link-level-2" href="#unless-between" data-docsmith-toc-link="unless-between">unless_between</a><a class="toc-link toc-link-level-3" href="#usage-22" data-docsmith-toc-link="usage-22">Usage</a><a class="toc-link toc-link-level-3" href="#examples-15" data-docsmith-toc-link="examples-15">Examples</a></nav></aside>
+        <aside class="toc-sidebar" data-docsmith-toc><p class="toc-title">On this page</p><nav class="toc-links"><a class="toc-link toc-link-level-2" href="#without-alias" data-docsmith-toc-link="without-alias">without_alias</a><a class="toc-link toc-link-level-3" href="#usage" data-docsmith-toc-link="usage">Usage</a><a class="toc-link toc-link-level-3" href="#examples" data-docsmith-toc-link="examples">Examples</a><a class="toc-link toc-link-level-2" href="#not-email" data-docsmith-toc-link="not-email">not_email</a><a class="toc-link toc-link-level-3" href="#usage-2" data-docsmith-toc-link="usage-2">Usage</a><a class="toc-link toc-link-level-3" href="#examples-2" data-docsmith-toc-link="examples-2">Examples</a><a class="toc-link toc-link-level-2" href="#slug" data-docsmith-toc-link="slug">slug</a><a class="toc-link toc-link-level-3" href="#usage-3" data-docsmith-toc-link="usage-3">Usage</a><a class="toc-link toc-link-level-3" href="#examples-with-default" data-docsmith-toc-link="examples-with-default">Examples (with default -)</a><a class="toc-link toc-link-level-2" href="#even" data-docsmith-toc-link="even">even</a><a class="toc-link toc-link-level-3" href="#usage-4" data-docsmith-toc-link="usage-4">Usage</a><a class="toc-link toc-link-level-3" href="#examples-3" data-docsmith-toc-link="examples-3">Examples</a><a class="toc-link toc-link-level-2" href="#odd" data-docsmith-toc-link="odd">odd</a><a class="toc-link toc-link-level-3" href="#usage-5" data-docsmith-toc-link="usage-5">Usage</a><a class="toc-link toc-link-level-3" href="#examples-4" data-docsmith-toc-link="examples-4">Examples</a><a class="toc-link toc-link-level-2" href="#semver" data-docsmith-toc-link="semver">semver</a><a class="toc-link toc-link-level-3" href="#usage-6" data-docsmith-toc-link="usage-6">Usage</a><a class="toc-link toc-link-level-3" href="#examples-5" data-docsmith-toc-link="examples-5">Examples</a><a class="toc-link toc-link-level-2" href="#base64-string" data-docsmith-toc-link="base64-string">base64_string</a><a class="toc-link toc-link-level-3" href="#usage-7" data-docsmith-toc-link="usage-7">Usage</a><a class="toc-link toc-link-level-2" href="#luhn" data-docsmith-toc-link="luhn">luhn</a><a class="toc-link toc-link-level-3" href="#usage-8" data-docsmith-toc-link="usage-8">Usage</a><a class="toc-link toc-link-level-2" href="#min-words" data-docsmith-toc-link="min-words">min_words</a><a class="toc-link toc-link-level-3" href="#usage-9" data-docsmith-toc-link="usage-9">Usage</a><a class="toc-link toc-link-level-2" href="#max-words" data-docsmith-toc-link="max-words">max_words</a><a class="toc-link toc-link-level-3" href="#usage-10" data-docsmith-toc-link="usage-10">Usage</a><a class="toc-link toc-link-level-2" href="#domain" data-docsmith-toc-link="domain">domain</a><a class="toc-link toc-link-level-3" href="#usage-11" data-docsmith-toc-link="usage-11">Usage</a><a class="toc-link toc-link-level-3" href="#examples-6" data-docsmith-toc-link="examples-6">Examples</a><a class="toc-link toc-link-level-2" href="#e164" data-docsmith-toc-link="e164">e164</a><a class="toc-link toc-link-level-3" href="#usage-12" data-docsmith-toc-link="usage-12">Usage</a><a class="toc-link toc-link-level-3" href="#examples-7" data-docsmith-toc-link="examples-7">Examples</a><a class="toc-link toc-link-level-2" href="#isbn" data-docsmith-toc-link="isbn">isbn</a><a class="toc-link toc-link-level-3" href="#usage-13" data-docsmith-toc-link="usage-13">Usage</a><a class="toc-link toc-link-level-2" href="#country-code" data-docsmith-toc-link="country-code">country_code</a><a class="toc-link toc-link-level-3" href="#usage-14" data-docsmith-toc-link="usage-14">Usage</a><a class="toc-link toc-link-level-2" href="#hex-color" data-docsmith-toc-link="hex-color">hex_color</a><a class="toc-link toc-link-level-3" href="#usage-15" data-docsmith-toc-link="usage-15">Usage</a><a class="toc-link toc-link-level-3" href="#examples-8" data-docsmith-toc-link="examples-8">Examples</a><a class="toc-link toc-link-level-2" href="#latitude" data-docsmith-toc-link="latitude">latitude</a><a class="toc-link toc-link-level-3" href="#usage-16" data-docsmith-toc-link="usage-16">Usage</a><a class="toc-link toc-link-level-3" href="#examples-9" data-docsmith-toc-link="examples-9">Examples</a><a class="toc-link toc-link-level-2" href="#longitude" data-docsmith-toc-link="longitude">longitude</a><a class="toc-link toc-link-level-3" href="#usage-17" data-docsmith-toc-link="usage-17">Usage</a><a class="toc-link toc-link-level-3" href="#examples-10" data-docsmith-toc-link="examples-10">Examples</a><a class="toc-link toc-link-level-2" href="#cidr" data-docsmith-toc-link="cidr">cidr</a><a class="toc-link toc-link-level-3" href="#usage-18" data-docsmith-toc-link="usage-18">Usage</a><a class="toc-link toc-link-level-3" href="#examples-11" data-docsmith-toc-link="examples-11">Examples</a><a class="toc-link toc-link-level-2" href="#email-domain" data-docsmith-toc-link="email-domain">email_domain</a><a class="toc-link toc-link-level-3" href="#usage-19" data-docsmith-toc-link="usage-19">Usage</a><a class="toc-link toc-link-level-3" href="#examples-12" data-docsmith-toc-link="examples-12">Examples</a><a class="toc-link toc-link-level-2" href="#not-hashed" data-docsmith-toc-link="not-hashed">not_hashed</a><a class="toc-link toc-link-level-3" href="#usage-20" data-docsmith-toc-link="usage-20">Usage</a><a class="toc-link toc-link-level-3" href="#examples-13" data-docsmith-toc-link="examples-13">Examples</a><a class="toc-link toc-link-level-2" href="#alpha-underscore" data-docsmith-toc-link="alpha-underscore">alpha_underscore</a><a class="toc-link toc-link-level-3" href="#usage-21" data-docsmith-toc-link="usage-21">Usage</a><a class="toc-link toc-link-level-3" href="#examples-14" data-docsmith-toc-link="examples-14">Examples</a><a class="toc-link toc-link-level-2" href="#unless-between" data-docsmith-toc-link="unless-between">unless_between</a><a class="toc-link toc-link-level-3" href="#usage-22" data-docsmith-toc-link="usage-22">Usage</a><a class="toc-link toc-link-level-3" href="#examples-15" data-docsmith-toc-link="examples-15">Examples</a><a class="toc-link toc-link-level-2" href="#without-whitespace" data-docsmith-toc-link="without-whitespace">without_whitespace</a><a class="toc-link toc-link-level-3" href="#usage-23" data-docsmith-toc-link="usage-23">Usage</a><a class="toc-link toc-link-level-3" href="#examples-16" data-docsmith-toc-link="examples-16">Examples</a><a class="toc-link toc-link-level-2" href="#no-html" data-docsmith-toc-link="no-html">no_html</a><a class="toc-link toc-link-level-3" href="#usage-24" data-docsmith-toc-link="usage-24">Usage</a><a class="toc-link toc-link-level-3" href="#examples-17" data-docsmith-toc-link="examples-17">Examples</a><a class="toc-link toc-link-level-2" href="#url-protocol" data-docsmith-toc-link="url-protocol">url_protocol</a><a class="toc-link toc-link-level-3" href="#usage-25" data-docsmith-toc-link="usage-25">Usage</a><a class="toc-link toc-link-level-3" href="#examples-18" data-docsmith-toc-link="examples-18">Examples</a><a class="toc-link toc-link-level-2" href="#snake-case" data-docsmith-toc-link="snake-case">snake_case</a><a class="toc-link toc-link-level-3" href="#usage-26" data-docsmith-toc-link="usage-26">Usage</a><a class="toc-link toc-link-level-3" href="#examples-19" data-docsmith-toc-link="examples-19">Examples</a><a class="toc-link toc-link-level-2" href="#multiple-of" data-docsmith-toc-link="multiple-of">multiple_of</a><a class="toc-link toc-link-level-3" href="#usage-27" data-docsmith-toc-link="usage-27">Usage</a><a class="toc-link toc-link-level-3" href="#examples-20" data-docsmith-toc-link="examples-20">Examples</a><a class="toc-link toc-link-level-2" href="#alpha-num-ascii" data-docsmith-toc-link="alpha-num-ascii">alpha_num_ascii</a><a class="toc-link toc-link-level-3" href="#usage-28" data-docsmith-toc-link="usage-28">Usage</a><a class="toc-link toc-link-level-3" href="#examples-21" data-docsmith-toc-link="examples-21">Examples</a></nav></aside>
     </div>
     <div class="search-overlay" data-docsmith-search-overlay hidden role="dialog" aria-label="Search documentation">
     <div class="search-overlay-backdrop" data-docsmith-search-overlay-close></div>

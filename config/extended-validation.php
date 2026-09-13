@@ -39,6 +39,12 @@ return [
         'not_hashed' => true,
         'alpha_underscore' => true,
         'unless_between' => true,
+        'without_whitespace' => true,
+        'no_html' => true,
+        'url_protocol' => true,
+        'snake_case' => true,
+        'multiple_of' => true,
+        'alpha_num_ascii' => true,
     ],
 
 ];

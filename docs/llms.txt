@@ -6,6 +6,6 @@
 - https://mrpunyapal.github.io/laravel-extended-validation/acknowledgements: Community contributors and rejected Laravel pull requests that inspired rules in this package.
 - https://mrpunyapal.github.io/laravel-extended-validation/configuration: Configure and selectively enable or disable validation rules in mrpunyapal/laravel-extended-validation.
 - https://mrpunyapal.github.io/laravel-extended-validation/installation: Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.
-- https://mrpunyapal.github.io/laravel-extended-validation/: A collection of 22 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
-- https://mrpunyapal.github.io/laravel-extended-validation/rules: Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.
+- https://mrpunyapal.github.io/laravel-extended-validation/: A collection of 28 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
+- https://mrpunyapal.github.io/laravel-extended-validation/rules: Complete reference and usage examples for all 28 validation rules in mrpunyapal/laravel-extended-validation.
 - https://mrpunyapal.github.io/laravel-extended-validation/usage: Learn the three syntax options for applying extended validation rules in Laravel applications.

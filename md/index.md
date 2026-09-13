@@ -1,11 +1,11 @@
 ---
 title: Laravel Extended Validation
-description: A collection of 22 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
+description: A collection of 28 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
 ---
 
 # Laravel Extended Validation
 
-A collection of 22 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
+A collection of 28 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
 
 ```bash
 composer require mrpunyapal/laravel-extended-validation
@@ -54,6 +54,12 @@ $request->validate([
 | [not_hashed](rules.md#not_hashed) | `NotHashed` | Ensure string is not already a bcrypt/argon hashed password | `not_hashed` |
 | [alpha_underscore](rules.md#alpha_underscore) | `AlphaUnderscore` | Ensure string contains only letters, numbers, and underscores | `alpha_underscore` |
 | [unless_between](rules.md#unless_between) | `UnlessBetween` | Ensure numeric value falls outside a specified range | `unless_between:min,max` |
+| [without_whitespace](rules.md#without_whitespace) | `WithoutWhitespace` | Ensure input does not contain any whitespace characters | `without_whitespace` |
+| [no_html](rules.md#no_html) | `NoHtml` | Ensure input does not contain HTML tags | `no_html` |
+| [url_protocol](rules.md#url_protocol) | `UrlProtocol` | Validate URL scheme against allowed protocols | `url_protocol:https,sftp` |
+| [snake_case](rules.md#snake_case) | `SnakeCase` | Validate strict snake_case string formatting | `snake_case` |
+| [multiple_of](rules.md#multiple_of) | `MultipleOf` | Ensure numeric value is an exact multiple of a step | `multiple_of:step` |
+| [alpha_num_ascii](rules.md#alpha_num_ascii) | `AlphaNumAscii` | Validate strict ASCII-only alphanumeric characters | `alpha_num_ascii` |
 
 ## Why this package exists
 

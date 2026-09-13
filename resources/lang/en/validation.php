@@ -25,4 +25,10 @@ return [
     'not_hashed' => 'The :attribute must not be a pre-hashed string.',
     'alpha_underscore' => 'The :attribute may only contain letters, numbers, and underscores.',
     'unless_between' => 'The :attribute must not be between :min and :max.',
+    'without_whitespace' => 'The :attribute must not contain any whitespace.',
+    'no_html' => 'The :attribute must not contain HTML tags.',
+    'url_protocol' => 'The :attribute must use one of the following protocols: :protocols.',
+    'snake_case' => 'The :attribute must be formatted in snake_case.',
+    'multiple_of' => 'The :attribute must be a multiple of :step.',
+    'alpha_num_ascii' => 'The :attribute may only contain ASCII letters and numbers.',
 ];
