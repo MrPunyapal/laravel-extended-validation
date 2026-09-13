@@ -4,206 +4,111 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mrpunyapal/laravel-extended-validation/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mrpunyapal/laravel-extended-validation/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrpunyapal/laravel-extended-validation.svg?style=flat-square)](https://packagist.org/packages/mrpunyapal/laravel-extended-validation)
 
-A collection of **15 useful validation rules** that were proposed to Laravel core but rejected — now available as a clean, well-tested package. Every rule works three ways: as a class, as a `Rule::` macro, and as a string rule.
+A collection of 15 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a standard string rule.
 
-## Why this package?
+## Quick start
 
-I submitted a pull request ([laravel/framework#61522](https://github.com/laravel/framework/pull/61522)) to the Laravel framework to add an option rejecting plus-addressed email aliases (e.g. `username+alias@gmail.com`) to prevent users from creating multiple accounts or abusing trials. The PR was rejected because plus-addressing is RFC 5322 compliant, and Laravel core maintains strict RFC compliance for email validation rather than adding anti-abuse rules.
-
-That got me thinking: *what other useful validation rules have been proposed to the framework over the years and rejected?*
-
-I looked through closed and rejected validation PRs on the `laravel/framework` repository, picked the most useful ones that real-world applications actually need, and implemented them all in this package the Laravel way!
-
-## Installation
+Install the package via Composer:
 
 ```bash
 composer require mrpunyapal/laravel-extended-validation
 ```
 
-## Available Rules
-
-### `slug` — URL-Friendly Slug
-Validates that a string is a clean, URL-friendly slug. Rejects uppercase, spaces, special characters, consecutive/leading/trailing separators.
-
-> **Rejected in [laravel/framework#38706](https://github.com/laravel/framework/pull/38706)** — *"You can use regex or a custom rule for this."*
+Use rules with class syntax, fluent macros, or pipe-delimited strings:
 
 ```php
-// Class syntax
-'slug' => ['required', new Slug]
-'slug' => ['required', new Slug('_')]  // custom separator
+use Illuminate\Validation\Rule;
+use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
+use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
+use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
 
-// Rule macro
-'slug' => ['required', Rule::slug()]
-
-// String syntax
-'slug' => 'required|slug'
+$request->validate([
+    'email'    => ['required', 'email', new WithoutAlias],
+    'username' => ['required', 'string', Rule::notEmail()],
+    'slug'     => 'required|slug',
+]);
 ```
 
----
+## Why this package exists
 
-### `even` / `odd` — Even & Odd Numbers
-Validates whether a numeric value is even or odd.
+This package started when I submitted a pull request ([PR #61522](https://github.com/laravel/framework/pull/61522)) to the Laravel framework to add a validation rule for rejecting plus-addressed email aliases (such as `username+tag@gmail.com`) to prevent trial abuse and duplicate account creation.
 
-> **Rejected in [laravel/framework#43632](https://github.com/laravel/framework/pull/43632)** — *"Feel free to use a custom rule for this."*
+The pull request was closed because plus-addressing is valid per RFC 5322, and the Laravel core team prioritizes keeping built-in validation rules strictly aligned with RFC standards while keeping framework core lean.
+
+That prompted a closer look at other validation pull requests closed across the framework repository over the years. Many addressed practical real-world needs (such as verifying slugs, SemVer strings, Luhn checksums, or word counts), but were kept out of core to prevent framework bloat. This package gathers those useful validation rules together in one place, built the Laravel way.
+
+## Available rules
+
+| Rule | Class | Description | Syntax |
+| --- | --- | --- | --- |
+| `without_alias` | `WithoutAlias` | Reject plus-addressed email aliases (`user+tag@gmail.com`) | `without_alias` |
+| `not_email` | `NotEmail` | Ensure a value is not an email address | `not_email` |
+| `slug` | `Slug` | Validate clean URL slugs with configurable separator | `slug` / `slug:_` |
+| `even` | `EvenNumber` | Ensure numeric input is an even integer | `even` |
+| `odd` | `OddNumber` | Ensure numeric input is an odd integer | `odd` |
+| `semver` | `Semver` | Validate Semantic Versioning 2.0.0 strings | `semver` |
+| `base64_string` | `Base64String` | Validate base64 strings and data URIs with optional MIME filters | `base64_string` |
+| `luhn` | `Luhn` | Validate numeric strings against the Luhn/MOD-10 checksum | `luhn` |
+| `min_words` | `MinWords` | Validate minimum word count | `min_words:N` |
+| `max_words` | `MaxWords` | Validate maximum word count | `max_words:N` |
+| `domain` | `Domain` | Validate domain names without requiring protocols | `domain` |
+| `e164` | `E164Phone` | Validate international phone numbers in E.164 format | `e164` |
+| `isbn` | `Isbn` | Validate ISBN-10, ISBN-13, or both with checksums | `isbn` / `isbn:10` / `isbn:13` |
+| `country_code` | `CountryCode` | Validate ISO 3166-1 country codes (alpha-2 or alpha-3) | `country_code` |
+| `hex_color` | `HexColor` | Validate CSS hex color codes (3, 4, 6, or 8 digits) | `hex_color` |
+
+## Three ways to use every rule
+
+### 1. Class instance syntax (Recommended)
+
+Direct instantiation provides full IDE autocomplete, type safety, and static analysis:
 
 ```php
-'quantity' => ['required', new EvenNumber]
-'seat'     => ['required', Rule::odd()]
+use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
+use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
+use MrPunyapal\LaravelExtendedValidation\Rules\MinWords;
+
+$request->validate([
+    'email' => ['required', 'email', new WithoutAlias],
+    'slug'  => ['required', new Slug('_')],
+    'bio'   => ['required', new MinWords(50)],
+]);
 ```
 
----
+### 2. Fluent Rule macro syntax
 
-### `semver` — Semantic Versioning
-Validates [SemVer 2.0.0](https://semver.org) strings including pre-release and build metadata.
-
-> **Rejected in [laravel/framework#36854](https://github.com/laravel/framework/pull/36854)** — Too niche for framework core.
+All rules are available as camelCase macros on `Illuminate\Validation\Rule`:
 
 ```php
-'version' => ['required', new Semver]
-'version' => ['required', Rule::semver()]
-'version' => 'required|semver'
+use Illuminate\Validation\Rule;
+
+$request->validate([
+    'email'    => ['required', 'email', Rule::withoutAlias()],
+    'username' => ['required', 'string', Rule::notEmail()],
+    'slug'     => ['required', Rule::slug()],
+    'phone'    => ['required', Rule::e164()],
+    'country'  => ['required', Rule::countryCode('alpha3')],
+]);
 ```
 
----
+### 3. String syntax
 
-### `base64_string` — Base64 Encoded Data
-Validates base64 strings with optional MIME type filtering for data URIs.
-
-> **Rejected in [laravel/framework#41528](https://github.com/laravel/framework/pull/41528)** — Memory/DoS concerns with decoding in validation.
+Use pipe-delimited string rules for concise form requests:
 
 ```php
-'data'   => ['required', new Base64String]
-'avatar' => ['required', new Base64String('image/png', 'image/jpeg')]
-```
-
----
-
-### `luhn` — Luhn/MOD-10 Checksum
-Validates numeric strings against the Luhn algorithm (credit cards, IMEI, national IDs).
-
-> **Rejected in [laravel/framework#31422](https://github.com/laravel/framework/pull/31422)** — PCI-DSS compliance concerns.
-
-```php
-'card_number' => ['required', new Luhn]
-'card_number' => ['required', Rule::luhn()]
-```
-
----
-
-### `min_words` / `max_words` — Word Count
-Validates minimum or maximum word count for text content.
-
-> **Rejected in [laravel/framework#35108](https://github.com/laravel/framework/pull/35108)** — `str_word_count()` doesn't support CJK/Unicode.
-
-```php
-'essay'   => ['required', new MinWords(100)]
-'summary' => ['required', new MaxWords(50)]
-```
-
----
-
-### `domain` — Domain Name
-Validates domain names without requiring a URL protocol scheme.
-
-> **Rejected in [laravel/framework#38954](https://github.com/laravel/framework/pull/38954)** — Too many IDN edge cases.
-
-```php
-'website' => ['required', new Domain]
-'website' => ['required', Rule::domain()]
-```
-
----
-
-### `e164` — E.164 Phone Number
-Validates international phone numbers in E.164 format (`+` followed by 2–15 digits).
-
-> **Rejected in [laravel/framework#48332](https://github.com/laravel/framework/pull/48332)** — Simple enough for regex; real validation needs libphonenumber.
-
-```php
-'phone' => ['required', new E164Phone]
-'phone' => ['required', Rule::e164()]
-'phone' => 'required|e164'
-```
-
----
-
-### `isbn` — ISBN-10 / ISBN-13
-Validates International Standard Book Numbers with proper checksum verification.
-
-> **Rejected in [laravel/framework#37652](https://github.com/laravel/framework/pull/37652)** — Too domain-specific for core.
-
-```php
-'book'   => ['required', new Isbn]        // accepts both
-'book10' => ['required', new Isbn('10')]   // ISBN-10 only
-'book13' => ['required', new Isbn('13')]   // ISBN-13 only
-```
-
----
-
-### `country_code` — ISO 3166-1 Country Code
-Validates ISO 3166-1 alpha-2 country codes (249 codes).
-
-> **Rejected in [laravel/framework#42110](https://github.com/laravel/framework/pull/42110)** — Static data maintenance burden.
-
-```php
-'country' => ['required', new CountryCode]
-'country' => ['required', Rule::countryCode()]
-'country' => 'required|country_code'
-```
-
----
-
-### `hex_color` — Hex Color Code
-Validates CSS hex color codes (3, 4, 6, or 8 character formats).
-
-```php
-'color' => ['required', new HexColor]
-'color' => ['required', Rule::hexColor()]
-'color' => 'required|hex_color'
-```
-
----
-
-### `without_alias` — Email Without Plus Alias
-Validates that an email doesn't contain plus sub-addressing (e.g. `user+tag@gmail.com`).
-
-> **Rejected in [laravel/framework#61522](https://github.com/laravel/framework/pull/61522)** — Plus addressing is valid per RFC 5322.
-
-```php
-'email' => ['required', 'email', new WithoutAlias]
-'email' => ['required', 'email', Rule::withoutAlias()]
-```
-
----
-
-### `not_email` — Not an Email Address
-Validates that a string is NOT a valid email address. Great for username fields.
-
-> **Rejected in [laravel/framework#60915](https://github.com/laravel/framework/pull/60915)** — Slippery slope for "not_*" rules.
-
-```php
-'username' => ['required', 'string', new NotEmail]
-'username' => ['required', 'string', Rule::notEmail()]
-```
-
----
-
-## Three Ways to Use Every Rule
-
-```php
-// 1. Class syntax (recommended for IDE support)
-'field' => ['required', new Slug]
-
-// 2. Rule macro syntax (fluent API)
-'field' => ['required', Rule::slug()]
-
-// 3. String syntax (classic Laravel)
-'field' => 'required|slug'
+$request->validate([
+    'email'    => 'required|email|without_alias',
+    'username' => 'required|string|not_email',
+    'slug'     => 'required|slug',
+    'phone'    => 'required|e164',
+    'version'  => 'required|semver',
+    'color'    => 'required|hex_color',
+]);
 ```
 
 ## Configuration
 
-Publish the config file to enable/disable specific rules:
+Publish the configuration file to selectively enable or disable individual rules:
 
 ```bash
 php artisan vendor:publish --tag="laravel-extended-validation-config"
@@ -219,9 +124,9 @@ php artisan vendor:publish --tag="laravel-extended-validation-translations"
 
 ## Laravel Boost
 
-The package ships a Laravel Boost skill named `laravel-extended-validation-development` for on-demand AI guidance when using these extended validation rules.
+This package ships a Laravel Boost skill named `laravel-extended-validation-development` for on-demand AI guidance.
 
-If your Laravel application uses Boost, discover the new package skills:
+If your Laravel application uses Boost, discover the skill with:
 
 ```bash
 php artisan boost:update --discover
@@ -233,9 +138,13 @@ php artisan boost:update --discover
 composer test
 ```
 
+## Documentation
+
+Full documentation is available at [https://mrpunyapal.github.io/laravel-extended-validation](https://mrpunyapal.github.io/laravel-extended-validation).
+
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information on recent changes.
 
 ## License
 

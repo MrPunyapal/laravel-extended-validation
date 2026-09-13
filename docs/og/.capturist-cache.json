@@ -2,27 +2,27 @@
   "version": 1,
   "entries": {
     "configuration.png": {
-      "hash": "24450ae57c24dbe9764d4e4b166234f8dca740d4b288209b70b29a4bbad0dc4c",
+      "hash": "6409d7c82d5d442c5887d19fa67a0157da795ee0c91f8bb76efb3f9f8125665e",
       "output": "configuration.png",
       "label": "configuration"
     },
     "index.png": {
-      "hash": "b209a7f5ff55767a2c03993a108ada13e5dee16f74fad2ae632bcb7b9346cf5a",
+      "hash": "eac280d37aa5f067cb86f6736089b47fd5844b148c486e2504f25945ae249db5",
       "output": "index.png",
       "label": "index"
     },
     "installation.png": {
-      "hash": "e322607e93c028bef3355bb52fd83b3db247b6ac3dd0b2041acb30cd4c00986b",
+      "hash": "a10ae227d3ea699276e0197e2bf1417a5cb56f41085d874093832fe7456b23c8",
       "output": "installation.png",
       "label": "installation"
     },
     "rules.png": {
-      "hash": "6d63741f8556e32edbaabf8a1d5ff88a0540179d62335462895a55c7d8ff72ae",
+      "hash": "a10ed02d2b2a4eb66980981319ca33942c2c201afae29b091eeea50660c93ef8",
       "output": "rules.png",
       "label": "rules"
     },
     "usage.png": {
-      "hash": "d7a6b8b62fc30770710e88ff97900a34091ef9c85765e018630a72c5430e1285",
+      "hash": "eea59c1af691e57fef25748972d15c9cb8afde9451b2fb8499c14cdadd7b4939",
       "output": "usage.png",
       "label": "usage"
     }

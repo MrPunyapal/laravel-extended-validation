@@ -1,3 +1,8 @@
+---
+title: Installation
+description: Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.
+---
+
 # Installation
 
 ## Requirements
@@ -5,50 +10,43 @@
 - PHP `^8.3`, `^8.4`, or `^8.5`
 - Laravel 11, 12, or 13
 
-## Install the package
+## Install via Composer
 
-Install the package via Composer:
+Require the package as a dependency:
 
 ```bash
 composer require mrpunyapal/laravel-extended-validation
 ```
 
-## Package Auto-Discovery
+## Package auto-discovery
 
-The package automatically registers its service provider (`MrPunyapal\LaravelExtendedValidation\LaravelExtendedValidationServiceProvider`) through Laravel's package auto-discovery. No manual provider registration in `bootstrap/providers.php` or `config/app.php` is necessary.
+Laravel automatically registers `MrPunyapal\LaravelExtendedValidation\LaravelExtendedValidationServiceProvider` through package auto-discovery. You do not need to register the provider manually.
 
-## Publishing Configuration
+## Publishing configuration
 
-Optionally publish the package configuration file:
+Publish the configuration file to enable or disable specific rules:
 
 ```bash
 php artisan vendor:publish --tag="laravel-extended-validation-config"
 ```
 
-This will create `config/laravel-extended-validation.php` in your application. See [Configuration](configuration/) for details.
+This creates `config/laravel-extended-validation.php`. See [Configuration](configuration.md) for available settings.
 
-## Publishing Translations
+## Publishing translations
 
-All validation error messages can be published and customized:
+Publish the language files to customize error messages:
 
 ```bash
 php artisan vendor:publish --tag="laravel-extended-validation-translations"
 ```
 
-This places the translation files in `lang/vendor/laravel-extended-validation` where you can translate them into any language or tweak the error messages.
+This publishes translation lines to `lang/vendor/laravel-extended-validation/en/validation.php`.
 
 ## Laravel Boost
 
-The package ships a Laravel Boost skill named `laravel-extended-validation-development` for on-demand AI guidance when using these extended validation rules.
+This package includes a Laravel Boost skill named `laravel-extended-validation-development` for AI-assisted development.
 
-If your Laravel application uses Boost, install Boost and publish its resources:
-
-```bash
-composer require laravel/boost --dev
-php artisan boost:install
-```
-
-If Boost is already installed and you add this package later, discover the new package skills:
+If your application uses Laravel Boost, discover the skill with:
 
 ```bash
 php artisan boost:update --discover
@@ -56,6 +54,6 @@ php artisan boost:update --discover
 
 ## Next steps
 
-- Explore [Configuration](configuration/) to enable or disable specific rules.
-- Read [Usage](usage/) to see how to use rules in Form Requests and Validators.
-- Check the [Rules](rules/) reference for complete examples of all 15 rules.
+- Read [Configuration](configuration.md) to manage rule toggles.
+- Explore [Usage](usage.md) for the three syntax options.
+- Browse the [Rules reference](rules.md) for full examples.

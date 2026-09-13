@@ -1,24 +1,29 @@
+---
+title: Usage
+description: Learn the three syntax options for applying extended validation rules in Laravel applications.
+---
+
 # Usage
 
-Laravel Extended Validation is designed to feel completely native to Laravel. Every rule supports three distinct consumption patterns.
+Every rule in this package supports three usage patterns: class instances, fluent macros on the `Rule` facade, and pipe-delimited string rules.
 
-## 1. Class Instance Syntax (Recommended)
+## 1. Class instance syntax (Recommended)
 
-Instantiate the rule directly or use its static `make()` method. This approach provides full IDE autocomplete, type safety, and static analysis support:
+Instantiate rule objects directly or call their static `make()` method. This provides full IDE auto-completion and static analysis:
 
 ```php
-use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
 use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
 use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
+use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
 
 $request->validate([
-    'slug'     => ['required', 'string', new Slug],
     'email'    => ['required', 'email', new WithoutAlias],
-    'username' => ['required', 'string', NotEmail::make()],
+    'username' => ['required', 'string', new NotEmail],
+    'slug'     => ['required', Slug::make()],
 ]);
 ```
 
-You can pass arguments to the constructor or `make()` method:
+Pass constructor parameters to customize rule behavior:
 
 ```php
 use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
@@ -32,72 +37,81 @@ $request->validate([
 ]);
 ```
 
-## 2. Fluent Rule Macro Syntax
+## 2. Fluent Rule macro syntax
 
-All rules are registered as macros on Laravel's built-in `Illuminate\Validation\Rule` class using camelCase naming:
+The package registers camelCase macros on Laravel's `Illuminate\Validation\Rule` class:
 
 ```php
 use Illuminate\Validation\Rule;
 
 $request->validate([
-    'slug'     => ['required', Rule::slug()],
     'email'    => ['required', 'email', Rule::withoutAlias()],
-    'username' => ['required', Rule::notEmail()],
+    'username' => ['required', 'string', Rule::notEmail()],
+    'slug'     => ['required', Rule::slug()],
     'phone'    => ['required', Rule::e164()],
     'bio'      => ['required', Rule::minWords(20)],
-    'country'  => ['required', Rule::countryCode()],
+    'country'  => ['required', Rule::countryCode('alpha3')],
 ]);
 ```
 
-## 3. Classic String Syntax
+## 3. String syntax
 
-Rules are also registered with the validator so you can use pipe-delimited strings:
+Use standard string rules for concise validation arrays or form request definitions:
 
 ```php
 $request->validate([
-    'slug'     => 'required|slug',
     'email'    => 'required|email|without_alias',
     'username' => 'required|string|not_email',
+    'slug'     => 'required|slug',
     'phone'    => 'required|e164',
     'version'  => 'required|semver',
     'color'    => 'required|hex_color',
 ]);
 ```
 
-Rules that accept arguments can take them via colon notation:
+Rules with parameters accept them via colon separation:
 
 ```php
 $request->validate([
     'slug'    => 'required|slug:_',
     'country' => 'required|country_code:alpha3',
     'isbn'    => 'required|isbn:13',
+    'bio'     => 'required|min_words:25',
 ]);
 ```
 
-## Customizing Error Messages
+## Customizing error messages
 
-### Inline Messages
+### Inline messages
 
-You can override messages inline when validating:
+Override messages directly when calling `$request->validate()` or inside a form request `messages()` method:
 
 ```php
 $request->validate([
-    'email' => ['required', 'email', new WithoutAlias],
+    'email' => ['required', 'email', Rule::withoutAlias()],
 ], [
-    'email.without_alias' => 'We do not accept disposable or alias email addresses.',
+    'email.without_alias' => 'Please provide a direct email address without aliases.',
 ]);
 ```
 
-### Global Localization
+### Translation files
 
-Publish the package translations:
+Publish the package translations to customize messages application-wide:
 
 ```bash
 php artisan vendor:publish --tag="laravel-extended-validation-translations"
 ```
 
-Then edit `lang/vendor/laravel-extended-validation/en/validation.php`.
+Edit `lang/vendor/laravel-extended-validation/en/validation.php`:
 
-## Next step
+```php
+return [
+    'without_alias' => 'The :attribute must not contain a plus-alias.',
+    'not_email'     => 'The :attribute cannot be an email address.',
+    // ...
+];
+```
 
-Read [Rules](rules/) for full details and examples of each rule.
+## Next steps
+
+- Explore all 15 rules with input examples in the [Rules reference](rules.md).

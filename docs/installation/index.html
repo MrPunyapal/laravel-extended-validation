@@ -8,12 +8,12 @@
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Installation | Laravel Extended Validation">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.">
     <meta property="og:url" content="https://mrpunyapal.github.io/laravel-extended-validation/installation">
     <meta property="og:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/installation.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Installation | Laravel Extended Validation">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.">
     <meta name="twitter:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/installation.png">
     <link rel="stylesheet" href="../assets/app.css">
     <script src="../assets/app.js" defer></script>
@@ -36,7 +36,7 @@
                     <div class="search-results" data-docsmith-search-results hidden></div>
                     <div class="search-empty" data-docsmith-empty>No pages match your search.</div>
                 </div>
-                <nav class="nav" data-docsmith-nav><a class="" href="../" data-nav-item data-title="Laravel Extended Validation" data-search="Laravel Extended Validation Laravel Extended Validation">Laravel Extended Validation</a><a class="active" href="./" data-nav-item data-title="Installation" data-search="Installation Installation">Installation</a><a class="" href="../configuration/" data-nav-item data-title="Configuration" data-search="Configuration Configuration">Configuration</a><a class="" href="../usage/" data-nav-item data-title="Usage" data-search="Usage Usage">Usage</a><a class="" href="../rules/" data-nav-item data-title="Rules Reference" data-search="Rules Reference Rules Reference">Rules Reference</a></nav>
+                <nav class="nav" data-docsmith-nav><a class="" href="../" data-nav-item data-title="Laravel Extended Validation" data-search="Laravel Extended Validation Laravel Extended Validation A collection of 15 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.">Laravel Extended Validation</a><a class="active" href="./" data-nav-item data-title="Installation" data-search="Installation Installation Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.">Installation</a><a class="" href="../configuration/" data-nav-item data-title="Configuration" data-search="Configuration Configuration Configure and selectively enable or disable validation rules in mrpunyapal/laravel-extended-validation.">Configuration</a><a class="" href="../usage/" data-nav-item data-title="Usage" data-search="Usage Usage Learn the three syntax options for applying extended validation rules in Laravel applications.">Usage</a><a class="" href="../rules/" data-nav-item data-title="Rules Reference" data-search="Rules Reference Rules Reference Complete reference and usage examples for all 15 validation rules in mrpunyapal/laravel-extended-validation.">Rules Reference</a></nav>
                 <a class="docsmith-badge" href="https://github.com/MrPunyapal/docsmith" target="_blank" rel="noopener noreferrer" data-docsmith-badge aria-label="Built with DocSmith"><svg class="docsmith-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-6.716-4.35-9.428-7.052C.4 11.692-.21 8.9 1.38 6.87 2.736 5.14 5.09 4.583 6.86 5.686 8 6.41 8.86 7.55 9.6 8.7c.74-1.15 1.6-2.29 2.74-3.014 1.77-1.103 4.124-.546 5.48 1.184 1.59 2.03.98 4.822-1.192 7.078C18.716 16.65 12 21 12 21z"/></svg><span class="docsmith-badge-text">Built with</span><span class="docsmith-badge-brand">DocSmith</span></a>
             </div>
         </aside>
@@ -46,7 +46,7 @@
                 <header class="doc-head">
                     
                     <h1>Installation</h1>
-                    
+                    <p class="doc-description">Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.</p>
                 </header>
                 <div class="doc-body">
                     <h2 id="requirements">Requirements</h2>
@@ -54,36 +54,32 @@
 <li>PHP <code>^8.3</code>, <code>^8.4</code>, or <code>^8.5</code></li>
 <li>Laravel 11, 12, or 13</li>
 </ul>
-<h2 id="install-the-package">Install the package</h2>
-<p>Install the package via Composer:</p>
+<h2 id="install-via-composer">Install via Composer</h2>
+<p>Require the package as a dependency:</p>
 <pre class="phiki language-shellscript github-light phiki-themes github-dark" data-language="shellscript" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">composer</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">require</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">mrpunyapal/laravel-extended-validation</span><span class="token">
 </span></span></code></pre>
-<h2 id="package-auto-discovery">Package Auto-Discovery</h2>
-<p>The package automatically registers its service provider (<code>MrPunyapal\LaravelExtendedValidation\LaravelExtendedValidationServiceProvider</code>) through Laravel's package auto-discovery. No manual provider registration in <code>bootstrap/providers.php</code> or <code>config/app.php</code> is necessary.</p>
-<h2 id="publishing-configuration">Publishing Configuration</h2>
-<p>Optionally publish the package configuration file:</p>
+<h2 id="package-auto-discovery">Package auto-discovery</h2>
+<p>Laravel automatically registers <code>MrPunyapal\LaravelExtendedValidation\LaravelExtendedValidationServiceProvider</code> through package auto-discovery. You do not need to register the provider manually.</p>
+<h2 id="publishing-configuration">Publishing configuration</h2>
+<p>Publish the configuration file to enable or disable specific rules:</p>
 <pre class="phiki language-shellscript github-light phiki-themes github-dark" data-language="shellscript" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">php</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">artisan</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">vendor:publish</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-tag=</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">"</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">laravel-extended-validation-config</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">"</span><span class="token">
 </span></span></code></pre>
-<p>This will create <code>config/laravel-extended-validation.php</code> in your application. See <a href="configuration/">Configuration</a> for details.</p>
-<h2 id="publishing-translations">Publishing Translations</h2>
-<p>All validation error messages can be published and customized:</p>
+<p>This creates <code>config/laravel-extended-validation.php</code>. See <a href="../configuration/">Configuration</a> for available settings.</p>
+<h2 id="publishing-translations">Publishing translations</h2>
+<p>Publish the language files to customize error messages:</p>
 <pre class="phiki language-shellscript github-light phiki-themes github-dark" data-language="shellscript" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">php</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">artisan</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">vendor:publish</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-tag=</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">"</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">laravel-extended-validation-translations</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">"</span><span class="token">
 </span></span></code></pre>
-<p>This places the translation files in <code>lang/vendor/laravel-extended-validation</code> where you can translate them into any language or tweak the error messages.</p>
+<p>This publishes translation lines to <code>lang/vendor/laravel-extended-validation/en/validation.php</code>.</p>
 <h2 id="laravel-boost">Laravel Boost</h2>
-<p>The package ships a Laravel Boost skill named <code>laravel-extended-validation-development</code> for on-demand AI guidance when using these extended validation rules.</p>
-<p>If your Laravel application uses Boost, install Boost and publish its resources:</p>
-<pre class="phiki language-shellscript github-light phiki-themes github-dark" data-language="shellscript" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">composer</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">require</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">laravel/boost</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-dev</span><span class="token">
-</span></span><span class="line"><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">php</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">artisan</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">boost:install</span><span class="token">
-</span></span></code></pre>
-<p>If Boost is already installed and you add this package later, discover the new package skills:</p>
+<p>This package includes a Laravel Boost skill named <code>laravel-extended-validation-development</code> for AI-assisted development.</p>
+<p>If your application uses Laravel Boost, discover the skill with:</p>
 <pre class="phiki language-shellscript github-light phiki-themes github-dark" data-language="shellscript" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">php</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">artisan</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">boost:update</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">-discover</span><span class="token">
 </span></span></code></pre>
 <h2 id="next-steps">Next steps</h2>
 <ul>
-<li>Explore <a href="configuration/">Configuration</a> to enable or disable specific rules.</li>
-<li>Read <a href="usage/">Usage</a> to see how to use rules in Form Requests and Validators.</li>
-<li>Check the <a href="rules/">Rules</a> reference for complete examples of all 15 rules.</li>
+<li>Read <a href="../configuration/">Configuration</a> to manage rule toggles.</li>
+<li>Explore <a href="../usage/">Usage</a> for the three syntax options.</li>
+<li>Browse the <a href="../rules/">Rules reference</a> for full examples.</li>
 </ul>
 
                 </div>

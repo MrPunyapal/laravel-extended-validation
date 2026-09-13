@@ -1,10 +1,15 @@
+---
+title: Configuration
+description: Configure and selectively enable or disable validation rules in mrpunyapal/laravel-extended-validation.
+---
+
 # Configuration
 
-The package comes with an optional configuration file that lets you toggle individual rules on or off.
+You can selectively enable or disable individual validation rules to suit your application and avoid naming collisions with other packages.
 
-## Publishing the config
+## Publish the config file
 
-Publish `config/laravel-extended-validation.php`:
+Run the Artisan publish command:
 
 ```bash
 php artisan vendor:publish --tag="laravel-extended-validation-config"
@@ -12,7 +17,7 @@ php artisan vendor:publish --tag="laravel-extended-validation-config"
 
 ## Configuration options
 
-The configuration file contains an array of enabled rules:
+The published file lives at `config/laravel-extended-validation.php`:
 
 ```php
 return [
@@ -48,8 +53,9 @@ return [
 ];
 ```
 
-By default, all rules are enabled. If you want to avoid collisions with any other package or custom rule, simply set the corresponding rule name to `false`.
+To disable any rule, set its value to `false`. Disabled rules are not registered on `Validator` or as macros on `Rule`.
 
-## Next step
+## Next steps
 
-Learn about the three syntax options in [Usage](usage/).
+- Read [Usage](usage.md) to see how to apply rules in form requests and controllers.
+- Check the [Rules reference](rules.md) for individual rule behavior.

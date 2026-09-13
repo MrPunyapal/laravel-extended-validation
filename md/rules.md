@@ -1,3 +1,8 @@
+---
+title: Rules Reference
+description: Complete reference and usage examples for all 15 validation rules in mrpunyapal/laravel-extended-validation.
+---
+
 # Rules Reference
 
 Complete reference for all 15 validation rules included in the package.
@@ -6,13 +11,11 @@ Complete reference for all 15 validation rules included in the package.
 
 ## without_alias
 
-Validates that an email address does not contain a plus sub-addressing alias (e.g. `user+tag@gmail.com`).
+Validates that an email address does not contain a plus-addressed sub-alias (e.g. `user+tag@gmail.com`). Useful for preventing trial abuse and duplicate account creation.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias`
 - **Macro**: `Rule::withoutAlias()`
 - **String**: `without_alias`
-- **Rejected in**: [laravel/framework#61522](https://github.com/laravel/framework/pull/61522)
-- **Why rejected**: RFC 5322 explicitly allows `+` in email local-parts; core maintainers keep email validation strictly aligned with the RFC, leaving abuse prevention to userland.
 
 ### Usage
 
@@ -30,22 +33,25 @@ use Illuminate\Validation\Rule;
 'email' => 'required|email|without_alias'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `user@example.com`, `john.doe@gmail.com`, `team@sub.domain.co.uk`
-- Fails: `user+test@example.com`, `john+promo@gmail.com`, `+user@example.com`, `user+@example.com`
+| Input | Result |
+| --- | --- |
+| `user@example.com` | Passes |
+| `john.doe@gmail.com` | Passes |
+| `user+tag@gmail.com` | Fails |
+| `john+promo@domain.com` | Fails |
+| `+user@domain.com` | Fails |
 
 ---
 
 ## not_email
 
-Validates that a given string is **not** a valid email address. Essential for applications that allow sign-in with "Username or Email" to prevent account collisions.
+Validates that a given string is not a valid email address. Useful for username fields to prevent collisions in applications that allow login with "Email or Username".
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\NotEmail`
 - **Macro**: `Rule::notEmail()`
 - **String**: `not_email`
-- **Rejected in**: [laravel/framework#60915](https://github.com/laravel/framework/pull/60915)
-- **Why rejected**: Laravel core avoids adding negated variants (`not_*`) to prevent a slippery slope of negative rule duplication.
 
 ### Usage
 
@@ -53,28 +59,29 @@ Validates that a given string is **not** a valid email address. Essential for ap
 use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
 use Illuminate\Validation\Rule;
 
-// Prevent users from choosing an email address as their username
 'username' => ['required', 'string', 'min:3', 'max:30', new NotEmail]
 'username' => ['required', 'string', Rule::notEmail()]
 'username' => 'required|string|not_email'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `johndoe`, `cool-dev_42`, `hello world`
-- Fails: `user@example.com`, `john@gmail.com`, `admin@domain.io`
+| Input | Result |
+| --- | --- |
+| `johndoe` | Passes |
+| `cool_user42` | Passes |
+| `john@example.com` | Fails |
+| `admin@domain.io` | Fails |
 
 ---
 
 ## slug
 
-Validates that a string is a clean, URL-friendly slug. Rejects uppercase letters, whitespace, special characters, and consecutive or leading/trailing separators.
+Validates that a string is a clean, URL-friendly slug. Rejects uppercase characters, whitespace, special characters, and consecutive or trailing separators.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Slug`
-- **Macro**: `Rule::slug(?string $separator = '-')`
+- **Macro**: `Rule::slug(string $separator = '-')`
 - **String**: `slug` or `slug:{separator}`
-- **Rejected in**: [laravel/framework#38706](https://github.com/laravel/framework/pull/38706) and [#32353](https://github.com/laravel/framework/pull/32353)
-- **Why rejected**: Maintainers prefer developers use custom regex or existing `alpha_dash` rules.
 
 ### Usage
 
@@ -82,7 +89,7 @@ Validates that a string is a clean, URL-friendly slug. Rejects uppercase letters
 use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
 use Illuminate\Validation\Rule;
 
-// Standard dash separator
+// Default dash separator
 'slug' => ['required', new Slug]
 'slug' => ['required', Rule::slug()]
 'slug' => 'required|slug'
@@ -93,10 +100,16 @@ use Illuminate\Validation\Rule;
 'slug' => 'required|slug:_'
 ```
 
-### Passes / Fails (with default `-`)
+### Examples (with default `-`)
 
-- Passes: `my-awesome-post`, `post-123`, `introduction`
-- Fails: `My-Awesome-Post`, `my awesome post`, `my--post`, `-my-post`, `my-post-`, `my_post`
+| Input | Result |
+| --- | --- |
+| `my-awesome-post` | Passes |
+| `post-123` | Passes |
+| `My-Awesome-Post` | Fails (uppercase) |
+| `my awesome post` | Fails (spaces) |
+| `my--post` | Fails (consecutive separators) |
+| `-my-post` | Fails (leading separator) |
 
 ---
 
@@ -107,8 +120,6 @@ Validates that a numeric input represents an even integer.
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\EvenNumber`
 - **Macro**: `Rule::even()`
 - **String**: `even`
-- **Rejected in**: [laravel/framework#43632](https://github.com/laravel/framework/pull/43632)
-- **Why rejected**: Modulo checks are considered too simple to warrant framework core rules.
 
 ### Usage
 
@@ -121,10 +132,12 @@ use Illuminate\Validation\Rule;
 'team_size' => 'required|integer|even'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `0`, `2`, `4`, `-2`, `100`, `'42'`
-- Fails: `1`, `3`, `-1`, `99`, `'7'`, `'abc'`
+| Input | Result |
+| --- | --- |
+| `0`, `2`, `4`, `100`, `'42'` | Passes |
+| `1`, `3`, `-1`, `'7'`, `'abc'` | Fails |
 
 ---
 
@@ -135,7 +148,6 @@ Validates that a numeric input represents an odd integer.
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\OddNumber`
 - **Macro**: `Rule::odd()`
 - **String**: `odd`
-- **Rejected in**: [laravel/framework#45781](https://github.com/laravel/framework/pull/45781)
 
 ### Usage
 
@@ -148,22 +160,22 @@ use Illuminate\Validation\Rule;
 'step' => 'required|integer|odd'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `1`, `3`, `-1`, `99`, `'7'`
-- Fails: `0`, `2`, `4`, `-2`, `100`, `'42'`, `'abc'`
+| Input | Result |
+| --- | --- |
+| `1`, `3`, `-1`, `99`, `'7'` | Passes |
+| `0`, `2`, `4`, `100`, `'42'`, `'abc'` | Fails |
 
 ---
 
 ## semver
 
-Validates strings against the official [Semantic Versioning 2.0.0](https://semver.org) specification, including optional pre-release labels and build metadata.
+Validates strings against the official [Semantic Versioning 2.0.0](https://semver.org) specification, including optional pre-release tags and build metadata.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Semver`
 - **Macro**: `Rule::semver()`
 - **String**: `semver`
-- **Rejected in**: [laravel/framework#36854](https://github.com/laravel/framework/pull/36854) and [#42921](https://github.com/laravel/framework/pull/42921)
-- **Why rejected**: Considered too specialized for core framework needs.
 
 ### Usage
 
@@ -176,22 +188,25 @@ use Illuminate\Validation\Rule;
 'version' => 'required|semver'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `1.0.0`, `0.1.0`, `1.2.3-alpha.1`, `2.0.0-beta+build.123`, `1.0.0-x.7.z.92`
-- Fails: `v1.0.0` (prefix not allowed in SemVer 2.0), `1.0`, `1`, `01.0.0`, `1.0.0.0`
+| Input | Result |
+| --- | --- |
+| `1.0.0`, `0.1.0` | Passes |
+| `1.2.3-alpha.1` | Passes |
+| `2.0.0-beta+build.123` | Passes |
+| `v1.0.0` | Fails (prefix not allowed in SemVer 2.0) |
+| `1.0` | Fails (missing patch component) |
 
 ---
 
 ## base64_string
 
-Validates that an attribute is valid base64-encoded data, with optional MIME type restrictions for data URI schemes.
+Validates that an attribute is valid base64-encoded data, with optional MIME type filtering for Data URIs.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Base64String`
 - **Macro**: `Rule::base64String(array|string $allowedMimeTypes = [])`
-- **String**: `base64_string` or `base64_string:image/png,image/jpeg`
-- **Rejected in**: [laravel/framework#41528](https://github.com/laravel/framework/pull/41528) and [#30744](https://github.com/laravel/framework/pull/30744)
-- **Why rejected**: Memory/DoS concerns when decoding unbounded payloads during validation.
+- **String**: `base64_string` or `base64_string:{mimes}`
 
 ### Usage
 
@@ -199,10 +214,10 @@ Validates that an attribute is valid base64-encoded data, with optional MIME typ
 use MrPunyapal\LaravelExtendedValidation\Rules\Base64String;
 use Illuminate\Validation\Rule;
 
-// Any valid base64 payload
+// Standard base64 payload
 'payload' => ['required', new Base64String]
 
-// Data URI restricted to images
+// Data URI restricted to specific image types
 'avatar' => ['required', new Base64String(['image/png', 'image/jpeg'])]
 'avatar' => ['required', Rule::base64String('image/png', 'image/jpeg')]
 'avatar' => 'required|base64_string:image/png,image/jpeg'
@@ -212,13 +227,11 @@ use Illuminate\Validation\Rule;
 
 ## luhn
 
-Validates numeric strings against the Luhn algorithm (MOD-10 checksum), commonly used for credit cards, debit cards, IMEI numbers, and national identification numbers.
+Validates numeric strings against the Luhn/MOD-10 algorithm. Common for credit cards, debit cards, IMEI numbers, and national identifiers.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Luhn`
 - **Macro**: `Rule::luhn()`
 - **String**: `luhn`
-- **Rejected in**: [laravel/framework#31422](https://github.com/laravel/framework/pull/31422) and [#44805](https://github.com/laravel/framework/pull/44805)
-- **Why rejected**: PCI-DSS guidance discourages handling raw credit card numbers on application servers.
 
 ### Usage
 
@@ -240,7 +253,6 @@ Validates that a string contains at least a specified number of words.
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\MinWords`
 - **Macro**: `Rule::minWords(int $min)`
 - **String**: `min_words:{min}`
-- **Rejected in**: [laravel/framework#35108](https://github.com/laravel/framework/pull/35108)
 
 ### Usage
 
@@ -248,9 +260,9 @@ Validates that a string contains at least a specified number of words.
 use MrPunyapal\LaravelExtendedValidation\Rules\MinWords;
 use Illuminate\Validation\Rule;
 
-'article' => ['required', 'string', new MinWords(100)]
-'article' => ['required', 'string', Rule::minWords(100)]
-'article' => 'required|string|min_words:100'
+'bio' => ['required', 'string', new MinWords(10)]
+'bio' => ['required', 'string', Rule::minWords(10)]
+'bio' => 'required|string|min_words:10'
 ```
 
 ---
@@ -262,7 +274,6 @@ Validates that a string does not exceed a specified number of words.
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\MaxWords`
 - **Macro**: `Rule::maxWords(int $max)`
 - **String**: `max_words:{max}`
-- **Rejected in**: [laravel/framework#46092](https://github.com/laravel/framework/pull/46092)
 
 ### Usage
 
@@ -279,12 +290,11 @@ use Illuminate\Validation\Rule;
 
 ## domain
 
-Validates that a string is a valid domain name (FQDN) without requiring URL protocols (`http://` or `https://`).
+Validates that a string is a valid domain name (FQDN) without requiring `http://` or `https://` protocol schemes.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Domain`
 - **Macro**: `Rule::domain()`
 - **String**: `domain`
-- **Rejected in**: [laravel/framework#38954](https://github.com/laravel/framework/pull/38954) and [#45470](https://github.com/laravel/framework/pull/45470)
 
 ### Usage
 
@@ -297,21 +307,25 @@ use Illuminate\Validation\Rule;
 'website' => 'required|domain'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `example.com`, `sub.example.co.uk`, `my-portal.org`
-- Fails: `https://example.com`, `192.168.1.1`, `localhost`, `-domain.com`
+| Input | Result |
+| --- | --- |
+| `example.com` | Passes |
+| `sub.example.co.uk` | Passes |
+| `https://example.com` | Fails (protocol not expected) |
+| `192.168.1.1` | Fails (IP address rejected) |
+| `localhost` | Fails (requires valid TLD) |
 
 ---
 
 ## e164
 
-Validates international phone numbers according to the ITU-T E.164 recommendation (`+` sign followed by 2 to 15 digits).
+Validates international telephone numbers according to the ITU-T E.164 format (`+` followed by 2 to 15 digits).
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\E164Phone`
 - **Macro**: `Rule::e164()`
 - **String**: `e164`
-- **Rejected in**: [laravel/framework#48332](https://github.com/laravel/framework/pull/48332)
 
 ### Usage
 
@@ -324,21 +338,25 @@ use Illuminate\Validation\Rule;
 'phone' => 'required|e164'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `+14155552671`, `+442071234567`, `+919876543210`
-- Fails: `14155552671` (missing `+`), `+0123456789` (starts with `0`), `+1` (too short)
+| Input | Result |
+| --- | --- |
+| `+14155552671` | Passes |
+| `+442071234567` | Passes |
+| `+919876543210` | Passes |
+| `14155552671` | Fails (missing `+`) |
+| `+0123456789` | Fails (cannot start with 0) |
 
 ---
 
 ## isbn
 
-Validates International Standard Book Numbers (ISBN-10, ISBN-13, or both) with full mathematical checksum verification.
+Validates International Standard Book Numbers (ISBN-10, ISBN-13, or both) with mathematical checksum verification.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Isbn`
 - **Macro**: `Rule::isbn(?string $type = null)`
 - **String**: `isbn`, `isbn:10`, `isbn:13`
-- **Rejected in**: [laravel/framework#37652](https://github.com/laravel/framework/pull/37652) and [#44299](https://github.com/laravel/framework/pull/44299)
 
 ### Usage
 
@@ -346,7 +364,7 @@ Validates International Standard Book Numbers (ISBN-10, ISBN-13, or both) with f
 use MrPunyapal\LaravelExtendedValidation\Rules\Isbn;
 use Illuminate\Validation\Rule;
 
-// Accepts both ISBN-10 and ISBN-13
+// Accepts either ISBN-10 or ISBN-13
 'book' => ['required', new Isbn]
 'book' => ['required', Rule::isbn()]
 'book' => 'required|isbn'
@@ -366,12 +384,11 @@ use Illuminate\Validation\Rule;
 
 ## country_code
 
-Validates ISO 3166-1 country codes (alpha-2 or alpha-3).
+Validates ISO 3166-1 country codes (alpha-2 or alpha-3 format).
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\CountryCode`
 - **Macro**: `Rule::countryCode(string $format = 'alpha2')`
-- **String**: `country_code` or `country_code:alpha3`
-- **Rejected in**: [laravel/framework#42110](https://github.com/laravel/framework/pull/42110) and [#47115](https://github.com/laravel/framework/pull/47115)
+- **String**: `country_code` or `country_code:{format}`
 
 ### Usage
 
@@ -394,7 +411,7 @@ use Illuminate\Validation\Rule;
 
 ## hex_color
 
-Validates CSS hex color codes (supporting 3, 4, 6, and 8 hex digits preceded by `#`).
+Validates CSS hex color codes (supporting 3, 4, 6, or 8 hexadecimal characters preceded by `#`).
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\HexColor`
 - **Macro**: `Rule::hexColor()`
@@ -406,12 +423,18 @@ Validates CSS hex color codes (supporting 3, 4, 6, and 8 hex digits preceded by 
 use MrPunyapal\LaravelExtendedValidation\Rules\HexColor;
 use Illuminate\Validation\Rule;
 
-'accent_color' => ['required', new HexColor]
-'accent_color' => ['required', Rule::hexColor()]
-'accent_color' => 'required|hex_color'
+'accent' => ['required', new HexColor]
+'accent' => ['required', Rule::hexColor()]
+'accent' => 'required|hex_color'
 ```
 
-### Passes / Fails
+### Examples
 
-- Passes: `#fff`, `#FFF`, `#ffffff`, `#FFFFFF`, `#ffff`, `#ffffffff`
-- Fails: `fff` (missing `#`), `#ff`, `#fffff`, `#gggggg`, `red`
+| Input | Result |
+| --- | --- |
+| `#fff`, `#FFF` | Passes (3-digit) |
+| `#ffff` | Passes (4-digit with alpha) |
+| `#ffffff` | Passes (6-digit) |
+| `#ffffffff` | Passes (8-digit with alpha) |
+| `fff` | Fails (missing `#`) |
+| `#gggggg` | Fails (invalid hex characters) |

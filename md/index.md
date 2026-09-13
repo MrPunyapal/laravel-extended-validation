@@ -1,46 +1,64 @@
+---
+title: Laravel Extended Validation
+description: A collection of 15 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
+---
+
 # Laravel Extended Validation
 
-A collection of **15 useful validation rules** that were proposed to Laravel framework core but closed or rejected — implemented following modern Laravel standards.
+A collection of 15 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
 
-Every rule can be used in three ways: as a standalone validation class (`new Slug`), as a fluent `Rule::` macro (`Rule::slug()`), or as a standard string rule (`'slug'`).
+```bash
+composer require mrpunyapal/laravel-extended-validation
+```
 
-## Available Rules
+## Quick start
 
-| Rule | Description | Syntax | Rejected In |
+Use any rule with class syntax, fluent macros, or pipe-delimited strings:
+
+```php
+use Illuminate\Validation\Rule;
+use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
+use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
+use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
+
+$request->validate([
+    'email'    => ['required', 'email', new WithoutAlias],
+    'username' => ['required', 'string', Rule::notEmail()],
+    'slug'     => 'required|slug',
+]);
+```
+
+## Available rules
+
+| Rule | Class | Description | Syntax |
 | --- | --- | --- | --- |
-| [WithoutAlias](rules/#without_alias) | Reject plus-addressed email aliases (e.g. `user+tag@gmail.com`) | `without_alias` | [PR #61522](https://github.com/laravel/framework/pull/61522) |
-| [NotEmail](rules/#not_email) | Ensure a value is not an email address (e.g. for usernames) | `not_email` | [PR #60915](https://github.com/laravel/framework/pull/60915) |
-| [Slug](rules/#slug) | Validate URL-friendly slugs with configurable separator | `slug` / `slug:_` | [PR #38706](https://github.com/laravel/framework/pull/38706) |
-| [EvenNumber](rules/#even) | Ensure numeric input is an even number | `even` | [PR #43632](https://github.com/laravel/framework/pull/43632) |
-| [OddNumber](rules/#odd) | Ensure numeric input is an odd number | `odd` | [PR #45781](https://github.com/laravel/framework/pull/45781) |
-| [Semver](rules/#semver) | Validate Semantic Versioning 2.0.0 strings | `semver` | [PR #36854](https://github.com/laravel/framework/pull/36854) |
-| [Base64String](rules/#base64_string) | Validate base64 strings and data URIs with MIME checks | `base64_string` | [PR #41528](https://github.com/laravel/framework/pull/41528) |
-| [Luhn](rules/#luhn) | Validate numeric strings against the Luhn/MOD-10 checksum | `luhn` | [PR #31422](https://github.com/laravel/framework/pull/31422) |
-| [MinWords](rules/#min_words) | Validate minimum word count | `min_words:N` | [PR #35108](https://github.com/laravel/framework/pull/35108) |
-| [MaxWords](rules/#max_words) | Validate maximum word count | `max_words:N` | [PR #46092](https://github.com/laravel/framework/pull/46092) |
-| [Domain](rules/#domain) | Validate domain names without requiring `http://` or `https://` | `domain` | [PR #38954](https://github.com/laravel/framework/pull/38954) |
-| [E164Phone](rules/#e164) | Validate international phone numbers in E.164 format | `e164` | [PR #48332](https://github.com/laravel/framework/pull/48332) |
-| [Isbn](rules/#isbn) | Validate ISBN-10, ISBN-13, or both with checksums | `isbn` / `isbn:10` / `isbn:13` | [PR #37652](https://github.com/laravel/framework/pull/37652) |
-| [CountryCode](rules/#country_code) | Validate ISO 3166-1 alpha-2 or alpha-3 country codes | `country_code` / `country_code:alpha3` | [PR #42110](https://github.com/laravel/framework/pull/42110) |
-| [HexColor](rules/#hex_color) | Validate CSS hex color codes (3, 4, 6, or 8 characters) | `hex_color` | Community Rule |
+| [without_alias](rules.md#without_alias) | `WithoutAlias` | Reject plus-addressed email aliases (e.g. `user+tag@gmail.com`) | `without_alias` |
+| [not_email](rules.md#not_email) | `NotEmail` | Ensure a value is not an email address | `not_email` |
+| [slug](rules.md#slug) | `Slug` | Validate clean URL slugs with configurable separator | `slug` / `slug:_` |
+| [even](rules.md#even) | `EvenNumber` | Ensure numeric input is an even integer | `even` |
+| [odd](rules.md#odd) | `OddNumber` | Ensure numeric input is an odd integer | `odd` |
+| [semver](rules.md#semver) | `Semver` | Validate Semantic Versioning 2.0.0 strings | `semver` |
+| [base64_string](rules.md#base64_string) | `Base64String` | Validate base64 strings and data URIs with optional MIME filters | `base64_string` |
+| [luhn](rules.md#luhn) | `Luhn` | Validate numeric strings against the Luhn/MOD-10 checksum | `luhn` |
+| [min_words](rules.md#min_words) | `MinWords` | Validate minimum word count | `min_words:N` |
+| [max_words](rules.md#max_words) | `MaxWords` | Validate maximum word count | `max_words:N` |
+| [domain](rules.md#domain) | `Domain` | Validate domain names without requiring protocols | `domain` |
+| [e164](rules.md#e164) | `E164Phone` | Validate international phone numbers in E.164 format | `e164` |
+| [isbn](rules.md#isbn) | `Isbn` | Validate ISBN-10, ISBN-13, or both with checksums | `isbn` / `isbn:10` / `isbn:13` |
+| [country_code](rules.md#country_code) | `CountryCode` | Validate ISO 3166-1 country codes (alpha-2 or alpha-3) | `country_code` |
+| [hex_color](rules.md#hex_color) | `HexColor` | Validate CSS hex color codes (3, 4, 6, or 8 digits) | `hex_color` |
 
-## Why this package?
+## Why this package exists
 
-I submitted a pull request ([laravel/framework#61522](https://github.com/laravel/framework/pull/61522)) to the Laravel framework to add an option rejecting plus-addressed email aliases (`username+alias@gmail.com`) to prevent users from creating multiple accounts or abusing free trials. The PR was closed because plus-addressing is RFC 5322 compliant, and Laravel core maintains strict RFC compliance for email validation rather than adding anti-abuse rules.
+This package started when I submitted a pull request ([PR #61522](https://github.com/laravel/framework/pull/61522)) to the Laravel framework to add a validation rule for rejecting plus-addressed email aliases (such as `username+tag@gmail.com`). The goal was to help applications prevent trial abuse and duplicate account creation.
 
-That got me thinking: *what other useful validation rules have been proposed to the framework over the years and rejected?*
+The pull request was closed because plus-addressing is technically valid per RFC 5322, and the Laravel core team prioritizes keeping built-in validation rules strictly aligned with RFC standards while keeping framework core lean.
 
-In `laravel/framework`, pull requests for new validation rules are frequently closed by core maintainers not because the rules lack utility, but because:
-
-1. **Core Leanness**: The framework avoids single-regex wrapper rules to avoid bloat.
-2. **RFC Strictness**: Some rules (such as sub-addressing in email) restrict inputs that are RFC-valid even though real-world apps need to block them.
-3. **Dataset Maintenance**: Rules requiring ISO codes, country lists, or postal formats require constant maintenance that core avoids taking on.
-
-I looked through closed and rejected validation PRs on the `laravel/framework` repository, picked the most useful ones, and implemented them all in this package following Laravel's modern validation standards.
+That prompted a closer look at other validation pull requests closed across the framework repository over the years. Many addressed practical application needs, such as verifying slugs, SemVer strings, Luhn checksums, or word counts, but were kept out of core to prevent framework bloat. This package gathers those useful validation rules together in one place, built the Laravel way.
 
 ## Next steps
 
-- [Installation](installation/) — requirements and setup.
-- [Configuration](configuration/) — enable or disable specific rules.
-- [Usage](usage/) — three flexible ways to use any rule.
-- [Rules](rules/) — detailed documentation and examples for every rule.
+- [Installation](installation.md): requirements and auto-discovery.
+- [Configuration](configuration.md): enable or disable specific rules.
+- [Usage](usage.md): class syntax, Rule macros, and string rules.
+- [Rules reference](rules.md): full documentation and code examples for each rule.
