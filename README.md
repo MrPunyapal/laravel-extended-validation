@@ -7,7 +7,7 @@
 [![PHP Version Compatibility](https://badge.laravel.cloud/php-badge/mrpunyapal/laravel-extended-validation?style=flat-square)](https://packagist.org/packages/mrpunyapal/laravel-extended-validation)
 [![Laravel Boost Skill](https://badge.laravel.cloud/boost-badge.svg?style=flat-square)](https://laravel.com/docs/boost#third-party-package-skills)
 
-A collection of 15 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a standard string rule.
+A collection of validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a standard string rule.
 
 ## Quick start
 
