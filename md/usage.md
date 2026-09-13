@@ -114,4 +114,4 @@ return [
 
 ## Next steps
 
-- Explore all 15 rules with input examples in the [Rules reference](rules.md).
+- Explore the rules with input examples in the [Rules reference](rules.md).
