@@ -240,7 +240,7 @@ $request->validate([
 | [without_whitespace](rules.md#without_whitespace) | `WithoutWhitespace` | Ensure input does not contain any whitespace characters | `without_whitespace` |
 | [no_html](rules.md#no_html) | `NoHtml` | Ensure input does not contain HTML tags | `no_html` |
 | [url_protocol](rules.md#url_protocol) | `UrlProtocol` | Validate URL scheme against allowed protocols | `url_protocol:https,sftp` |
-| [snake_case](rules.md#snake_case) | `SnakeCase` | Validate strict snake_case string formatting | `snake_case` |
+| [snake_case](rules.md#snake_case) | `SnakeCase` | Validate strict snake_case string formatting | `snake_case` / `snake_case:capital` |
 | [multiple_of](rules.md#multiple_of) | `MultipleOf` | Ensure numeric value is an exact multiple of a step | `multiple_of:step` |
 | [alpha_num_ascii](rules.md#alpha_num_ascii) | `AlphaNumAscii` | Validate strict ASCII-only alphanumeric characters | `alpha_num_ascii` |
 
@@ -1037,8 +1037,8 @@ use Illuminate\Validation\Rule;
 Validates that a string is strictly formatted in snake_case (lowercase alphanumeric characters separated by single underscores).
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\SnakeCase`
-- **Macro**: `Rule::snakeCase()`
-- **String**: `snake_case`
+- **Macro**: `Rule::snakeCase(?bool $capital = false)`
+- **String**: `snake_case` / `snake_case:capital`
 
 ### Usage
 
@@ -1046,22 +1046,32 @@ Validates that a string is strictly formatted in snake_case (lowercase alphanume
 use MrPunyapal\LaravelExtendedValidation\Rules\SnakeCase;
 use Illuminate\Validation\Rule;
 
+// Standard lowercase snake_case
 'column_name' => ['required', new SnakeCase]
 'column_name' => ['required', Rule::snakeCase()]
 'column_name' => 'required|snake_case'
+
+// ALL_CAPS snake_case (SCREAMING_SNAKE_CASE)
+'constant_key' => ['required', SnakeCase::capital()]
+'constant_key' => ['required', new SnakeCase(capital: true)]
+'constant_key' => ['required', Rule::snakeCase(capital: true)]
+'constant_key' => 'required|snake_case:capital'
 ```
 
 ### Examples
 
-| Input | Result |
-| --- | --- |
-| `user_name` | Passes |
-| `first_name_id` | Passes |
-| `slug` | Passes |
-| `UserName` | Fails (uppercase letters) |
-| `user-name` | Fails (hyphens not allowed) |
-| `user__name` | Fails (consecutive underscores) |
-| `_user_name` | Fails (leading underscore) |
+| Input | Mode | Result |
+| --- | --- | --- |
+| `user_name` | Default | Passes |
+| `first_name_id` | Default | Passes |
+| `slug` | Default | Passes |
+| `UserName` | Default | Fails (uppercase letters) |
+| `USER_NAME` | Default | Fails (uppercase not allowed without capital option) |
+| `USER_NAME` | `:capital` | Passes |
+| `API_KEY_SECRET` | `:capital` | Passes |
+| `user_name` | `:capital` | Fails (lowercase not allowed in capital mode) |
+| `user__name` / `USER__NAME` | Both | Fails (consecutive underscores) |
+| `_user_name` / `_USER_NAME` | Both | Fails (leading underscore) |
 
 ---
 

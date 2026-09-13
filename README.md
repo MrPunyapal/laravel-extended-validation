@@ -69,7 +69,7 @@ That prompted a closer look at other validation pull requests closed across the 
 | `without_whitespace` | `WithoutWhitespace` | Ensure input does not contain any whitespace characters | `without_whitespace` |
 | `no_html` | `NoHtml` | Ensure input does not contain HTML tags | `no_html` |
 | `url_protocol` | `UrlProtocol` | Validate URL scheme against allowed protocols | `url_protocol:https,sftp` |
-| `snake_case` | `SnakeCase` | Validate strict snake_case string formatting | `snake_case` |
+| `snake_case` | `SnakeCase` | Validate strict snake_case string formatting | `snake_case` / `snake_case:capital` |
 | `multiple_of` | `MultipleOf` | Ensure numeric value is an exact multiple of a step | `multiple_of:step` |
 | `alpha_num_ascii` | `AlphaNumAscii` | Validate strict ASCII-only alphanumeric characters | `alpha_num_ascii` |
 

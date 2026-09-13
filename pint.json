@@ -1,5 +1,8 @@
 {
     "preset": "laravel",
+    "exclude": [
+        "workground"
+    ],
     "rules": {
         "declare_strict_types": true
     }

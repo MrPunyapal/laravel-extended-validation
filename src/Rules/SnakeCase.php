@@ -13,9 +13,23 @@ final class SnakeCase implements ValidationRule
 {
     use Conditionable, Macroable;
 
-    public static function make(): static
+    public readonly bool $capital;
+
+    public function __construct(bool|string $capital = false)
     {
-        return new self;
+        $this->capital = is_bool($capital)
+            ? $capital
+            : in_array(strtolower(trim($capital)), ['1', 'true', 'capital', 'caps', 'upper', 'uppercase', 'screaming'], true);
+    }
+
+    public static function make(bool|string $capital = false): static
+    {
+        return new self($capital);
+    }
+
+    public static function capital(): static
+    {
+        return new self(true);
     }
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
@@ -26,7 +40,11 @@ final class SnakeCase implements ValidationRule
             return;
         }
 
-        if (preg_match('/^[a-z0-9]+(?:_[a-z0-9]+)*$/', $value) !== 1) {
+        $pattern = $this->capital
+            ? '/^[A-Z0-9]+(?:_[A-Z0-9]+)*$/'
+            : '/^[a-z0-9]+(?:_[a-z0-9]+)*$/';
+
+        if (preg_match($pattern, $value) !== 1) {
             $fail('extended-validation::validation.snake_case')->translate();
         }
     }
