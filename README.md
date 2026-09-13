@@ -3,6 +3,9 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mrpunyapal/laravel-extended-validation.svg?style=flat-square)](https://packagist.org/packages/mrpunyapal/laravel-extended-validation)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mrpunyapal/laravel-extended-validation/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mrpunyapal/laravel-extended-validation/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrpunyapal/laravel-extended-validation.svg?style=flat-square)](https://packagist.org/packages/mrpunyapal/laravel-extended-validation)
+[![Laravel Version Compatibility](https://badge.laravel.cloud/badge/mrpunyapal/laravel-extended-validation?style=flat-square)](https://packagist.org/packages/mrpunyapal/laravel-extended-validation)
+[![PHP Version Compatibility](https://badge.laravel.cloud/php-badge/mrpunyapal/laravel-extended-validation?style=flat-square)](https://packagist.org/packages/mrpunyapal/laravel-extended-validation)
+[![Laravel Boost Skill](https://badge.laravel.cloud/boost-badge.svg?style=flat-square)](https://laravel.com/docs/boost#third-party-package-skills)
 
 A collection of 15 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a standard string rule.
 
