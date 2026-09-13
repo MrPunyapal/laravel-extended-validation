@@ -24,6 +24,7 @@ Docsmith::make()
         'usage.md',
         'rules.md',
     ])
+    ->rightSidebar()
     ->ogGeneratedPerPage()
     ->build();
 
