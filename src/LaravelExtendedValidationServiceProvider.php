@@ -10,20 +10,27 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Translation\PotentiallyTranslatedString;
 use Illuminate\Validation\Rule;
+use MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore;
 use MrPunyapal\LaravelExtendedValidation\Rules\Base64String;
+use MrPunyapal\LaravelExtendedValidation\Rules\Cidr;
 use MrPunyapal\LaravelExtendedValidation\Rules\CountryCode;
 use MrPunyapal\LaravelExtendedValidation\Rules\Domain;
 use MrPunyapal\LaravelExtendedValidation\Rules\E164Phone;
+use MrPunyapal\LaravelExtendedValidation\Rules\EmailDomain;
 use MrPunyapal\LaravelExtendedValidation\Rules\EvenNumber;
 use MrPunyapal\LaravelExtendedValidation\Rules\HexColor;
 use MrPunyapal\LaravelExtendedValidation\Rules\Isbn;
+use MrPunyapal\LaravelExtendedValidation\Rules\Latitude;
+use MrPunyapal\LaravelExtendedValidation\Rules\Longitude;
 use MrPunyapal\LaravelExtendedValidation\Rules\Luhn;
 use MrPunyapal\LaravelExtendedValidation\Rules\MaxWords;
 use MrPunyapal\LaravelExtendedValidation\Rules\MinWords;
 use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
+use MrPunyapal\LaravelExtendedValidation\Rules\NotHashed;
 use MrPunyapal\LaravelExtendedValidation\Rules\OddNumber;
 use MrPunyapal\LaravelExtendedValidation\Rules\Semver;
 use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
+use MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween;
 use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -71,6 +78,13 @@ class LaravelExtendedValidationServiceProvider extends PackageServiceProvider
             'hex_color' => HexColor::class,
             'without_alias' => WithoutAlias::class,
             'not_email' => NotEmail::class,
+            'latitude' => Latitude::class,
+            'longitude' => Longitude::class,
+            'cidr' => Cidr::class,
+            'email_domain' => EmailDomain::class,
+            'not_hashed' => NotHashed::class,
+            'alpha_underscore' => AlphaUnderscore::class,
+            'unless_between' => UnlessBetween::class,
         ];
 
         foreach ($rules as $name => $ruleClass) {

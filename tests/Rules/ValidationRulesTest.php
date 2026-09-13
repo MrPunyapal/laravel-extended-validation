@@ -4,20 +4,27 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore;
 use MrPunyapal\LaravelExtendedValidation\Rules\Base64String;
+use MrPunyapal\LaravelExtendedValidation\Rules\Cidr;
 use MrPunyapal\LaravelExtendedValidation\Rules\CountryCode;
 use MrPunyapal\LaravelExtendedValidation\Rules\Domain;
 use MrPunyapal\LaravelExtendedValidation\Rules\E164Phone;
+use MrPunyapal\LaravelExtendedValidation\Rules\EmailDomain;
 use MrPunyapal\LaravelExtendedValidation\Rules\EvenNumber;
 use MrPunyapal\LaravelExtendedValidation\Rules\HexColor;
 use MrPunyapal\LaravelExtendedValidation\Rules\Isbn;
+use MrPunyapal\LaravelExtendedValidation\Rules\Latitude;
+use MrPunyapal\LaravelExtendedValidation\Rules\Longitude;
 use MrPunyapal\LaravelExtendedValidation\Rules\Luhn;
 use MrPunyapal\LaravelExtendedValidation\Rules\MaxWords;
 use MrPunyapal\LaravelExtendedValidation\Rules\MinWords;
 use MrPunyapal\LaravelExtendedValidation\Rules\NotEmail;
+use MrPunyapal\LaravelExtendedValidation\Rules\NotHashed;
 use MrPunyapal\LaravelExtendedValidation\Rules\OddNumber;
 use MrPunyapal\LaravelExtendedValidation\Rules\Semver;
 use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
+use MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween;
 use MrPunyapal\LaravelExtendedValidation\Rules\WithoutAlias;
 
 // ──────────────────────────────────────────────────────
@@ -443,4 +450,212 @@ describe('Rule macros', function (): void {
     it('registers Rule::notEmail()', function (): void {
         expect(Rule::notEmail())->toBeInstanceOf(NotEmail::class);
     });
+
+    it('registers Rule::latitude()', function (): void {
+        expect(Rule::latitude())->toBeInstanceOf(Latitude::class);
+    });
+
+    it('registers Rule::longitude()', function (): void {
+        expect(Rule::longitude())->toBeInstanceOf(Longitude::class);
+    });
+
+    it('registers Rule::cidr()', function (): void {
+        expect(Rule::cidr())->toBeInstanceOf(Cidr::class);
+    });
+
+    it('registers Rule::emailDomain()', function (): void {
+        expect(Rule::emailDomain())->toBeInstanceOf(EmailDomain::class);
+    });
+
+    it('registers Rule::notHashed()', function (): void {
+        expect(Rule::notHashed())->toBeInstanceOf(NotHashed::class);
+    });
+
+    it('registers Rule::alphaUnderscore()', function (): void {
+        expect(Rule::alphaUnderscore())->toBeInstanceOf(AlphaUnderscore::class);
+    });
+
+    it('registers Rule::unlessBetween()', function (): void {
+        expect(Rule::unlessBetween(1, 10))->toBeInstanceOf(UnlessBetween::class);
+    });
+});
+
+// ──────────────────────────────────────────────────────
+// Latitude
+// ──────────────────────────────────────────────────────
+describe('Latitude', function (): void {
+    it('passes for valid latitudes', function (int|float|string $value): void {
+        expect(Validator::make(['lat' => $value], ['lat' => new Latitude])->passes())->toBeTrue();
+    })->with([
+        0,
+        90,
+        -90,
+        45.123456,
+        '-12.34',
+        '89.9999',
+    ]);
+
+    it('fails for invalid latitudes', function (mixed $value): void {
+        expect(Validator::make(['lat' => $value], ['lat' => new Latitude])->fails())->toBeTrue();
+    })->with([
+        90.1,
+        -90.1,
+        180,
+        -180,
+        'not-a-latitude',
+        null,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// Longitude
+// ──────────────────────────────────────────────────────
+describe('Longitude', function (): void {
+    it('passes for valid longitudes', function (int|float|string $value): void {
+        expect(Validator::make(['lng' => $value], ['lng' => new Longitude])->passes())->toBeTrue();
+    })->with([
+        0,
+        180,
+        -180,
+        123.456,
+        '-74.006',
+        '179.9999',
+    ]);
+
+    it('fails for invalid longitudes', function (mixed $value): void {
+        expect(Validator::make(['lng' => $value], ['lng' => new Longitude])->fails())->toBeTrue();
+    })->with([
+        180.1,
+        -180.1,
+        360,
+        -360,
+        'not-a-longitude',
+        null,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// Cidr
+// ──────────────────────────────────────────────────────
+describe('Cidr', function (): void {
+    it('passes for valid CIDR notations', function (string $value): void {
+        expect(Validator::make(['cidr' => $value], ['cidr' => new Cidr])->passes())->toBeTrue();
+    })->with([
+        '192.168.1.0/24',
+        '10.0.0.0/8',
+        '0.0.0.0/0',
+        '172.16.0.0/16',
+        '2001:db8::/32',
+        '::1/128',
+    ]);
+
+    it('fails for invalid CIDR notations', function (mixed $value): void {
+        expect(Validator::make(['cidr' => $value], ['cidr' => new Cidr])->fails())->toBeTrue();
+    })->with([
+        '192.168.1.0/33',
+        '192.168.1.0',
+        '192.168.1.256/24',
+        'not-a-cidr',
+        '2001:db8::/129',
+        123,
+    ]);
+
+    it('supports v4 specific validation', function (): void {
+        expect(Validator::make(['c' => '10.0.0.0/8'], ['c' => Cidr::v4()])->passes())->toBeTrue();
+        expect(Validator::make(['c' => '2001:db8::/32'], ['c' => Cidr::v4()])->fails())->toBeTrue();
+    });
+
+    it('supports v6 specific validation', function (): void {
+        expect(Validator::make(['c' => '2001:db8::/32'], ['c' => Cidr::v6()])->passes())->toBeTrue();
+        expect(Validator::make(['c' => '10.0.0.0/8'], ['c' => Cidr::v6()])->fails())->toBeTrue();
+    });
+});
+
+// ──────────────────────────────────────────────────────
+// EmailDomain
+// ──────────────────────────────────────────────────────
+describe('EmailDomain', function (): void {
+    it('passes when domain is in allowed list', function (): void {
+        $rule = EmailDomain::allowed('company.com', 'partner.org');
+
+        expect(Validator::make(['email' => 'user@company.com'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'admin@partner.org'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'user@gmail.com'], ['email' => $rule])->fails())->toBeTrue();
+    });
+
+    it('fails when domain is in blocked list', function (): void {
+        $rule = EmailDomain::blocked('mailinator.com', 'tempmail.com');
+
+        expect(Validator::make(['email' => 'user@gmail.com'], ['email' => $rule])->passes())->toBeTrue();
+        expect(Validator::make(['email' => 'user@mailinator.com'], ['email' => $rule])->fails())->toBeTrue();
+        expect(Validator::make(['email' => 'user@tempmail.com'], ['email' => $rule])->fails())->toBeTrue();
+    });
+});
+
+// ──────────────────────────────────────────────────────
+// NotHashed
+// ──────────────────────────────────────────────────────
+describe('NotHashed', function (): void {
+    it('passes for plain text strings', function (string $value): void {
+        expect(Validator::make(['pw' => $value], ['pw' => new NotHashed])->passes())->toBeTrue();
+    })->with([
+        'my-secret-password',
+        'P@ssw0rd123!',
+        'plain-text',
+    ]);
+
+    it('fails for hashed password strings', function (): void {
+        $bcrypt = password_hash('secret', PASSWORD_BCRYPT);
+        expect(Validator::make(['pw' => $bcrypt], ['pw' => new NotHashed])->fails())->toBeTrue();
+    });
+});
+
+// ──────────────────────────────────────────────────────
+// AlphaUnderscore
+// ──────────────────────────────────────────────────────
+describe('AlphaUnderscore', function (): void {
+    it('passes for strings with letters, numbers, and underscores', function (string $value): void {
+        expect(Validator::make(['u' => $value], ['u' => new AlphaUnderscore])->passes())->toBeTrue();
+    })->with([
+        'username',
+        'user_name',
+        'user_123',
+        '_system_',
+        'USER_NAME',
+    ]);
+
+    it('fails for strings with dashes, spaces, or special characters', function (mixed $value): void {
+        expect(Validator::make(['u' => $value], ['u' => new AlphaUnderscore])->fails())->toBeTrue();
+    })->with([
+        'user-name',
+        'user name',
+        'user@name',
+        'user.name',
+        'user#name',
+        null,
+    ]);
+});
+
+// ──────────────────────────────────────────────────────
+// UnlessBetween
+// ──────────────────────────────────────────────────────
+describe('UnlessBetween', function (): void {
+    it('passes when value is outside the range', function (int|float $value): void {
+        expect(Validator::make(['val' => $value], ['val' => new UnlessBetween(10, 20)])->passes())->toBeTrue();
+    })->with([
+        5,
+        9.99,
+        20.01,
+        100,
+        -5,
+    ]);
+
+    it('fails when value is inside the range', function (int|float $value): void {
+        expect(Validator::make(['val' => $value], ['val' => new UnlessBetween(10, 20)])->fails())->toBeTrue();
+    })->with([
+        10,
+        15,
+        20,
+        10.5,
+    ]);
 });

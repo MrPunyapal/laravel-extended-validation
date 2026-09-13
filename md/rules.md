@@ -1,11 +1,11 @@
 ---
 title: Rules Reference
-description: Complete reference and usage examples for all 15 validation rules in mrpunyapal/laravel-extended-validation.
+description: Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.
 ---
 
 # Rules Reference
 
-Complete reference for all 15 validation rules included in the package.
+Complete reference for all 22 validation rules included in the package.
 
 ---
 
@@ -438,3 +438,238 @@ use Illuminate\Validation\Rule;
 | `#ffffffff` | Passes (8-digit with alpha) |
 | `fff` | Fails (missing `#`) |
 | `#gggggg` | Fails (invalid hex characters) |
+
+---
+
+## latitude
+
+Validates that a numeric coordinate represents a valid latitude between `-90` and `90` degrees (inclusive).
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Latitude`
+- **Macro**: `Rule::latitude()`
+- **String**: `latitude`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\Latitude;
+use Illuminate\Validation\Rule;
+
+'lat' => ['required', new Latitude]
+'lat' => ['required', Rule::latitude()]
+'lat' => 'required|latitude'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `0` | Passes |
+| `37.7749` | Passes |
+| `-90`, `90` | Passes |
+| `90.0001` | Fails |
+| `-91` | Fails |
+| `'not-a-number'` | Fails |
+
+---
+
+## longitude
+
+Validates that a numeric coordinate represents a valid longitude between `-180` and `180` degrees (inclusive).
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Longitude`
+- **Macro**: `Rule::longitude()`
+- **String**: `longitude`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\Longitude;
+use Illuminate\Validation\Rule;
+
+'lng' => ['required', new Longitude]
+'lng' => ['required', Rule::longitude()]
+'lng' => 'required|longitude'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `0` | Passes |
+| `-122.4194` | Passes |
+| `-180`, `180` | Passes |
+| `180.0001` | Fails |
+| `-181` | Fails |
+| `'not-a-number'` | Fails |
+
+---
+
+## cidr
+
+Validates that a string is a valid Classless Inter-Domain Routing (CIDR) subnet notation block. Supports IPv4, IPv6, or either.
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\Cidr`
+- **Macro**: `Rule::cidr(?string $version = null)`
+- **String**: `cidr`, `cidr:v4`, or `cidr:v6`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\Cidr;
+use Illuminate\Validation\Rule;
+
+// IPv4 or IPv6
+'subnet' => ['required', new Cidr]
+'subnet' => ['required', Rule::cidr()]
+'subnet' => 'required|cidr'
+
+// IPv4 only
+'subnet' => ['required', new Cidr('v4')]
+'subnet' => ['required', Rule::cidr('v4')]
+'subnet' => 'required|cidr:v4'
+
+// IPv6 only
+'subnet' => ['required', new Cidr('v6')]
+'subnet' => ['required', Rule::cidr('v6')]
+'subnet' => 'required|cidr:v6'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `192.168.1.0/24` | Passes (IPv4) |
+| `10.0.0.0/8` | Passes (IPv4) |
+| `2001:db8::/32` | Passes (IPv6) |
+| `192.168.1.0/33` | Fails (invalid prefix) |
+| `192.168.1.0` | Fails (missing prefix length) |
+| `not-a-cidr` | Fails |
+
+---
+
+## email_domain
+
+Validates that an email address belongs to an allowed domain list or does not belong to a blocked domain list.
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\EmailDomain`
+- **Macro**: `Rule::emailDomain($allowed = [], $blocked = [])`
+- **String**: `email_domain`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\EmailDomain;
+use Illuminate\Validation\Rule;
+
+// Allow specific company domains
+'email' => ['required', 'email', EmailDomain::allowed('company.com', 'partner.org')]
+'email' => ['required', 'email', Rule::emailDomain(allowed: ['company.com', 'partner.org'])]
+
+// Block disposable email providers
+'email' => ['required', 'email', EmailDomain::blocked('mailinator.com', 'tempmail.com')]
+'email' => ['required', 'email', Rule::emailDomain(blocked: ['mailinator.com', 'tempmail.com'])]
+```
+
+### Examples
+
+| Input | Configuration | Result |
+| --- | --- | --- |
+| `alice@company.com` | `allowed: ['company.com']` | Passes |
+| `alice@gmail.com` | `allowed: ['company.com']` | Fails |
+| `bob@legit.com` | `blocked: ['tempmail.com']` | Passes |
+| `bob@tempmail.com` | `blocked: ['tempmail.com']` | Fails |
+
+---
+
+## not_hashed
+
+Ensures that a password field is not already passed as an algorithm hash (such as bcrypt or argon). Useful for preventing users or clients from submitting pre-hashed strings when registration or password resets expect plain text to hash on the server.
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\NotHashed`
+- **Macro**: `Rule::notHashed()`
+- **String**: `not_hashed`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\NotHashed;
+use Illuminate\Validation\Rule;
+
+'password' => ['required', 'string', 'min:8', new NotHashed]
+'password' => ['required', 'string', 'min:8', Rule::notHashed()]
+'password' => 'required|string|min:8|not_hashed'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `P@ssw0rd123!` | Passes |
+| `my-secret-password` | Passes |
+| `$2y$10$e80yq9k...` (bcrypt hash) | Fails |
+| `$argon2id$v=19$...` (argon hash) | Fails |
+
+---
+
+## alpha_underscore
+
+Validates that a string contains only letters, numbers, and underscores (`_`). Unlike Laravel's native `alpha_dash` which also permits hyphens (`-`), `alpha_underscore` enforces strict identifier naming (like Python or SQL identifiers and usernames).
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore`
+- **Macro**: `Rule::alphaUnderscore()`
+- **String**: `alpha_underscore`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore;
+use Illuminate\Validation\Rule;
+
+'username' => ['required', 'string', new AlphaUnderscore]
+'username' => ['required', 'string', Rule::alphaUnderscore()]
+'username' => 'required|string|alpha_underscore'
+```
+
+### Examples
+
+| Input | Result |
+| --- | --- |
+| `user_123` | Passes |
+| `USER_NAME` | Passes |
+| `_system_` | Passes |
+| `user-name` | Fails (hyphen not allowed) |
+| `user name` | Fails (space not allowed) |
+| `user@name` | Fails (symbol not allowed) |
+
+---
+
+## unless_between
+
+Validates that a numeric value falls outside a specified range (i.e. value < min OR value > max).
+
+- **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween`
+- **Macro**: `Rule::unlessBetween(float|int $min, float|int $max)`
+- **String**: `unless_between:{min},{max}`
+
+### Usage
+
+```php
+use MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween;
+use Illuminate\Validation\Rule;
+
+'discount' => ['required', new UnlessBetween(10, 20)]
+'discount' => ['required', Rule::unlessBetween(10, 20)]
+'discount' => 'required|unless_between:10,20'
+```
+
+### Examples
+
+| Input | Range | Result |
+| --- | --- | --- |
+| `5` | `10, 20` | Passes |
+| `25` | `10, 20` | Passes |
+| `10` | `10, 20` | Fails (inside boundary) |
+| `15` | `10, 20` | Fails (inside range) |
+| `20` | `10, 20` | Fails (inside boundary) |
+

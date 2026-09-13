@@ -18,4 +18,11 @@ return [
     'hex_color' => 'The :attribute must be a valid hex color code.',
     'without_alias' => 'The :attribute must not contain a plus-alias (e.g. user+tag@example.com).',
     'not_email' => 'The :attribute must not be an email address.',
+    'latitude' => 'The :attribute must be a valid latitude between -90 and 90 degrees.',
+    'longitude' => 'The :attribute must be a valid longitude between -180 and 180 degrees.',
+    'cidr' => 'The :attribute must be a valid CIDR notation block.',
+    'email_domain' => 'The :attribute must be an email address from an authorized domain.',
+    'not_hashed' => 'The :attribute must not be a pre-hashed string.',
+    'alpha_underscore' => 'The :attribute may only contain letters, numbers, and underscores.',
+    'unless_between' => 'The :attribute must not be between :min and :max.',
 ];

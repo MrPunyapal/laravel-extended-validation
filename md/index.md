@@ -1,11 +1,11 @@
 ---
 title: Laravel Extended Validation
-description: A collection of 15 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
+description: A collection of 22 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.
 ---
 
 # Laravel Extended Validation
 
-A collection of 15 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
+A collection of 22 validation rules for Laravel applications. Every rule works in three ways: as an invokable rule class, as a fluent `Rule::` macro, and as a classic string rule.
 
 ```bash
 composer require mrpunyapal/laravel-extended-validation
@@ -47,6 +47,13 @@ $request->validate([
 | [isbn](rules.md#isbn) | `Isbn` | Validate ISBN-10, ISBN-13, or both with checksums | `isbn` / `isbn:10` / `isbn:13` |
 | [country_code](rules.md#country_code) | `CountryCode` | Validate ISO 3166-1 country codes (alpha-2 or alpha-3) | `country_code` |
 | [hex_color](rules.md#hex_color) | `HexColor` | Validate CSS hex color codes (3, 4, 6, or 8 digits) | `hex_color` |
+| [latitude](rules.md#latitude) | `Latitude` | Validate numeric coordinate between -90 and 90 degrees | `latitude` |
+| [longitude](rules.md#longitude) | `Longitude` | Validate numeric coordinate between -180 and 180 degrees | `longitude` |
+| [cidr](rules.md#cidr) | `Cidr` | Validate IPv4 or IPv6 CIDR subnet notations | `cidr` / `cidr:v4` / `cidr:v6` |
+| [email_domain](rules.md#email_domain) | `EmailDomain` | Validate email domain against allowed or blocked lists | `email_domain` |
+| [not_hashed](rules.md#not_hashed) | `NotHashed` | Ensure string is not already a bcrypt/argon hashed password | `not_hashed` |
+| [alpha_underscore](rules.md#alpha_underscore) | `AlphaUnderscore` | Ensure string contains only letters, numbers, and underscores | `alpha_underscore` |
+| [unless_between](rules.md#unless_between) | `UnlessBetween` | Ensure numeric value falls outside a specified range | `unless_between:min,max` |
 
 ## Why this package exists
 

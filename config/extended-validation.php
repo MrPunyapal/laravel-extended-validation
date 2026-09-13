@@ -32,6 +32,13 @@ return [
         'hex_color' => true,
         'without_alias' => true,
         'not_email' => true,
+        'latitude' => true,
+        'longitude' => true,
+        'cidr' => true,
+        'email_domain' => true,
+        'not_hashed' => true,
+        'alpha_underscore' => true,
+        'unless_between' => true,
     ],
 
 ];

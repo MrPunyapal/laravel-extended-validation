@@ -1,6 +1,6 @@
 ---
 name: laravel-extended-validation-development
-description: "Use this skill when working with mrpunyapal/laravel-extended-validation in a Laravel application. Trigger when adding or configuring extended validation rules for plus-alias email rejection (without_alias), username non-email validation (not_email), URL slugs (slug), even/odd integers (even, odd), semantic versions (semver), base64 data URIs (base64_string), Luhn MOD-10 checksums (luhn), word count limits (min_words, max_words), domain names (domain), E.164 phone numbers (e164), ISBN codes (isbn), ISO 3166-1 country codes (country_code), or hex colors (hex_color). Covers rule class syntax, Rule fluent macros, and string rule syntax."
+description: "Use this skill when working with mrpunyapal/laravel-extended-validation in a Laravel application. Trigger when adding or configuring extended validation rules for plus-alias email rejection (without_alias), username non-email validation (not_email), URL slugs (slug), even/odd integers (even, odd), semantic versions (semver), base64 data URIs (base64_string), Luhn MOD-10 checksums (luhn), word count limits (min_words, max_words), domain names (domain), E.164 phone numbers (e164), ISBN codes (isbn), ISO 3166-1 country codes (country_code), hex colors (hex_color), coordinates (latitude, longitude), CIDR blocks (cidr), email domain filtering (email_domain), unhashed passwords (not_hashed), alpha-underscore strings (alpha_underscore), or exclusion ranges (unless_between). Covers rule class syntax, Rule fluent macros, and string rule syntax."
 license: MIT
 metadata:
   author: mrpunyapal
@@ -26,6 +26,12 @@ Typical triggers:
 - Validating ISBN-10, ISBN-13, or both (`isbn` / `Isbn`)
 - Validating ISO 3166-1 alpha-2 or alpha-3 country codes (`country_code` / `CountryCode`)
 - Validating CSS hex color codes (`hex_color` / `HexColor`)
+- Validating geographical coordinates (`latitude`, `longitude` / `Latitude`, `Longitude`)
+- Validating IPv4 and IPv6 CIDR subnet blocks (`cidr` / `Cidr`)
+- Validating email domains against allow/block lists (`email_domain` / `EmailDomain`)
+- Ensuring submitted passwords are not already hashed (`not_hashed` / `NotHashed`)
+- Validating alphanumeric identifiers with underscores (`alpha_underscore` / `AlphaUnderscore`)
+- Validating numeric values that must fall outside a range (`unless_between` / `UnlessBetween`)
 
 ## Three Syntax Styles
 
@@ -92,8 +98,14 @@ $request->validate([
 | Domain | `Domain` | `Rule::domain()` | `domain` | `example.com` (no protocol) |
 | E.164 | `E164Phone` | `Rule::e164()` | `e164` | `+14155552671` |
 | ISBN | `Isbn` | `Rule::isbn(?string $type = null)` | `isbn` / `isbn:10` / `isbn:13` | ISBN-10 or ISBN-13 checksum |
-| Country Code | `CountryCode` | `Rule::countryCode($format = 'alpha2')` | `country_code` / `country_code:alpha3` | ISO 3166-1 `US`, `GB`, `USA` |
 | Hex Color | `HexColor` | `Rule::hexColor()` | `hex_color` | `#fff`, `#ffffff`, `#ffffffff` |
+| Latitude | `Latitude` | `Rule::latitude()` | `latitude` | Coordinate `-90` to `90` |
+| Longitude | `Longitude` | `Rule::longitude()` | `longitude` | Coordinate `-180` to `180` |
+| CIDR | `Cidr` | `Rule::cidr(?string $v = null)` | `cidr` / `cidr:v4` / `cidr:v6` | `192.168.1.0/24`, `2001:db8::/32` |
+| Email Domain | `EmailDomain` | `Rule::emailDomain($allow, $block)` | `email_domain` | Allowed/blocked domains |
+| Not Hashed | `NotHashed` | `Rule::notHashed()` | `not_hashed` | Rejects bcrypt/argon hashes |
+| Alpha Underscore | `AlphaUnderscore` | `Rule::alphaUnderscore()` | `alpha_underscore` | `user_123` (letters, numbers, _) |
+| Unless Between | `UnlessBetween` | `Rule::unlessBetween($min, $max)` | `unless_between:min,max` | Outside numeric range |
 
 ## Configuration
 

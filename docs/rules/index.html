@@ -8,12 +8,12 @@
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Rules Reference | Laravel Extended Validation">
-    <meta property="og:description" content="Complete reference and usage examples for all 15 validation rules in mrpunyapal/laravel-extended-validation.">
+    <meta property="og:description" content="Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.">
     <meta property="og:url" content="https://mrpunyapal.github.io/laravel-extended-validation/rules">
     <meta property="og:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/rules.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rules Reference | Laravel Extended Validation">
-    <meta name="twitter:description" content="Complete reference and usage examples for all 15 validation rules in mrpunyapal/laravel-extended-validation.">
+    <meta name="twitter:description" content="Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.">
     <meta name="twitter:image" content="https://mrpunyapal.github.io/laravel-extended-validation/og/rules.png">
     <link rel="stylesheet" href="../assets/app.css">
     <script src="../assets/app.js" defer></script>
@@ -36,7 +36,7 @@
                     <div class="search-results" data-docsmith-search-results hidden></div>
                     <div class="search-empty" data-docsmith-empty>No pages match your search.</div>
                 </div>
-                <nav class="nav" data-docsmith-nav><a class="" href="../" data-nav-item data-title="Laravel Extended Validation" data-search="Laravel Extended Validation Laravel Extended Validation A collection of 15 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.">Laravel Extended Validation</a><a class="" href="../installation/" data-nav-item data-title="Installation" data-search="Installation Installation Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.">Installation</a><a class="" href="../configuration/" data-nav-item data-title="Configuration" data-search="Configuration Configuration Configure and selectively enable or disable validation rules in mrpunyapal/laravel-extended-validation.">Configuration</a><a class="" href="../usage/" data-nav-item data-title="Usage" data-search="Usage Usage Learn the three syntax options for applying extended validation rules in Laravel applications.">Usage</a><a class="active" href="./" data-nav-item data-title="Rules Reference" data-search="Rules Reference Rules Reference Complete reference and usage examples for all 15 validation rules in mrpunyapal/laravel-extended-validation.">Rules Reference</a></nav>
+                <nav class="nav" data-docsmith-nav><a class="" href="../" data-nav-item data-title="Laravel Extended Validation" data-search="Laravel Extended Validation Laravel Extended Validation A collection of 22 useful validation rules for Laravel applications, available as rule classes, fluent Rule macros, and string rules.">Laravel Extended Validation</a><a class="" href="../installation/" data-nav-item data-title="Installation" data-search="Installation Installation Install and configure mrpunyapal/laravel-extended-validation in your Laravel application.">Installation</a><a class="" href="../configuration/" data-nav-item data-title="Configuration" data-search="Configuration Configuration Configure and selectively enable or disable validation rules in mrpunyapal/laravel-extended-validation.">Configuration</a><a class="" href="../usage/" data-nav-item data-title="Usage" data-search="Usage Usage Learn the three syntax options for applying extended validation rules in Laravel applications.">Usage</a><a class="active" href="./" data-nav-item data-title="Rules Reference" data-search="Rules Reference Rules Reference Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.">Rules Reference</a></nav>
                 <a class="docsmith-badge" href="https://github.com/MrPunyapal/docsmith" target="_blank" rel="noopener noreferrer" data-docsmith-badge aria-label="Built with DocSmith"><svg class="docsmith-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-6.716-4.35-9.428-7.052C.4 11.692-.21 8.9 1.38 6.87 2.736 5.14 5.09 4.583 6.86 5.686 8 6.41 8.86 7.55 9.6 8.7c.74-1.15 1.6-2.29 2.74-3.014 1.77-1.103 4.124-.546 5.48 1.184 1.59 2.03.98 4.822-1.192 7.078C18.716 16.65 12 21 12 21z"/></svg><span class="docsmith-badge-text">Built with</span><span class="docsmith-badge-brand">DocSmith</span></a>
             </div>
         </aside>
@@ -46,10 +46,10 @@
                 <header class="doc-head">
                     
                     <h1>Rules Reference</h1>
-                    <p class="doc-description">Complete reference and usage examples for all 15 validation rules in mrpunyapal/laravel-extended-validation.</p>
+                    <p class="doc-description">Complete reference and usage examples for all 22 validation rules in mrpunyapal/laravel-extended-validation.</p>
                 </header>
                 <div class="doc-body">
-                    <p>Complete reference for all 15 validation rules included in the package.</p>
+                    <p>Complete reference for all 22 validation rules included in the package.</p>
 <hr>
 <h2 id="without-alias">without_alias</h2>
 <p>Validates that an email address does not contain a plus-addressed sub-alias (e.g. <code>user+tag@gmail.com</code>). Useful for preventing trial abuse and duplicate account creation.</p>
@@ -581,6 +581,369 @@
 </tr>
 </tbody>
 </table></div>
+<hr>
+<h2 id="latitude">latitude</h2>
+<p>Validates that a numeric coordinate represents a valid latitude between <code>-90</code> and <code>90</code> degrees (inclusive).</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\Latitude</code></li>
+<li><strong>Macro</strong>: <code>Rule::latitude()</code></li>
+<li><strong>String</strong>: <code>latitude</code></li>
+</ul>
+<h3 id="usage-16">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Latitude</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">lat</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Latitude</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">lat</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">latitude</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">lat</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|latitude</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-9">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>37.7749</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>-90</code>, <code>90</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>90.0001</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>-91</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>'not-a-number'</code></td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="longitude">longitude</h2>
+<p>Validates that a numeric coordinate represents a valid longitude between <code>-180</code> and <code>180</code> degrees (inclusive).</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\Longitude</code></li>
+<li><strong>Macro</strong>: <code>Rule::longitude()</code></li>
+<li><strong>String</strong>: <code>longitude</code></li>
+</ul>
+<h3 id="usage-17">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Longitude</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">lng</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Longitude</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">lng</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">longitude</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">lng</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|longitude</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-10">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>-122.4194</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>-180</code>, <code>180</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>180.0001</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>-181</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>'not-a-number'</code></td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="cidr">cidr</h2>
+<p>Validates that a string is a valid Classless Inter-Domain Routing (CIDR) subnet notation block. Supports IPv4, IPv6, or either.</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\Cidr</code></li>
+<li><strong>Macro</strong>: <code>Rule::cidr(?string $version = null)</code></li>
+<li><strong>String</strong>: <code>cidr</code>, <code>cidr:v4</code>, or <code>cidr:v6</code></li>
+</ul>
+<h3 id="usage-18">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Cidr</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">//</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;"> IPv4 or IPv6</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Cidr</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">cidr</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|cidr</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">//</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;"> IPv4 only</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Cidr</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">v4</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">cidr</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">v4</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|cidr:v4</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">//</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;"> IPv6 only</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Cidr</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">v6</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">cidr</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">v6</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">subnet</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|cidr:v6</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-11">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>192.168.1.0/24</code></td>
+<td>Passes (IPv4)</td>
+</tr>
+<tr>
+<td><code>10.0.0.0/8</code></td>
+<td>Passes (IPv4)</td>
+</tr>
+<tr>
+<td><code>2001:db8::/32</code></td>
+<td>Passes (IPv6)</td>
+</tr>
+<tr>
+<td><code>192.168.1.0/33</code></td>
+<td>Fails (invalid prefix)</td>
+</tr>
+<tr>
+<td><code>192.168.1.0</code></td>
+<td>Fails (missing prefix length)</td>
+</tr>
+<tr>
+<td><code>not-a-cidr</code></td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="email-domain">email_domain</h2>
+<p>Validates that an email address belongs to an allowed domain list or does not belong to a blocked domain list.</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\EmailDomain</code></li>
+<li><strong>Macro</strong>: <code>Rule::emailDomain($allowed = [], $blocked = [])</code></li>
+<li><strong>String</strong>: <code>email_domain</code></li>
+</ul>
+<h3 id="usage-19">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">EmailDomain</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">//</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;"> Allow specific company domains</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">EmailDomain</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">allowed</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">company.com</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">partner.org</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">emailDomain</span><span class="token">(</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">allowed</span><span class="token">:</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">company.com</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">partner.org</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">]</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">//</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;"> Block disposable email providers</span><span class="token" style="color: #6a737d;--phiki-dark-color: #6a737d;">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">EmailDomain</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">blocked</span><span class="token">(</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">mailinator.com</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">tempmail.com</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">email</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">emailDomain</span><span class="token">(</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">blocked</span><span class="token">:</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">mailinator.com</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">tempmail.com</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">]</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-12">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Configuration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alice@company.com</code></td>
+<td><code>allowed: ['company.com']</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>alice@gmail.com</code></td>
+<td><code>allowed: ['company.com']</code></td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>bob@legit.com</code></td>
+<td><code>blocked: ['tempmail.com']</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>bob@tempmail.com</code></td>
+<td><code>blocked: ['tempmail.com']</code></td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="not-hashed">not_hashed</h2>
+<p>Ensures that a password field is not already passed as an algorithm hash (such as bcrypt or argon). Useful for preventing users or clients from submitting pre-hashed strings when registration or password resets expect plain text to hash on the server.</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\NotHashed</code></li>
+<li><strong>Macro</strong>: <code>Rule::notHashed()</code></li>
+<li><strong>String</strong>: <code>not_hashed</code></li>
+</ul>
+<h3 id="usage-20">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">NotHashed</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">password</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">string</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">min:8</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">NotHashed</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">password</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">string</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">min:8</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">notHashed</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">password</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|string|min:8|not_hashed</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-13">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>P@ssw0rd123!</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>my-secret-password</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>$2y$10$e80yq9k...</code> (bcrypt hash)</td>
+<td>Fails</td>
+</tr>
+<tr>
+<td><code>$argon2id$v=19$...</code> (argon hash)</td>
+<td>Fails</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="alpha-underscore">alpha_underscore</h2>
+<p>Validates that a string contains only letters, numbers, and underscores (<code>_</code>). Unlike Laravel's native <code>alpha_dash</code> which also permits hyphens (<code>-</code>), <code>alpha_underscore</code> enforces strict identifier naming (like Python or SQL identifiers and usernames).</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\AlphaUnderscore</code></li>
+<li><strong>Macro</strong>: <code>Rule::alphaUnderscore()</code></li>
+<li><strong>String</strong>: <code>alpha_underscore</code></li>
+</ul>
+<h3 id="usage-21">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">AlphaUnderscore</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">username</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">string</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">AlphaUnderscore</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">username</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">string</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">alphaUnderscore</span><span class="token">(</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">username</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|string|alpha_underscore</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-14">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>user_123</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>USER_NAME</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>_system_</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>user-name</code></td>
+<td>Fails (hyphen not allowed)</td>
+</tr>
+<tr>
+<td><code>user name</code></td>
+<td>Fails (space not allowed)</td>
+</tr>
+<tr>
+<td><code>user@name</code></td>
+<td>Fails (symbol not allowed)</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="unless-between">unless_between</h2>
+<p>Validates that a numeric value falls outside a specified range (i.e. value &lt; min OR value &gt; max).</p>
+<ul>
+<li><strong>Class</strong>: <code>MrPunyapal\LaravelExtendedValidation\Rules\UnlessBetween</code></li>
+<li><strong>Macro</strong>: <code>Rule::unlessBetween(float|int $min, float|int $max)</code></li>
+<li><strong>String</strong>: <code>unless_between:{min},{max}</code></li>
+</ul>
+<h3 id="usage-22">Usage</h3>
+<pre class="phiki language-php github-light phiki-themes github-dark" data-language="php" style="background-color: #fff;color: #24292e;--phiki-dark-background-color: #24292e;--phiki-dark-color: #e1e4e8;"><code><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">MrPunyapal</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">LaravelExtendedValidation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rules</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">UnlessBetween</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">use</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Illuminate</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Validation</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">\</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token">;</span><span class="token">
+</span></span><span class="line"><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">discount</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">new</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">UnlessBetween</span><span class="token">(</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">10</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">20</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">discount</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token">[</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">Rule</span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">::</span><span class="token" style="color: #6f42c1;--phiki-dark-color: #b392f0;">unlessBetween</span><span class="token">(</span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">10</span><span class="token">,</span><span class="token"> </span><span class="token" style="color: #005cc5;--phiki-dark-color: #79b8ff;">20</span><span class="token">)</span><span class="token">]</span><span class="token">
+</span></span><span class="line"><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">discount</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token"> </span><span class="token" style="color: #d73a49;--phiki-dark-color: #f97583;">=&gt;</span><span class="token"> </span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">required|unless_between:10,20</span><span class="token" style="color: #032f62;--phiki-dark-color: #9ecbff;">'</span><span class="token">
+</span></span></code></pre>
+<h3 id="examples-15">Examples</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Range</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>5</code></td>
+<td><code>10, 20</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>25</code></td>
+<td><code>10, 20</code></td>
+<td>Passes</td>
+</tr>
+<tr>
+<td><code>10</code></td>
+<td><code>10, 20</code></td>
+<td>Fails (inside boundary)</td>
+</tr>
+<tr>
+<td><code>15</code></td>
+<td><code>10, 20</code></td>
+<td>Fails (inside range)</td>
+</tr>
+<tr>
+<td><code>20</code></td>
+<td><code>10, 20</code></td>
+<td>Fails (inside boundary)</td>
+</tr>
+</tbody>
+</table></div>
 
                 </div>
                 <footer class="doc-meta">
@@ -589,7 +952,7 @@
             </article>
             <nav class="pager" aria-label="Page navigation"><a class="pager-link" href="../usage/"><span>Previous</span><strong>Usage</strong></a></nav>
         </main>
-        <aside class="toc-sidebar" data-docsmith-toc><p class="toc-title">On this page</p><nav class="toc-links"><a class="toc-link toc-link-level-2" href="#without-alias" data-docsmith-toc-link="without-alias">without_alias</a><a class="toc-link toc-link-level-3" href="#usage" data-docsmith-toc-link="usage">Usage</a><a class="toc-link toc-link-level-3" href="#examples" data-docsmith-toc-link="examples">Examples</a><a class="toc-link toc-link-level-2" href="#not-email" data-docsmith-toc-link="not-email">not_email</a><a class="toc-link toc-link-level-3" href="#usage-2" data-docsmith-toc-link="usage-2">Usage</a><a class="toc-link toc-link-level-3" href="#examples-2" data-docsmith-toc-link="examples-2">Examples</a><a class="toc-link toc-link-level-2" href="#slug" data-docsmith-toc-link="slug">slug</a><a class="toc-link toc-link-level-3" href="#usage-3" data-docsmith-toc-link="usage-3">Usage</a><a class="toc-link toc-link-level-3" href="#examples-with-default" data-docsmith-toc-link="examples-with-default">Examples (with default -)</a><a class="toc-link toc-link-level-2" href="#even" data-docsmith-toc-link="even">even</a><a class="toc-link toc-link-level-3" href="#usage-4" data-docsmith-toc-link="usage-4">Usage</a><a class="toc-link toc-link-level-3" href="#examples-3" data-docsmith-toc-link="examples-3">Examples</a><a class="toc-link toc-link-level-2" href="#odd" data-docsmith-toc-link="odd">odd</a><a class="toc-link toc-link-level-3" href="#usage-5" data-docsmith-toc-link="usage-5">Usage</a><a class="toc-link toc-link-level-3" href="#examples-4" data-docsmith-toc-link="examples-4">Examples</a><a class="toc-link toc-link-level-2" href="#semver" data-docsmith-toc-link="semver">semver</a><a class="toc-link toc-link-level-3" href="#usage-6" data-docsmith-toc-link="usage-6">Usage</a><a class="toc-link toc-link-level-3" href="#examples-5" data-docsmith-toc-link="examples-5">Examples</a><a class="toc-link toc-link-level-2" href="#base64-string" data-docsmith-toc-link="base64-string">base64_string</a><a class="toc-link toc-link-level-3" href="#usage-7" data-docsmith-toc-link="usage-7">Usage</a><a class="toc-link toc-link-level-2" href="#luhn" data-docsmith-toc-link="luhn">luhn</a><a class="toc-link toc-link-level-3" href="#usage-8" data-docsmith-toc-link="usage-8">Usage</a><a class="toc-link toc-link-level-2" href="#min-words" data-docsmith-toc-link="min-words">min_words</a><a class="toc-link toc-link-level-3" href="#usage-9" data-docsmith-toc-link="usage-9">Usage</a><a class="toc-link toc-link-level-2" href="#max-words" data-docsmith-toc-link="max-words">max_words</a><a class="toc-link toc-link-level-3" href="#usage-10" data-docsmith-toc-link="usage-10">Usage</a><a class="toc-link toc-link-level-2" href="#domain" data-docsmith-toc-link="domain">domain</a><a class="toc-link toc-link-level-3" href="#usage-11" data-docsmith-toc-link="usage-11">Usage</a><a class="toc-link toc-link-level-3" href="#examples-6" data-docsmith-toc-link="examples-6">Examples</a><a class="toc-link toc-link-level-2" href="#e164" data-docsmith-toc-link="e164">e164</a><a class="toc-link toc-link-level-3" href="#usage-12" data-docsmith-toc-link="usage-12">Usage</a><a class="toc-link toc-link-level-3" href="#examples-7" data-docsmith-toc-link="examples-7">Examples</a><a class="toc-link toc-link-level-2" href="#isbn" data-docsmith-toc-link="isbn">isbn</a><a class="toc-link toc-link-level-3" href="#usage-13" data-docsmith-toc-link="usage-13">Usage</a><a class="toc-link toc-link-level-2" href="#country-code" data-docsmith-toc-link="country-code">country_code</a><a class="toc-link toc-link-level-3" href="#usage-14" data-docsmith-toc-link="usage-14">Usage</a><a class="toc-link toc-link-level-2" href="#hex-color" data-docsmith-toc-link="hex-color">hex_color</a><a class="toc-link toc-link-level-3" href="#usage-15" data-docsmith-toc-link="usage-15">Usage</a><a class="toc-link toc-link-level-3" href="#examples-8" data-docsmith-toc-link="examples-8">Examples</a></nav></aside>
+        <aside class="toc-sidebar" data-docsmith-toc><p class="toc-title">On this page</p><nav class="toc-links"><a class="toc-link toc-link-level-2" href="#without-alias" data-docsmith-toc-link="without-alias">without_alias</a><a class="toc-link toc-link-level-3" href="#usage" data-docsmith-toc-link="usage">Usage</a><a class="toc-link toc-link-level-3" href="#examples" data-docsmith-toc-link="examples">Examples</a><a class="toc-link toc-link-level-2" href="#not-email" data-docsmith-toc-link="not-email">not_email</a><a class="toc-link toc-link-level-3" href="#usage-2" data-docsmith-toc-link="usage-2">Usage</a><a class="toc-link toc-link-level-3" href="#examples-2" data-docsmith-toc-link="examples-2">Examples</a><a class="toc-link toc-link-level-2" href="#slug" data-docsmith-toc-link="slug">slug</a><a class="toc-link toc-link-level-3" href="#usage-3" data-docsmith-toc-link="usage-3">Usage</a><a class="toc-link toc-link-level-3" href="#examples-with-default" data-docsmith-toc-link="examples-with-default">Examples (with default -)</a><a class="toc-link toc-link-level-2" href="#even" data-docsmith-toc-link="even">even</a><a class="toc-link toc-link-level-3" href="#usage-4" data-docsmith-toc-link="usage-4">Usage</a><a class="toc-link toc-link-level-3" href="#examples-3" data-docsmith-toc-link="examples-3">Examples</a><a class="toc-link toc-link-level-2" href="#odd" data-docsmith-toc-link="odd">odd</a><a class="toc-link toc-link-level-3" href="#usage-5" data-docsmith-toc-link="usage-5">Usage</a><a class="toc-link toc-link-level-3" href="#examples-4" data-docsmith-toc-link="examples-4">Examples</a><a class="toc-link toc-link-level-2" href="#semver" data-docsmith-toc-link="semver">semver</a><a class="toc-link toc-link-level-3" href="#usage-6" data-docsmith-toc-link="usage-6">Usage</a><a class="toc-link toc-link-level-3" href="#examples-5" data-docsmith-toc-link="examples-5">Examples</a><a class="toc-link toc-link-level-2" href="#base64-string" data-docsmith-toc-link="base64-string">base64_string</a><a class="toc-link toc-link-level-3" href="#usage-7" data-docsmith-toc-link="usage-7">Usage</a><a class="toc-link toc-link-level-2" href="#luhn" data-docsmith-toc-link="luhn">luhn</a><a class="toc-link toc-link-level-3" href="#usage-8" data-docsmith-toc-link="usage-8">Usage</a><a class="toc-link toc-link-level-2" href="#min-words" data-docsmith-toc-link="min-words">min_words</a><a class="toc-link toc-link-level-3" href="#usage-9" data-docsmith-toc-link="usage-9">Usage</a><a class="toc-link toc-link-level-2" href="#max-words" data-docsmith-toc-link="max-words">max_words</a><a class="toc-link toc-link-level-3" href="#usage-10" data-docsmith-toc-link="usage-10">Usage</a><a class="toc-link toc-link-level-2" href="#domain" data-docsmith-toc-link="domain">domain</a><a class="toc-link toc-link-level-3" href="#usage-11" data-docsmith-toc-link="usage-11">Usage</a><a class="toc-link toc-link-level-3" href="#examples-6" data-docsmith-toc-link="examples-6">Examples</a><a class="toc-link toc-link-level-2" href="#e164" data-docsmith-toc-link="e164">e164</a><a class="toc-link toc-link-level-3" href="#usage-12" data-docsmith-toc-link="usage-12">Usage</a><a class="toc-link toc-link-level-3" href="#examples-7" data-docsmith-toc-link="examples-7">Examples</a><a class="toc-link toc-link-level-2" href="#isbn" data-docsmith-toc-link="isbn">isbn</a><a class="toc-link toc-link-level-3" href="#usage-13" data-docsmith-toc-link="usage-13">Usage</a><a class="toc-link toc-link-level-2" href="#country-code" data-docsmith-toc-link="country-code">country_code</a><a class="toc-link toc-link-level-3" href="#usage-14" data-docsmith-toc-link="usage-14">Usage</a><a class="toc-link toc-link-level-2" href="#hex-color" data-docsmith-toc-link="hex-color">hex_color</a><a class="toc-link toc-link-level-3" href="#usage-15" data-docsmith-toc-link="usage-15">Usage</a><a class="toc-link toc-link-level-3" href="#examples-8" data-docsmith-toc-link="examples-8">Examples</a><a class="toc-link toc-link-level-2" href="#latitude" data-docsmith-toc-link="latitude">latitude</a><a class="toc-link toc-link-level-3" href="#usage-16" data-docsmith-toc-link="usage-16">Usage</a><a class="toc-link toc-link-level-3" href="#examples-9" data-docsmith-toc-link="examples-9">Examples</a><a class="toc-link toc-link-level-2" href="#longitude" data-docsmith-toc-link="longitude">longitude</a><a class="toc-link toc-link-level-3" href="#usage-17" data-docsmith-toc-link="usage-17">Usage</a><a class="toc-link toc-link-level-3" href="#examples-10" data-docsmith-toc-link="examples-10">Examples</a><a class="toc-link toc-link-level-2" href="#cidr" data-docsmith-toc-link="cidr">cidr</a><a class="toc-link toc-link-level-3" href="#usage-18" data-docsmith-toc-link="usage-18">Usage</a><a class="toc-link toc-link-level-3" href="#examples-11" data-docsmith-toc-link="examples-11">Examples</a><a class="toc-link toc-link-level-2" href="#email-domain" data-docsmith-toc-link="email-domain">email_domain</a><a class="toc-link toc-link-level-3" href="#usage-19" data-docsmith-toc-link="usage-19">Usage</a><a class="toc-link toc-link-level-3" href="#examples-12" data-docsmith-toc-link="examples-12">Examples</a><a class="toc-link toc-link-level-2" href="#not-hashed" data-docsmith-toc-link="not-hashed">not_hashed</a><a class="toc-link toc-link-level-3" href="#usage-20" data-docsmith-toc-link="usage-20">Usage</a><a class="toc-link toc-link-level-3" href="#examples-13" data-docsmith-toc-link="examples-13">Examples</a><a class="toc-link toc-link-level-2" href="#alpha-underscore" data-docsmith-toc-link="alpha-underscore">alpha_underscore</a><a class="toc-link toc-link-level-3" href="#usage-21" data-docsmith-toc-link="usage-21">Usage</a><a class="toc-link toc-link-level-3" href="#examples-14" data-docsmith-toc-link="examples-14">Examples</a><a class="toc-link toc-link-level-2" href="#unless-between" data-docsmith-toc-link="unless-between">unless_between</a><a class="toc-link toc-link-level-3" href="#usage-22" data-docsmith-toc-link="usage-22">Usage</a><a class="toc-link toc-link-level-3" href="#examples-15" data-docsmith-toc-link="examples-15">Examples</a></nav></aside>
     </div>
     <div class="search-overlay" data-docsmith-search-overlay hidden role="dialog" aria-label="Search documentation">
     <div class="search-overlay-backdrop" data-docsmith-search-overlay-close></div>
