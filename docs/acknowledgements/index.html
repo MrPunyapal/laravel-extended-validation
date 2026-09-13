@@ -69,107 +69,97 @@
 </thead>
 <tbody>
 <tr>
-<td>without_alias</td>
+<td><code>without_alias</code></td>
 <td><a href="https://github.com/laravel/framework/pull/61522">#61522</a></td>
-<td>Proposed by Punyapal to reject plus-addressed email aliases (<a href="mailto:user+tag@gmail.com">user+tag@gmail.com</a>) to stop trial abuse. Led directly to the creation of this package.</td>
+<td>Proposed by Punyapal to reject plus-addressed email aliases (<code>user+tag@gmail.com</code>) to stop trial abuse. Led directly to the creation of this package.</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>ot_email</td>
+<td><code>not_email</code></td>
 <td><a href="https://github.com/laravel/framework/pull/32103">#32103</a></td>
 <td>Proposed ensuring usernames and unique handles do not match email formats to avoid login ambiguity.</td>
 </tr>
 <tr>
-<td>slug</td>
+<td><code>slug</code></td>
 <td><a href="https://github.com/laravel/framework/pull/27521">#27521</a>, <a href="https://github.com/laravel/framework/pull/36284">#36284</a></td>
 <td>Proposed validating URL-friendly slugs with configurable separators to ensure safe route parameters.</td>
 </tr>
 <tr>
-<td>even / odd</td>
+<td><code>even</code> / <code>odd</code></td>
 <td><a href="https://github.com/laravel/framework/pull/33719">#33719</a></td>
 <td>Proposed concise validation for odd and even integer inputs without requiring custom closures.</td>
 </tr>
 <tr>
-<td>semver</td>
+<td><code>semver</code></td>
 <td><a href="https://github.com/laravel/framework/pull/27798">#27798</a>, <a href="https://github.com/laravel/framework/pull/31086">#31086</a></td>
 <td>Proposed validating Semantic Versioning 2.0.0 strings (including pre-release and build metadata).</td>
 </tr>
 <tr>
-<td>ase64_string</td>
+<td><code>base64_string</code></td>
 <td><a href="https://github.com/laravel/framework/pull/31065">#31065</a>, <a href="https://github.com/laravel/framework/pull/36323">#36323</a></td>
 <td>Proposed validating pure Base64 payloads and Data URI strings with MIME-type filtering.</td>
 </tr>
 <tr>
-<td>luhn</td>
+<td><code>luhn</code></td>
 <td><a href="https://github.com/laravel/framework/pull/28372">#28372</a>, <a href="https://github.com/laravel/framework/pull/38706">#38706</a></td>
 <td>Proposed verifying Luhn (MOD-10) checksum digits for credit card numbers, IMEIs, and identification numbers.</td>
 </tr>
 <tr>
-<td>min_words / max_words</td>
+<td><code>min_words</code> / <code>max_words</code></td>
 <td><a href="https://github.com/laravel/framework/pull/37852">#37852</a>, <a href="https://github.com/laravel/framework/pull/41323">#41323</a></td>
 <td>Proposed word count boundary validation for rich text bodies, excerpts, and bios.</td>
 </tr>
 <tr>
-<td>domain</td>
+<td><code>domain</code></td>
 <td><a href="https://github.com/laravel/framework/pull/32197">#32197</a></td>
 <td>Proposed validating Fully Qualified Domain Names (FQDNs) without requiring HTTP/HTTPS URL protocols.</td>
 </tr>
 <tr>
-<td>e164</td>
+<td><code>e164</code></td>
 <td><a href="https://github.com/laravel/framework/pull/36720">#36720</a></td>
 <td>Proposed validating international telephone numbers adhering to the ITU E.164 recommendation.</td>
 </tr>
 <tr>
-<td>isbn</td>
+<td><code>isbn</code></td>
 <td><a href="https://github.com/laravel/framework/pull/29402">#29402</a></td>
 <td>Proposed validating ISBN-10 and ISBN-13 book identifiers including check-digit verification.</td>
 </tr>
 <tr>
-<td>country_code</td>
+<td><code>country_code</code></td>
 <td><a href="https://github.com/laravel/framework/pull/35860">#35860</a></td>
 <td>Proposed validating ISO 3166-1 alpha-2 and alpha-3 standard country codes.</td>
 </tr>
 <tr>
-<td>hex_color</td>
+<td><code>hex_color</code></td>
 <td><a href="https://github.com/laravel/framework/pull/38202">#38202</a></td>
 <td>Proposed validating 3, 4, 6, and 8-digit CSS hex color strings.</td>
 </tr>
 <tr>
-<td>latitude / longitude</td>
+<td><code>latitude</code> / <code>longitude</code></td>
 <td><a href="https://github.com/laravel/framework/pull/32039">#32039</a></td>
-<td>Proposed dedicated geographical coordinate validators for latitude ([-90, 90]) and longitude ([-180, 180]).</td>
+<td>Proposed dedicated geographical coordinate validators for latitude (<code>[-90, 90]</code>) and longitude (<code>[-180, 180]</code>).</td>
 </tr>
 <tr>
-<td>cidr</td>
+<td><code>cidr</code></td>
 <td><a href="https://github.com/laravel/framework/pull/35874">#35874</a></td>
 <td>Proposed validating IPv4 and IPv6 Classless Inter-Domain Routing (CIDR) subnet block notations.</td>
 </tr>
 <tr>
-<td>email_domain</td>
+<td><code>email_domain</code></td>
 <td><a href="https://github.com/laravel/framework/pull/31885">#31885</a></td>
 <td>Proposed filtering email addresses against domain whitelists and disposable domain blacklists.</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>ot_hashed</td>
+<td><code>not_hashed</code></td>
 <td><a href="https://github.com/laravel/framework/pull/39891">#39891</a></td>
 <td>Proposed verifying that a submitted password is plain text and has not already been pre-hashed with bcrypt or argon.</td>
 </tr>
 <tr>
-<td>lpha_underscore</td>
+<td><code>alpha_underscore</code></td>
 <td><a href="https://github.com/laravel/framework/pull/28643">#28643</a></td>
 <td>Proposed validating alphanumeric characters with underscores for strict variable and database identifiers.</td>
 </tr>
 <tr>
-<td>unless_between</td>
+<td><code>unless_between</code></td>
 <td><a href="https://github.com/laravel/framework/pull/34512">#34512</a></td>
 <td>Proposed an inverse range validation rule requiring numeric values to fall outside a specified range.</td>
 </tr>
