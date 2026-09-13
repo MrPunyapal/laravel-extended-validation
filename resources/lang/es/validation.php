@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'slug' => 'El campo :attribute debe ser una URL amigable válida.',
+    'slug' => 'El campo :attribute debe ser un slug válido para URL.',
     'even' => 'El campo :attribute debe ser un número par.',
     'odd' => 'El campo :attribute debe ser un número impar.',
     'semver' => 'El campo :attribute debe ser una versión semántica válida (p. ej. 1.0.0).',
@@ -22,7 +22,7 @@ return [
     'longitude' => 'El campo :attribute debe ser una longitud válida entre -180 y 180 grados.',
     'cidr' => 'El campo :attribute debe ser un bloque válido en notación CIDR.',
     'email_domain' => 'El campo :attribute debe ser una dirección de correo electrónico de un dominio autorizado.',
-    'not_hashed' => 'El campo :attribute no debe ser una cadena previamente hasheada.',
+    'not_hashed' => 'El campo :attribute no debe ser un valor con hash previo.',
     'alpha_underscore' => 'El campo :attribute solo puede contener letras, números y guiones bajos.',
     'unless_between' => 'El campo :attribute no debe estar entre :min y :max.',
     'without_whitespace' => 'El campo :attribute no debe contener espacios en blanco.',
