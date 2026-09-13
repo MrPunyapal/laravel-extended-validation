@@ -38,7 +38,7 @@ This package started when I submitted a pull request ([PR #61522](https://github
 
 The pull request was closed because plus-addressing is valid per RFC 5322, and the Laravel core team prioritizes keeping built-in validation rules strictly aligned with RFC standards while keeping framework core lean.
 
-That prompted a closer look at other validation pull requests closed across the framework repository over the years. Many addressed practical real-world needs (such as verifying slugs, SemVer strings, Luhn checksums, or word counts), but were kept out of core to prevent framework bloat. This package gathers those useful validation rules together in one place, built the Laravel way.
+That prompted a closer look at other validation pull requests closed across the framework repository over the years. Many addressed practical real-world needs (such as verifying slugs, SemVer strings, Luhn checksums, or word counts), but were kept out of core to prevent framework bloat. This package gathers those useful validation rules together in one place, built the Laravel way. See our [Acknowledgements & Inspirations](https://mrpunyapal.github.io/laravel-extended-validation/acknowledgements) page for the complete list of community pull requests.
 
 ## Available rules
 

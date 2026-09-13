@@ -23,6 +23,7 @@ Docsmith::make()
         'configuration.md',
         'usage.md',
         'rules.md',
+        'acknowledgements.md',
     ])
     ->rightSidebar()
     ->ogGeneratedPerPage()

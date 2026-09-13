@@ -1,6 +1,11 @@
 {
   "version": 1,
   "entries": {
+    "acknowledgements.png": {
+      "hash": "7e210b5e92e40998c0722254248ef50d6d232e9ac3b722bbc5b1ff56230f091e",
+      "output": "acknowledgements.png",
+      "label": "acknowledgements"
+    },
     "configuration.png": {
       "hash": "6409d7c82d5d442c5887d19fa67a0157da795ee0c91f8bb76efb3f9f8125665e",
       "output": "configuration.png",
