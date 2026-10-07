@@ -15,4 +15,9 @@ class TestCase extends Orchestra
             LaravelExtendedValidationServiceProvider::class,
         ];
     }
+
+    protected function defineEnvironment($app): void
+    {
+        $app->useLangPath(__DIR__.'/fixtures/lang');
+    }
 }
