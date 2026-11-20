@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Validator;
+use MrPunyapal\LaravelExtendedValidation\Rules\Slug;
 
 describe('Validation Replacer and Translations', function (): void {
     afterEach(function (): void {
@@ -107,5 +108,44 @@ describe('Validation Replacer and Translations', function (): void {
 
         expect($validator->fails())->toBeTrue();
         expect($validator->errors()->first('val'))->toBe('Val out of bounds! Range is 10 to 20.');
+    });
+
+    it('uses the translated attribute name from validation.attributes', function (string $field, mixed $rule, mixed $value, string $expected): void {
+        App::setLocale('es');
+
+        $validator = Validator::make([$field => $value], [$field => $rule]);
+
+        expect($validator->fails())->toBeTrue();
+        expect($validator->errors()->first($field))->toBe($expected);
+    })->with([
+        'string rule' => ['username', 'slug', 'Test-User', 'El campo usuario debe ser un slug válido para URL.'],
+        'rule object' => ['username', Slug::make(), 'Test-User', 'El campo usuario debe ser un slug válido para URL.'],
+        'string rule with :min' => ['title', 'min_words:5', 'muy corto', 'El campo título debe tener al menos 5 palabras.'],
+        'string rule with :min and :max' => ['age', 'unless_between:10,20', 15, 'El campo edad no debe estar entre 10 y 20.'],
+    ]);
+
+    it('uses custom attribute names passed to the validator', function (): void {
+        $validator = Validator::make(
+            ['bio' => 'too short'],
+            ['bio' => 'min_words:5'],
+            [],
+            ['bio' => 'biography']
+        );
+
+        expect($validator->fails())->toBeTrue();
+        expect($validator->errors()->first('bio'))->toBe('The biography must have at least 5 words.');
+    });
+
+    it('uses the translated attribute name in custom messages', function (): void {
+        App::setLocale('es');
+
+        $validator = Validator::make(
+            ['username' => 'Test-User'],
+            ['username' => 'slug'],
+            ['username.slug' => ':Attribute no es un slug válido.']
+        );
+
+        expect($validator->fails())->toBeTrue();
+        expect($validator->errors()->first('username'))->toBe('Usuario no es un slug válido.');
     });
 });
