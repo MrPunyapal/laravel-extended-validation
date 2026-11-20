@@ -443,11 +443,11 @@ use Illuminate\Validation\Rule;
 Validates CSS hex color codes (supporting 3, 4, 6, or 8 hexadecimal characters). Supports colors with `#` (default), without `#`, or optional `#`.
 
 - **Class**: `MrPunyapal\LaravelExtendedValidation\Rules\HexColor`
-- **Macro**: `Rule::hexColor(?string $prefix = null)`
+- **Macro**: `Rule::extendedHexColor(?string $prefix = null)`
 - **String**: `hex_color`
 
 > [!NOTE]
-> Laravel 10+ includes a built-in `hex_color` string rule that strictly requires `#`. To validate colors without `#` or with optional `#`, use class syntax or the `Rule::hexColor()` macro.
+> Laravel 10+ includes a built-in `hex_color` string rule that strictly requires `#`. To validate colors without `#` or with optional `#`, use class syntax or `Rule::extendedHexColor()` on any supported Laravel version. On versions where Laravel defines `Rule::hexColor()`, that method uses the framework rule. On older versions, `Rule::hexColor()` remains an alias for the package macro.
 
 ### Usage
 
@@ -457,16 +457,16 @@ use Illuminate\Validation\Rule;
 
 // Requires '#' prefix (default)
 'accent' => ['required', new HexColor]
-'accent' => ['required', Rule::hexColor()]
+'accent' => ['required', Rule::extendedHexColor()]
 'accent' => 'required|hex_color'
 
 // Without '#' prefix (e.g. 'fff', '4f46e5')
 'accent' => ['required', HexColor::withoutHash()]
-'accent' => ['required', Rule::hexColor('no_hash')]
+'accent' => ['required', Rule::extendedHexColor('no_hash')]
 
 // Optional '#' prefix (accepts both 'fff' and '#fff')
 'accent' => ['required', HexColor::optionalHash()]
-'accent' => ['required', Rule::hexColor('optional_hash')]
+'accent' => ['required', Rule::extendedHexColor('optional_hash')]
 ```
 
 ### Examples

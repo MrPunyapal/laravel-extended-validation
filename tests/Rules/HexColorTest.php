@@ -33,15 +33,15 @@ describe('HexColor', function (): void {
     it('supports hex colors without hash prefix', function (): void {
         expect(Validator::make(['color' => 'ffffff'], ['color' => HexColor::withoutHash()])->passes())->toBeTrue();
         expect(Validator::make(['color' => '#ffffff'], ['color' => HexColor::withoutHash()])->fails())->toBeTrue();
-        expect(Validator::make(['color' => 'ffffff'], ['color' => Rule::hexColor('no_hash')])->passes())->toBeTrue();
-        expect(Validator::make(['color' => '#ffffff'], ['color' => Rule::hexColor('no_hash')])->fails())->toBeTrue();
+        expect(Validator::make(['color' => 'ffffff'], ['color' => Rule::extendedHexColor('no_hash')])->passes())->toBeTrue();
+        expect(Validator::make(['color' => '#ffffff'], ['color' => Rule::extendedHexColor('no_hash')])->fails())->toBeTrue();
     });
 
     it('supports optional hash prefix', function (): void {
         expect(Validator::make(['color' => '#ffffff'], ['color' => HexColor::optionalHash()])->passes())->toBeTrue();
         expect(Validator::make(['color' => 'ffffff'], ['color' => HexColor::optionalHash()])->passes())->toBeTrue();
-        expect(Validator::make(['color' => '#ffffff'], ['color' => Rule::hexColor('optional_hash')])->passes())->toBeTrue();
-        expect(Validator::make(['color' => 'ffffff'], ['color' => Rule::hexColor('optional_hash')])->passes())->toBeTrue();
+        expect(Validator::make(['color' => '#ffffff'], ['color' => Rule::extendedHexColor('optional_hash')])->passes())->toBeTrue();
+        expect(Validator::make(['color' => 'ffffff'], ['color' => Rule::extendedHexColor('optional_hash')])->passes())->toBeTrue();
         expect(Validator::make(['color' => 'invalid'], ['color' => HexColor::optionalHash()])->fails())->toBeTrue();
     });
 });

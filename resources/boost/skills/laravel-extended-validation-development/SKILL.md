@@ -105,7 +105,7 @@ $request->validate([
 | E.164 | `E164Phone` | `Rule::e164()` | `e164` | `+14155552671` |
 | ISBN | `Isbn` | `Rule::isbn(?string $type = null)` | `isbn` / `isbn:10` / `isbn:13` | ISBN-10 or ISBN-13 checksum |
 | Country Code | `CountryCode` | `Rule::countryCode(string $format = 'alpha2')` | `country_code`, `country_code:alpha3`, `country_code:any` | ISO 3166-1 alpha-2, alpha-3, or either |
-| Hex Color | `HexColor` | `Rule::hexColor(?string $prefix = null)` | `hex_color` | `#fff`, `4f46e5` (withoutHash), optional hash |
+| Hex Color | `HexColor` | `Rule::extendedHexColor(?string $prefix = null)` | `hex_color` | `#fff`, `4f46e5` (withoutHash), optional hash |
 | Latitude | `Latitude` | `Rule::latitude()` | `latitude` | Coordinate `-90` to `90` |
 | Longitude | `Longitude` | `Rule::longitude()` | `longitude` | Coordinate `-180` to `180` |
 | CIDR | `Cidr` | `Rule::cidr(?string $v = null)` | `cidr` / `cidr:v4` / `cidr:v6` | `192.168.1.0/24`, `2001:db8::/32` |

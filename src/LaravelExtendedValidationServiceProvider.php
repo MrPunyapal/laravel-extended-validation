@@ -212,6 +212,14 @@ class LaravelExtendedValidationServiceProvider extends PackageServiceProvider
     {
         $methodName = Str::camel($name);
 
-        Rule::macro($methodName, fn (mixed ...$args) => new $ruleClass(...$args));
+        $factory = fn (mixed ...$args) => new $ruleClass(...$args);
+
+        if ($name === 'hex_color') {
+            Rule::macro('extendedHexColor', $factory);
+        }
+
+        if (! method_exists(Rule::class, $methodName)) {
+            Rule::macro($methodName, $factory);
+        }
     }
 }

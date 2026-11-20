@@ -81,8 +81,14 @@ describe('Rule macros', function (): void {
         expect(Rule::countryCode())->toBeInstanceOf(CountryCode::class);
     });
 
-    it('registers Rule::hexColor()', function (): void {
-        expect(Rule::hexColor())->toBeInstanceOf(HexColor::class);
+    it('registers Rule::extendedHexColor()', function (): void {
+        expect(Rule::extendedHexColor())->toBeInstanceOf(HexColor::class);
+
+        if (method_exists(Rule::class, 'hexColor')) {
+            expect(Rule::hexColor())->toBe('hex_color');
+        } else {
+            expect(Rule::hexColor())->toBeInstanceOf(HexColor::class);
+        }
     });
 
     it('registers Rule::withoutAlias()', function (): void {
