@@ -26,7 +26,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.5, 8.4, 8.3]
-        laravel: [13.*, 12.*, 11.*]
+        # Laravel 11 is past security support and Composer blocks its releases.
+        laravel: [13.*, 12.*]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 13.*
@@ -36,11 +37,6 @@ jobs:
           - laravel: 12.*
             php: 8.5
             testbench: ^10.8.0
-          - laravel: 11.*
-            testbench: 9.*
-        exclude:
-          - laravel: 11.*
-            php: 8.5
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
