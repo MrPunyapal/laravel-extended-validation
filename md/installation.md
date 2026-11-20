@@ -8,7 +8,7 @@ description: Install and configure mrpunyapal/laravel-extended-validation in you
 ## Requirements
 
 - PHP `^8.3`, `^8.4`, or `^8.5`
-- Laravel 11, 12, or 13
+- Laravel 12 or 13
 
 ## Install via Composer
 
