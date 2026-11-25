@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-extended-validation` will be documented in this file.
 
+## 0.3.2 - 2026-11-25
+
+- Verify PHP 8.6 compatibility with Laravel 13.
+
 ## 1.0.0 - 2024-XX-XX
 
 - Initial release with 15 validation rules
